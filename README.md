@@ -48,7 +48,7 @@ LLMs operate within a strict sandbox:
 ## 📅 Usage
 
 ### 1. Reset & Setup (Day 0)
-Generate the 6-month playbooks for all 18 agents:
+Generate the 6-month playbooks for both agents (plus the random-control baseline, which needs no playbook):
 ```bash
 python -m v2.main --day-0
 ```
