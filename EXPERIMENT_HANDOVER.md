@@ -1,11 +1,13 @@
 # 🦾 AI Portfolio Experiment V2: Institutional Handover Dossier
 
-> **DATE**: 2026-04-11  
+> **DATE**: 2026-08-04  
 > **STATUS**: PROPER DAY 1 READY (CLEAN SLATE)  
-> **CONTEXT**: 18-Agent Autonomous Roster with Market Intelligence Hub (MIH).
+> **CONTEXT**: 2-Agent Autonomous Roster (OpenAI GPT only) with Market Intelligence Hub (MIH).
 
 ## 1. The Core Objective
-Benchmarking 18 autonomous agents (6 models × 3 personas) across a 6-month simulation in the 2026 high-rate, AI-volatile regime. Every agent starts with exactly **$10,000** on Day 1.
+Benchmarking 2 autonomous agents (1 model × 2 personas: Balanced, Aggressive) across a 6-month simulation in the 2026 high-rate, AI-volatile regime. Every agent starts with exactly **$1,000** on Day 1 (**$2,000** total across the roster).
+
+> **Scope Change (2026-08-04)**: The roster was narrowed from 18 agents (6 models × 3 personas) down to 2 (OpenAI GPT × Balanced/Aggressive). Anthropic, Google, Mistral, DeepSeek, and Qwen providers, and the Conservative persona, were removed from `v2/config.py`. A `random_control` baseline agent still runs alongside the 2 GPT agents. See `v2/api_adapters.py` — only the OpenAI request loop remains; the other provider-specific loops were deleted.
 
 ## 2. Technical Architecture (V2 "Institutional")
 We transitioned from the reactive V1 "Deep Search" to a deterministic MIH model.
@@ -22,7 +24,7 @@ We transitioned from the reactive V1 "Deep Search" to a deterministic MIH model.
 
 ## 3. Recent Structural Stabilizations
 The following fixes were applied to transition from "test" to "proper" execution:
-- **Roster Jitter**: Implemented a randomized 5-15 second delay between agents in `v2/agent_runner.py` to prevent `429 Rate Limit` crashes during the 18-agent roster run.
+- **Roster Jitter**: Implemented a randomized 5-15 second delay between agents in `v2/agent_runner.py` to prevent `429 Rate Limit` crashes (a holdover from the larger multi-provider roster; still harmless with the smaller 2-agent roster).
 - **Unbiased Logic**: Rewrote `v2/snapshot_engine.py` to remove hardcoded sector lists in favor of purely RRG-driven discovery.
 - **Automation Pipeline**: Configured `.github/workflows/daily_simulation.yml` to run the "Forever Loop" daily at 21:00 UTC with automated persistence via `git-auto-commit`.
 
@@ -30,13 +32,13 @@ The following fixes were applied to transition from "test" to "proper" execution
 The environment is currently in a **CLEAN SLATE** state. All test portfolios and snapshots have been purged.
 
 ### ⚡ NEXT STEPS (FOR THE NEXT AI INSTANCE):
-1. **GitHub Secrets**: Ensure the user has added `BRAVE_API_KEY`, `OPENAI_API_KEY`, `GEMINI_API_KEY`, `ANTHROPIC_API_KEY`, and `FRED_API_KEY` to the repo secrets.
+1. **GitHub Secrets**: Ensure the user has added `BRAVE_API_KEY`, `OPENAI_API_KEY`, and `FRED_API_KEY` to the repo secrets.
 2. **Trigger Proper Day 1**: Manually trigger the "Daily Portfolio Simulation" via the GitHub Actions tab.
 3. **Verify Alpha**: Audit the first official MIH snapshot to ensure the "Dynamic Discovery" is correctly picking up leaders in the 2026 regime (e.g., Energy/Defense during the Iran conflict).
 
 ## 📁 Key File Inventory
 - `v2/snapshot_engine.py`: Data ingestion, RRG, and Dynamic Alpha logic.
-- `v2/agent_runner.py`: Orchestrator of the 18 agents (includes Jitter).
+- `v2/agent_runner.py`: Orchestrator of the agent roster (includes Jitter).
 - `v2/portfolio_simulator.py`: Trade validation, execution, and PnL math.
 - `.github/workflows/daily_simulation.yml`: The "Forever Loop" configuration.
 - `v2/data/`: Current home for snapshots, portfolios (initially $10k), and logs.

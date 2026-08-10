@@ -10,7 +10,7 @@ from v2.config import AGENTS, STARTING_CAPITAL, RULES, PORTFOLIOS_DIR, SNAPSHOTS
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(name)s - %(message)s')
-logger = logging.getLogger("SmokeTest_Phase1")
+logger = logging.getLogger("SmokeTest")
 
 def main():
     run_date = date(2026, 4, 7)
@@ -20,17 +20,12 @@ def main():
         logger.error(f"No snapshot found for {run_date}. Run build_daily_snapshot first.")
         return
 
-    # Phase 1: 6 Balanced Agents
     target_agents = [
         "chatgpt_balanced",
-        "claude_balanced",
-        "gemini_balanced",
-        "mistral_balanced",
-        "deepseek_balanced",
-        "qwen_balanced"
+        "chatgpt_aggressive",
     ]
 
-    logger.info(f"--- STARTING SMOKE TEST PHASE 1: {len(target_agents)} AGENTS ---")
+    logger.info(f"--- STARTING SMOKE TEST: {len(target_agents)} AGENTS ---")
 
     for agent_id in target_agents:
         if agent_id not in AGENTS:
@@ -46,7 +41,7 @@ def main():
         except Exception as e:
             logger.error(f"Error running agent {agent_id}: {e}")
 
-    logger.info("--- PHASE 1 COMPLETE ---")
+    logger.info("--- SMOKE TEST COMPLETE ---")
 
 if __name__ == "__main__":
     main()

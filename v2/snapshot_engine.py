@@ -497,8 +497,9 @@ def build_mih_snapshot(snapshot_date: Optional[date] = None, save_dir: Optional[
 {toon_content}
 
 ## [MODULE 5: SIMULATOR CONSTRAINTS - CODE IS LAW]
-- UNIVERSE: Long-only US Equities $3-$50. No Penny Stocks. No Crypto.
-- EXECUTION: T+1 Open prices only.
+- UNIVERSE: US Equities and ETFs, including penny stocks (min price $0.01). No Crypto.
+- DIRECTION: LONG (BUY/SELL) and SHORT (SHORT/COVER) both allowed. One direction per ticker at a time.
+- EXECUTION: During the daily T+1 cycle, orders fill at next open. During a live intraday check-in, orders fill immediately at the current price (see your system prompt for which mode you're in).
 - POSITION SIZING: Max 25% per position ($2,500 on $10k base).
 - RISK: Mandatory Stop-Loss (1.5x-2.0x ATR recommended).
 """

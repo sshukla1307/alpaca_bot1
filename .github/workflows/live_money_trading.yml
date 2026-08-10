@@ -1,0 +1,79 @@
+name: LIVE MONEY Trading Loop (Real Capital)
+
+# ⚠️ This workflow places REAL orders against a REAL Alpaca brokerage account
+# using REAL money. It is deliberately kept in its own file, its own
+# concurrency group, and its own secrets — entirely separate from
+# daily_simulation.yml (the paper simulation), so a bug in one can never
+# reach the other.
+#
+# Two independent switches inside the job (not just this file existing) must
+# both be true for an order to ever be submitted:
+#   - ALPACA_LIVE_TRADING_ENABLED=true  (set below — the master kill switch)
+#   - ALPACA_LIVE=true                  (set below — live vs paper Alpaca endpoint)
+# To pause live trading without deleting anything, disable this workflow from
+# the repo's Actions tab, or flip ALPACA_LIVE_TRADING_ENABLED to "false" below.
+
+on:
+  schedule:
+    - cron: '30 13-21 * * 1-5' # Same hourly-at-:30 cadence as the paper loop
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type exactly: I UNDERSTAND REAL MONEY IS AT RISK'
+        required: true
+
+concurrency:
+  group: live-money-trading-loop
+  cancel-in-progress: false
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: write
+
+    steps:
+      - name: Require explicit confirmation on manual runs
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          if [ "${{ github.event.inputs.confirm }}" != "I UNDERSTAND REAL MONEY IS AT RISK" ]; then
+            echo "Confirmation text did not match exactly. Aborting."
+            exit 1
+          fi
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r v2/requirements.txt
+
+      - name: Run Live Money Tick
+        env:
+          ALPACA_LIVE_TRADING_ENABLED: "true"
+          ALPACA_LIVE: "true"
+          ALPACA_LIVE_KEY: ${{ secrets.ALPACA_LIVE_KEY }}
+          ALPACA_LIVE_SECRET: ${{ secrets.ALPACA_LIVE_SECRET }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          PYTHONPATH: ${{ github.workspace }}
+        run: python -m v2.live_money_runner
+
+      - name: Commit & Push Live-Money Audit Log
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "LIVE MONEY tick: ${{ github.event.schedule || 'Manual Run' }}"
+          file_pattern: 'v2/data/live_money/*'
+          branch: main

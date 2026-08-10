@@ -11,23 +11,24 @@ import os
 import logging
 from pathlib import Path
 
-from .config import AGENTS, RULES
+from .config import AGENTS, RULES, STARTING_CAPITAL
 from .api_adapters import UnifiedLLMClient
 
 logger = logging.getLogger(__name__)
 
-DAY_0_PROMPT = """
-You are about to begin a 6-month autonomous trading experiment. 
+DAY_0_PROMPT = f"""
+You are about to begin a 6-month autonomous trading experiment.
 You will be competing against other LLMs and a benchmark index.
 Before we start, you must define your "Meta-Strategy" (Investment Playbook).
 
-This playbook will be injected into your prompt every single day for the next 6 months. 
+This playbook will be injected into your prompt every single day for the next 6 months.
 You must adhere to it.
 
 === SYSTEM CONSTRAINTS ===
-- Capital: $10,000
+- Capital: ${STARTING_CAPITAL:,.0f}
 - Execution: T+1 Next Open (No day trading possible)
-- Instrument Universe: US Equities (price >= $5) and ETFs. NO penny stocks, NO crypto, NO options.
+- Instrument Universe: US Equities (including penny stocks) and ETFs. NO crypto, NO options.
+- Direction: LONG (BUY/SELL) and SHORT (SHORT/COVER) are both allowed. A ticker may only be held in one direction at a time.
 - Position Sizing: 5% to 25% per trade. Max 15 open positions.
 - Risk Management: The system enforces a mandatory Stop-Loss. But YOU must decide where to place it.
 

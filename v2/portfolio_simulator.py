@@ -39,15 +39,17 @@ class OrderStatus(Enum):
     REJECTED = "REJECTED"       # Failed validation
 
 class TradeAction(Enum):
-    BUY = "BUY"
-    SELL = "SELL"
+    BUY = "BUY"       # Open/add to a LONG position
+    SELL = "SELL"     # Close/reduce a LONG position
+    SHORT = "SHORT"   # Open/add to a SHORT position
+    COVER = "COVER"   # Close/reduce a SHORT position
 
 
 @dataclass
 class Position:
     """An active position in the portfolio."""
     ticker: str
-    shares: float                          # Fractional shares allowed
+    shares: float                          # Fractional shares allowed (always positive)
     entry_price: float                     # Average entry price
     entry_date: str                        # ISO date string
     stop_loss_price: float                 # Absolute price, system-enforced
@@ -55,9 +57,14 @@ class Position:
     current_price: float = 0.0             # Last known price
     unrealized_pnl: float = 0.0
     unrealized_pnl_pct: float = 0.0
+    direction: str = "LONG"                # "LONG" or "SHORT"
 
     @property
     def market_value(self) -> float:
+        """Contribution to total portfolio equity. Shorts are a liability
+        (shares owed, marked to market) since the sale proceeds already sit in cash."""
+        if self.direction == "SHORT":
+            return -(self.shares * self.current_price)
         return self.shares * self.current_price
 
     @property
@@ -67,9 +74,12 @@ class Position:
     def update_price(self, price: float):
         """Update current price and recalculate unrealized P&L."""
         self.current_price = price
-        self.unrealized_pnl = (price - self.entry_price) * self.shares
+        if self.direction == "SHORT":
+            self.unrealized_pnl = (self.entry_price - price) * self.shares
+        else:
+            self.unrealized_pnl = (price - self.entry_price) * self.shares
         if self.entry_price > 0:
-            self.unrealized_pnl_pct = (price - self.entry_price) / self.entry_price
+            self.unrealized_pnl_pct = self.unrealized_pnl / (self.entry_price * self.shares)
 
 
 @dataclass
@@ -97,7 +107,7 @@ class PendingOrder:
     allocation_pct: float                  # Original request (5-25%)
     order_type: OrderType
     limit_price: Optional[float] = None
-    stop_loss_pct: float = 10.0            # % below entry for stop
+    stop_loss_pct: float = 10.0            # % away from entry for stop (below for LONG, above for SHORT)
     take_profit_pct: Optional[float] = None
     reason: str = ""
     submitted_date: str = ""
@@ -179,49 +189,64 @@ class PortfolioSimulator:
             bar = ohlc_data[ticker]
             low = bar["low"]
             high = bar["high"]
+            is_short = pos.direction == "SHORT"
+            close_action = "COVER" if is_short else "SELL"
 
-            # Check STOP-LOSS: triggered if Low ≤ stop_loss_price
-            if low <= pos.stop_loss_price:
-                fill_price = pos.stop_loss_price  # Fill at stop price (conservative)
-                fill_price *= (1 - self.rules.slippage_pct)  # Apply slippage (worse for seller)
+            # LONG: stop triggers if price falls to/through stop (Low ≤ stop).
+            # SHORT: stop triggers if price rises to/through stop (High ≥ stop),
+            # since a short loses money as price goes up.
+            stop_triggered = (high >= pos.stop_loss_price) if is_short else (low <= pos.stop_loss_price)
+
+            if stop_triggered:
+                fill_price = pos.stop_loss_price
+                # Slippage always works against the agent: covering (buying) costs more,
+                # selling receives less.
+                fill_price *= (1 + self.rules.slippage_pct) if is_short else (1 - self.rules.slippage_pct)
 
                 txn = Transaction(
                     date=today,
-                    action="SELL",
+                    action=close_action,
                     ticker=ticker,
                     shares=pos.shares,
                     price=round(fill_price, 4),
                     total=round(pos.shares * fill_price, 2),
-                    reason=f"STOP-LOSS triggered (low=${low:.2f} ≤ stop=${pos.stop_loss_price:.2f})",
+                    reason=f"STOP-LOSS triggered ({'high' if is_short else 'low'}=${(high if is_short else low):.2f} "
+                           f"{'≥' if is_short else '≤'} stop=${pos.stop_loss_price:.2f})",
                     trigger="STOP_LOSS",
                 )
-                self.cash += txn.total
+                self.cash += -txn.total if is_short else txn.total
                 self.transactions.append(txn)
                 triggered_transactions.append(txn)
                 tickers_to_remove.append(ticker)
-                logger.info(f"[{self.agent_id}] STOP-LOSS {ticker}: sold {pos.shares} @ ${fill_price:.2f}")
+                logger.info(f"[{self.agent_id}] STOP-LOSS {ticker}: {close_action.lower()}ed {pos.shares} @ ${fill_price:.2f}")
                 continue
 
-            # Check TAKE-PROFIT: triggered if High ≥ take_profit_price
-            if pos.take_profit_price and high >= pos.take_profit_price:
+            # LONG: take-profit triggers if price rises to/through target (High ≥ tp).
+            # SHORT: take-profit triggers if price falls to/through target (Low ≤ tp).
+            tp_triggered = pos.take_profit_price and (
+                (low <= pos.take_profit_price) if is_short else (high >= pos.take_profit_price)
+            )
+
+            if tp_triggered:
                 fill_price = pos.take_profit_price
-                fill_price *= (1 - self.rules.slippage_pct)  # Slippage
+                fill_price *= (1 + self.rules.slippage_pct) if is_short else (1 - self.rules.slippage_pct)
 
                 txn = Transaction(
                     date=today,
-                    action="SELL",
+                    action=close_action,
                     ticker=ticker,
                     shares=pos.shares,
                     price=round(fill_price, 4),
                     total=round(pos.shares * fill_price, 2),
-                    reason=f"TAKE-PROFIT triggered (high=${high:.2f} ≥ tp=${pos.take_profit_price:.2f})",
+                    reason=f"TAKE-PROFIT triggered ({'low' if is_short else 'high'}=${(low if is_short else high):.2f} "
+                           f"{'≤' if is_short else '≥'} tp=${pos.take_profit_price:.2f})",
                     trigger="TAKE_PROFIT",
                 )
-                self.cash += txn.total
+                self.cash += -txn.total if is_short else txn.total
                 self.transactions.append(txn)
                 triggered_transactions.append(txn)
                 tickers_to_remove.append(ticker)
-                logger.info(f"[{self.agent_id}] TAKE-PROFIT {ticker}: sold {pos.shares} @ ${fill_price:.2f}")
+                logger.info(f"[{self.agent_id}] TAKE-PROFIT {ticker}: {close_action.lower()}ed {pos.shares} @ ${fill_price:.2f}")
 
         for ticker in tickers_to_remove:
             del self.positions[ticker]
@@ -252,54 +277,67 @@ class PortfolioSimulator:
                 continue
 
             open_price = open_prices[ticker]
+            paying = order.action in (TradeAction.BUY, TradeAction.COVER)
 
             # Check LIMIT orders
             if order.order_type == OrderType.LIMIT:
-                if order.action == TradeAction.BUY and open_price > order.limit_price:
-                    logger.info(f"[{self.agent_id}] LIMIT BUY {ticker} cancelled: open ${open_price:.2f} > limit ${order.limit_price:.2f}")
+                if paying and open_price > order.limit_price:
+                    logger.info(f"[{self.agent_id}] LIMIT {order.action.value} {ticker} cancelled: open ${open_price:.2f} > limit ${order.limit_price:.2f}")
                     continue
-                if order.action == TradeAction.SELL and open_price < order.limit_price:
-                    logger.info(f"[{self.agent_id}] LIMIT SELL {ticker} cancelled: open ${open_price:.2f} < limit ${order.limit_price:.2f}")
+                if not paying and open_price < order.limit_price:
+                    logger.info(f"[{self.agent_id}] LIMIT {order.action.value} {ticker} cancelled: open ${open_price:.2f} < limit ${order.limit_price:.2f}")
                     continue
 
-            # Apply slippage
-            if order.action == TradeAction.BUY:
+            # Apply slippage (always against the agent)
+            if paying:
                 fill_price = open_price * (1 + self.rules.slippage_pct)  # Pay slightly more
             else:
                 fill_price = open_price * (1 - self.rules.slippage_pct)  # Receive slightly less
 
             fill_price = round(fill_price, 4)
 
-            if order.action == TradeAction.BUY:
+            if order.action in (TradeAction.BUY, TradeAction.SHORT):
+                direction = "SHORT" if order.action == TradeAction.SHORT else "LONG"
+
+                # Guard: validation should already prevent this, but never let an
+                # opening order flip an existing position's direction.
+                existing = self.positions.get(ticker)
+                if existing and existing.direction != direction:
+                    logger.warning(f"[{self.agent_id}] Skipping {order.action.value} {ticker}: conflicts with existing {existing.direction} position")
+                    continue
+
                 # Recalculate shares based on current portfolio value and allocation
                 portfolio_value = self._portfolio_value_at_price(open_prices)
                 target_amount = portfolio_value * (order.allocation_pct / 100)
                 shares = target_amount / fill_price if fill_price > 0 else 0
 
-                # Final cash check
-                cost = shares * fill_price
-                if cost > self.cash:
+                # Final cash check (BUY spends cash; SHORT requires cash as collateral/margin)
+                notional = shares * fill_price
+                if notional > self.cash:
                     shares = self.cash / fill_price
-                    cost = shares * fill_price
+                    notional = shares * fill_price
 
-                if shares <= 0 or cost < 1.0:
+                if shares <= 0 or notional < 1.0:
                     logger.warning(f"[{self.agent_id}] Insufficient cash for {ticker}, skipping")
                     continue
 
-                # Calculate stop-loss and take-profit absolute prices
-                stop_loss_price = round(fill_price * (1 - order.stop_loss_pct / 100), 4)
-                take_profit_price = None
-                if order.take_profit_pct:
-                    take_profit_price = round(fill_price * (1 + order.take_profit_pct / 100), 4)
+                # Calculate stop-loss and take-profit absolute prices.
+                # LONG: stop below entry, target above. SHORT: stop above entry, target below.
+                if direction == "SHORT":
+                    stop_loss_price = round(fill_price * (1 + order.stop_loss_pct / 100), 4)
+                    take_profit_price = round(fill_price * (1 - order.take_profit_pct / 100), 4) if order.take_profit_pct else None
+                else:
+                    stop_loss_price = round(fill_price * (1 - order.stop_loss_pct / 100), 4)
+                    take_profit_price = round(fill_price * (1 + order.take_profit_pct / 100), 4) if order.take_profit_pct else None
 
-                # Execute
-                self.cash -= cost
+                # Execute — BUY debits cash, SHORT credits cash (sale proceeds received now,
+                # to be paid back on COVER).
+                self.cash += -notional if direction == "LONG" else notional
 
-                if ticker in self.positions:
+                if existing:
                     # Average into existing position
-                    existing = self.positions[ticker]
                     total_shares = existing.shares + shares
-                    avg_price = (existing.cost_basis + cost) / total_shares
+                    avg_price = (existing.cost_basis + notional) / total_shares
                     existing.shares = total_shares
                     existing.entry_price = avg_price
                     existing.stop_loss_price = stop_loss_price  # Update stop
@@ -314,15 +352,16 @@ class PortfolioSimulator:
                         stop_loss_price=stop_loss_price,
                         take_profit_price=take_profit_price,
                         current_price=fill_price,
+                        direction=direction,
                     )
 
                 txn = Transaction(
                     date=today,
-                    action="BUY",
+                    action=order.action.value,
                     ticker=ticker,
                     shares=round(shares, 6),
                     price=fill_price,
-                    total=round(cost, 2),
+                    total=round(notional, 2),
                     stop_loss=stop_loss_price,
                     take_profit=take_profit_price,
                     reason=order.reason,
@@ -330,17 +369,19 @@ class PortfolioSimulator:
                     order_type=order.order_type.value,
                 )
 
-            else:  # SELL
-                if ticker not in self.positions:
-                    logger.warning(f"[{self.agent_id}] Cannot sell {ticker}: no position")
+            else:  # SELL (close LONG) or COVER (close SHORT)
+                expected_direction = "SHORT" if order.action == TradeAction.COVER else "LONG"
+                pos = self.positions.get(ticker)
+                if not pos or pos.direction != expected_direction:
+                    logger.warning(f"[{self.agent_id}] Cannot {order.action.value} {ticker}: no matching position")
                     continue
 
-                pos = self.positions[ticker]
-                sell_pct = order.allocation_pct / 100  # For sells, allocation_pct = % of position
-                shares = pos.shares * min(sell_pct, 1.0)
-                proceeds = shares * fill_price
+                close_pct = order.allocation_pct / 100  # % of position to close
+                shares = pos.shares * min(close_pct, 1.0)
+                notional = shares * fill_price
 
-                self.cash += proceeds
+                # SELL receives proceeds; COVER pays to buy back borrowed shares.
+                self.cash += notional if order.action == TradeAction.SELL else -notional
                 pos.shares -= shares
 
                 if pos.shares < 0.0001:  # Effectively zero
@@ -350,11 +391,11 @@ class PortfolioSimulator:
 
                 txn = Transaction(
                     date=today,
-                    action="SELL",
+                    action=order.action.value,
                     ticker=ticker,
                     shares=round(shares, 6),
                     price=fill_price,
-                    total=round(proceeds, 2),
+                    total=round(notional, 2),
                     reason=order.reason,
                     trigger="AGENT",
                     order_type=order.order_type.value,
@@ -398,10 +439,18 @@ class PortfolioSimulator:
             reason = trade.get("reason", "")
 
             # ── Validation checks ──
+            opening = action in ("BUY", "SHORT")     # Opens/adds to a position
+            closing = action in ("SELL", "COVER")    # Closes/reduces a position
 
             # 1. Valid action
-            if action not in ("BUY", "SELL"):
+            if action not in ("BUY", "SELL", "SHORT", "COVER"):
                 results.append({"trade": trade, "status": "REJECTED", "reason": f"Invalid action: {action}"})
+                continue
+
+            # 1b. Shorting gated by the long_only system rule
+            if action in ("SHORT", "COVER") and self.rules.long_only:
+                results.append({"trade": trade, "status": "REJECTED",
+                                "reason": f"{action} rejected: long_only rule is enabled"})
                 continue
 
             # 2. Valid ticker format
@@ -409,8 +458,8 @@ class PortfolioSimulator:
                 results.append({"trade": trade, "status": "REJECTED", "reason": f"Invalid ticker: {ticker}"})
                 continue
 
-            # 3. Allocation bounds
-            if action == "BUY":
+            # 3. Allocation bounds (opening orders only; closes use allocation_pct as % of position)
+            if opening:
                 if allocation_pct < self.rules.min_position_pct * 100:
                     results.append({"trade": trade, "status": "REJECTED",
                                     "reason": f"Allocation {allocation_pct}% below minimum {self.rules.min_position_pct * 100}%"})
@@ -419,34 +468,47 @@ class PortfolioSimulator:
                     allocation_pct = self.rules.max_position_pct * 100
                     logger.warning(f"[{self.agent_id}] Capped allocation for {ticker} to {allocation_pct}%")
 
-            # 4. Max daily buys
-            if action == "BUY":
+            # 4. Max daily opens (BUY + SHORT share the same daily budget)
+            if opening:
                 if buys_today >= self.rules.max_daily_buys:
                     results.append({"trade": trade, "status": "REJECTED",
                                     "reason": f"Max daily buys ({self.rules.max_daily_buys}) reached"})
                     continue
 
             # 5. Max positions check
-            if action == "BUY" and ticker not in self.positions:
+            existing_pos = self.positions.get(ticker)
+            if opening and not existing_pos:
                 if len(self.positions) >= self.rules.max_positions:
                     results.append({"trade": trade, "status": "REJECTED",
                                     "reason": f"Max positions ({self.rules.max_positions}) reached"})
                     continue
 
-            # 6. Long only — no shorts
-            if action == "SELL" and ticker not in self.positions:
+            # 6. Direction consistency — a ticker can't be LONG and SHORT at once
+            if action == "BUY" and existing_pos and existing_pos.direction == "SHORT":
                 results.append({"trade": trade, "status": "REJECTED",
-                                "reason": f"Cannot sell {ticker}: no position (long-only rule)"})
+                                "reason": f"Cannot BUY {ticker}: position is SHORT (use COVER to close it first)"})
+                continue
+            if action == "SHORT" and existing_pos and existing_pos.direction == "LONG":
+                results.append({"trade": trade, "status": "REJECTED",
+                                "reason": f"Cannot SHORT {ticker}: position is LONG (use SELL to close it first)"})
+                continue
+            if action == "SELL" and (not existing_pos or existing_pos.direction != "LONG"):
+                results.append({"trade": trade, "status": "REJECTED",
+                                "reason": f"Cannot SELL {ticker}: no LONG position held"})
+                continue
+            if action == "COVER" and (not existing_pos or existing_pos.direction != "SHORT"):
+                results.append({"trade": trade, "status": "REJECTED",
+                                "reason": f"Cannot COVER {ticker}: no SHORT position held"})
                 continue
 
-            # 7. Stop-loss required for BUY
-            if action == "BUY" and not stop_loss_pct:
+            # 7. Stop-loss required for opening orders
+            if opening and not stop_loss_pct:
                 results.append({"trade": trade, "status": "REJECTED",
-                                "reason": "Stop-loss is mandatory for all BUY orders"})
+                                "reason": f"Stop-loss is mandatory for all {action} orders"})
                 continue
 
-            # 8. Cash check (rough)
-            if action == "BUY":
+            # 8. Cash check (rough) — BUY spends cash; SHORT requires cash as collateral
+            if opening:
                 estimated_cost = self.portfolio_value * (allocation_pct / 100)
                 if estimated_cost > self.cash * 1.05:  # 5% tolerance for slippage
                     results.append({"trade": trade, "status": "REJECTED",
@@ -473,7 +535,7 @@ class PortfolioSimulator:
             )
             self.pending_orders.append(order)
 
-            if action == "BUY":
+            if opening:
                 buys_today += 1
 
             results.append({"trade": trade, "status": "ACCEPTED", "reason": "Order queued for T+1 execution"})
@@ -566,7 +628,7 @@ class PortfolioSimulator:
         val = self.cash
         for ticker, pos in self.positions.items():
             price = prices.get(ticker, pos.current_price)
-            val += pos.shares * price
+            val += -(pos.shares * price) if pos.direction == "SHORT" else pos.shares * price
         return val
 
     # ─────────────────────────────────────
@@ -652,6 +714,7 @@ class PortfolioSimulator:
         for ticker, pos in self.positions.items():
             positions_summary.append({
                 "ticker": ticker,
+                "direction": pos.direction,
                 "shares": round(pos.shares, 4),
                 "entry_price": pos.entry_price,
                 "current_price": pos.current_price,

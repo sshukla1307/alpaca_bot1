@@ -15,7 +15,7 @@ from typing import Optional
 EXPERIMENT_NAME = "AI Portfolio Experiment V2"
 EXPERIMENT_START = "2026-07-01"
 EXPERIMENT_END = "2026-12-31"
-STARTING_CAPITAL = 10_000.00
+STARTING_CAPITAL = 1_000.00
 CURRENCY = "USD"
 
 # ─────────────────────────────────────────────
@@ -26,14 +26,14 @@ CURRENCY = "USD"
 @dataclass(frozen=True)
 class SystemRules:
     """Immutable trading rules enforced by the portfolio simulator."""
-    min_stock_price: float = 5.00          # Minimum stock price (excludes penny stocks)
+    min_stock_price: float = 0.01          # Minimum stock price (penny stocks allowed)
     max_position_pct: float = 0.25         # Max 25% of portfolio in one position
     min_position_pct: float = 0.05         # Min 5% of portfolio per trade
     max_positions: int = 15                # Max simultaneous positions
     max_daily_buys: int = 3                # Max new buy orders per day
     slippage_pct: float = 0.001            # 0.1% slippage on all fills
     fractional_shares: bool = True         # Allow fractional share trading
-    long_only: bool = True                 # No short selling
+    long_only: bool = False                # Short selling allowed (SHORT to open, COVER to close)
     stop_loss_required: bool = True        # Every position must have a stop-loss
     execution_model: str = "T+1_OPEN"      # Decide after close, execute at next open
     stop_trigger_model: str = "OHLC"       # Check High/Low for stop/TP triggers
@@ -45,18 +45,10 @@ RULES = SystemRules()
 # ─────────────────────────────────────────────
 
 class Persona(Enum):
-    CONSERVATIVE = "conservative"
     BALANCED = "balanced"
     AGGRESSIVE = "aggressive"
 
 PERSONA_MODIFIERS = {
-    Persona.CONSERVATIVE: (
-        "You are a CONSERVATIVE portfolio manager. "
-        "Prioritize capital preservation above all else. Prefer established, large-cap companies "
-        "and broad-market ETFs. Use smaller position sizes (closer to 5-10%). "
-        "Set wider stop-losses to avoid being stopped out by normal volatility. "
-        "Target a Sortino ratio above 1.0. Accept lower returns for lower drawdowns."
-    ),
     Persona.BALANCED: (
         "You are a BALANCED portfolio manager. "
         "Seek a healthy balance between risk and reward. Mix growth and value opportunities. "
@@ -96,39 +88,6 @@ PROVIDERS = {
         api_type="openai",
         api_key_env="OPENAI_API_KEY",
     ),
-    "gemini": LLMProvider(
-        name="Gemini",
-        model_id="gemini-2.5-flash",
-        api_type="google",
-        api_key_env="GOOGLE_API_KEY",
-    ),
-    "claude": LLMProvider(
-        name="Claude",
-        model_id="claude-sonnet-4-6",
-        api_type="anthropic",
-        api_key_env="ANTHROPIC_API_KEY",
-    ),
-
-    "mistral": LLMProvider(
-        name="Mistral",
-        model_id="mistral-large-latest",
-        api_type="mistral",
-        api_key_env="MISTRAL_API_KEY",
-    ),
-    "deepseek": LLMProvider(
-        name="DeepSeek",
-        model_id="deepseek-chat",
-        api_type="openai",  # DeepSeek uses OpenAI-compatible format
-        api_key_env="DEEPSEEK_API_KEY",
-        base_url="https://api.deepseek.com",
-    ),
-    "qwen": LLMProvider(
-        name="Qwen",
-        model_id="qwen-max",
-        api_type="openai",  # Qwen supports OpenAI-compatible format
-        api_key_env="QWEN_API_KEY",
-        base_url="https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
-    ),
 }
 
 # ─────────────────────────────────────────────
@@ -138,8 +97,8 @@ PROVIDERS = {
 @dataclass
 class Agent:
     """A single trading agent (model + persona combination)."""
-    id: str                                # e.g., "chatgpt_conservative"
-    display_name: str                      # e.g., "ChatGPT (Conservative)"
+    id: str                                # e.g., "chatgpt_balanced"
+    display_name: str                      # e.g., "ChatGPT (Balanced)"
     provider_key: str                      # Key into PROVIDERS dict
     persona: Persona
     benchmark: str = "SPY"                 # Default benchmark, updated after Day 0
@@ -149,7 +108,7 @@ class Agent:
         return PROVIDERS.get(self.provider_key)
 
 def _build_agents() -> list[Agent]:
-    """Generate all 21 AI agents (7 models × 3 personas) + 1 random control."""
+    """Generate all AI agents (1 model × 2 personas) + 1 random control."""
     agents = []
     for provider_key, provider in PROVIDERS.items():
         for persona in Persona:

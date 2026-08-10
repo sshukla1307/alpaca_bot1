@@ -7,7 +7,7 @@
 
     <!-- SEO & Social Sharing -->
     <meta name="description"
-        content="A comparative study benchmarking ChatGPT 5.3, Gemini 3.1, Claude 4.6 Opus, and Perplexity Pro in algorithmic trading.">
+        content="Comparing a Balanced vs. Aggressive ChatGPT persona in algorithmic trading.">
     <meta name="keywords"
         content="LLM benchmarking, algorithmic trading, AI finance, automated portfolio management, python comparative study">
 
@@ -2068,20 +2068,6 @@
             background: rgba(88, 166, 255, 0.12);
         }
 
-        .activity-model.gemini {
-            color: #bc8cff;
-            background: rgba(188, 140, 255, 0.12);
-        }
-
-        .activity-model.claude {
-            color: #3fb950;
-            background: rgba(63, 185, 80, 0.12);
-        }
-
-        .activity-model.perplexity {
-            color: #f85149;
-            background: rgba(248, 81, 73, 0.12);
-        }
 
         .activity-action {
             color: var(--text-dim);
@@ -2432,11 +2418,11 @@
                 </div>
             </div>
             <!-- Removed default pill, moved to ticker -->
-            <h1>AI Portfolio Experiment</h1>
+            <h1>Automated Trading Bot</h1>
             <p class="subtitle">
-                Comparing four $1,000 investment portfolios managed by AI.
+                Showing two ChatGPT-managed portfolios — Balanced vs. Aggressive — automatically managed for Siddharth Shukla.
                 <span class="header-links">
-                    <a href="https://aiportfolioexperiment.substack.com/" target="_blank" rel="noopener">
+                    <a href="#activity-feed">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path
@@ -2445,16 +2431,16 @@
                             <path d="M15 18h-5" />
                             <path d="M10 6h8v4h-8V6Z" />
                         </svg>
-                        Substack Blog
+                        Activity Feed
                     </a>
-                    <a href="https://github.com/seve1995/ai-portfolio-experiment" target="_blank" rel="noopener">
+                    <a href="#portfolio-holdings">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="16 18 22 12 16 6" />
                             <polyline points="8 6 2 12 8 18" />
                             <line x1="12" x2="12" y1="2" y2="22" />
                         </svg>
-                        Source Code
+                        Portfolio Holdings
                     </a>
                 </span>
             </p>
@@ -2475,22 +2461,13 @@
             <!-- Stats will be injected here -->
             <div class="stat-card">
                 <div class="glass-isolation-layer"></div>
-                <h3>ChatGPT</h3>
+                <h3>ChatGPT (Balanced)</h3>
                 <div class="value">$----.--</div>
                 <div class="change">--%</div>
             </div>
             <div class="stat-card">
-                <h3>Gemini</h3>
-                <div class="value">$----.--</div>
-                <div class="change">--%</div>
-            </div>
-            <div class="stat-card">
-                <h3>Claude</h3>
-                <div class="value">$----.--</div>
-                <div class="change">--%</div>
-            </div>
-            <div class="stat-card">
-                <h3>Perplexity</h3>
+                <div class="glass-isolation-layer"></div>
+                <h3>ChatGPT (Aggressive)</h3>
                 <div class="value">$----.--</div>
                 <div class="change">--%</div>
             </div>
@@ -2531,7 +2508,7 @@
         </div>
 
         <!-- Activity Feed -->
-        <div class="activity-feed-section stagger-4">
+        <div class="activity-feed-section stagger-4" id="activity-feed">
             <div class="activity-header">
                 <h2>Recent Activity</h2>
                 <button class="info-toggle" onclick="toggleActivityInfo()" aria-expanded="false">
@@ -2568,7 +2545,7 @@
             </div>
         </div>
 
-        <div class="portfolio-section stagger-4">
+        <div class="portfolio-section stagger-4" id="portfolio-holdings">
             <div class="portfolio-header">
                 <h2>Portfolio Holdings</h2>
                 <div class="date-selector">
@@ -2586,16 +2563,10 @@
         <!-- Donut Charts Removed -->
 
         <footer class="footer">
-            <p style="margin-bottom: 8px;"><strong>Disclaimer:</strong> This is a research experiment for educational
-                purposes only. It is not financial advice. Past performance is not indicative of future results.</p>
-            <p>&copy; 2026 AI Portfolio Experiment. Built for Deep Research AI Analysis.</p>
-            <button class="share-btn" onclick="shareOnTwitter()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-                Share This Experiment on X
-            </button>
+            <p style="margin-bottom: 8px;"><strong>Disclaimer:</strong> This is a personal research experiment and not a financial recommendation. The data and analysis are for informational
+                purposes only. Past performance is not indicative of future results.</p>
+            <p>&copy; 2026 Copyright @Siddharth Shukla - AI Analysis.</p>
+
         </footer>
     </div>
 
@@ -2604,18 +2575,14 @@
         let chart;
 
         const colors = {
-            'ChatGPT': '#58a6ff',
-            'Gemini': '#bc8cff',
-            'Claude': '#3fb950',
-            'Perplexity': '#f85149',
+            'Balanced': '#58a6ff',
+            'Aggressive': '#f97316',
             'SP500': '#888888'  // Neutral gray for baseline
         };
 
         const modelVersions = {
-            'ChatGPT': 'ChatGPT 5.3',
-            'Gemini': 'Gemini 3.1',
-            'Claude': 'Claude 4.6 Opus',
-            'Perplexity': 'Perplexity Pro',
+            'Balanced': 'ChatGPT (Balanced)',
+            'Aggressive': 'ChatGPT (Aggressive)',
             'SP500': 'S&P 500 (Baseline)'
         };
 
@@ -2706,10 +2673,7 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            // Update button text based on device capabilities
-            updateSnapshotButton();
-
+        function loadPerformanceData() {
             const timestamp = new Date().getTime();
             const csvPath = `v1/logs/performance.csv?t=${timestamp}`;
             const lastUpdatedPath = `v1/logs/last_updated.json?t=${timestamp}`;
@@ -2752,6 +2716,12 @@
                     const syncEl = document.getElementById('lastSync');
                     if (syncEl) syncEl.textContent = `Data Error: ${err.message}`;
                 });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Update button text based on device capabilities
+            updateSnapshotButton();
+            loadPerformanceData();
         });
 
         function updateLastSyncDisplay(isoTimestamp) {
@@ -2772,11 +2742,12 @@
                 timeAgo = syncTime.toLocaleDateString();
             }
 
-            // Experiment V1 finished status
+            const marketStatus = getMarketStatus();
             document.getElementById('lastSync').innerHTML =
-                `<span class="market-indicator closed"></span>Market Closed<span class="status-separator">·</span>Final Update: ${syncTime.toLocaleDateString()}` +
+                `<span class="market-indicator ${marketStatus.isOpen ? 'open' : 'closed'}"></span>${marketStatus.isOpen ? 'Market Open' : 'Market Closed'}` +
+                `<span class="status-separator">·</span>Last Sync: ${timeAgo}` +
                 `<span class="status-separator">·</span>` +
-                `<span class="next-update">Status: Experiment Complete</span>`;
+                `<span class="next-update">Next Update: ${getNextUpdateTime(isoTimestamp)}</span>`;
         }
 
         // Calculate the next data refresh time
@@ -2818,23 +2789,20 @@
             const dayStr = String(etDay).padStart(2, '0');
             const isHoliday = holidays2026.includes(`${monthStr}-${dayStr}`);
 
-            // If market is open: handle incremental updates
+            // If market is open: handle incremental updates (live loop ticks hourly at :30 past)
             if (isWeekday && !isHoliday && timeInMinutes >= marketOpen && timeInMinutes < marketClose) {
-                // Latest synchronization slot (updates run at :00 and :30)
-                const latestExpectedSlotMins = etMinutes < 30 ? (etHours * 60) : (etHours * 60 + 30);
-
                 // Buffer to allow GitHub Actions a few minutes to complete
                 const syncBufferMins = 5;
-                const isOverdue = lastSync && (new Date(lastSync).getTime() < (now.getTime() - (etMinutes % 30 + syncBufferMins) * 60000));
+                // Minutes elapsed since the most recent :30 slot (wraps into the previous hour before :30)
+                const minsSinceLastSlot = etMinutes >= 30 ? (etMinutes - 30) : (etMinutes + 30);
+                const isOverdue = lastSync && (new Date(lastSync).getTime() < (now.getTime() - (minsSinceLastSlot + syncBufferMins) * 60000));
 
-                if (isOverdue && etMinutes % 30 > 2) {
+                if (isOverdue) {
                     return '<span class="update-soon">Updating now...</span>';
                 }
 
-                // Calculate minutes until next :00 or :30
-                const currentSlot = etMinutes < 30 ? 0 : 30;
-                const nextSlot = currentSlot === 0 ? 30 : 60;
-                let minsUntilNext = nextSlot - etMinutes;
+                // Calculate minutes until the next :30 tick
+                const minsUntilNext = etMinutes < 30 ? (30 - etMinutes) : (90 - etMinutes);
 
                 if (minsUntilNext <= 1) {
                     return '<span class="update-soon">~1 min</span>';
@@ -2966,7 +2934,6 @@
 
         function processData(data) {
             let cleanData = data.filter(row => row.Date);
-            cleanData = cleanData.filter(row => row.Date <= '2026-03-31');
             if (cleanData.length === 0) return;
 
             const firstDate = cleanData[0].Date;
@@ -2975,7 +2942,7 @@
             document.getElementById('dateRange').textContent = `Reporting Period: ${dateRange}`;
 
             const labels = cleanData.map(row => row.Date);
-            const models = ['ChatGPT', 'Gemini', 'Claude', 'Perplexity'];
+            const models = ['Balanced', 'Aggressive'];
 
             const datasets = models.map(model => {
                 // Create a beautiful gradient for the area fill
@@ -3285,7 +3252,7 @@
 
         function updateStats(lastRow) {
             const grid = document.getElementById('statsGrid');
-            const models = ['ChatGPT', 'Gemini', 'Claude', 'Perplexity'];
+            const models = ['Balanced', 'Aggressive'];
 
             // Calculate rankings
             const rankings = models.map(model => ({
@@ -3465,7 +3432,7 @@
 
                 fCtx.font = '400 44px Outfit, sans-serif';
                 fCtx.fillStyle = dimColor;
-                fCtx.fillText('Comparing 4 AI Models with $1,000 each', 120, 290);
+                fCtx.fillText('Balanced vs. Aggressive ChatGPT, $1,000 each', 120, 290);
 
                 // 6. Composite the Chart (scaled 2x)
                 fCtx.drawImage(exportChartCanvas, 80, 360, 2240, 1040);
@@ -3494,7 +3461,7 @@
                 fCtx.fillStyle = dimColor;
                 fCtx.font = '600 32px Outfit, sans-serif';
                 fCtx.textAlign = 'right';
-                fCtx.fillText('aiportfolioexperiment.substack.com', 2280, 1520);
+                fCtx.fillText('Local Demo', 2280, 1520);
 
                 // 9. Share or Download
                 const filename = `AI-Portfolio-Snapshot-${new Date().toISOString().split('T')[0]}.png`;
@@ -3547,16 +3514,14 @@
 
         // Twitter share function
         function shareOnTwitter() {
-            const experimentStart = new Date('2026-01-05');
+            const experimentStart = new Date('2026-07-01');
             const today = new Date();
             const dayNumber = Math.ceil((today - experimentStart) / (1000 * 60 * 60 * 24));
 
             // Get rankings data
             const rankings = window.allRankings || [
-                { name: 'ChatGPT', change: '0' },
-                { name: 'Gemini', change: '0' },
-                { name: 'Claude', change: '0' },
-                { name: 'Perplexity', change: '0' }
+                { name: 'Balanced', change: '0' },
+                { name: 'Aggressive', change: '0' }
             ];
 
             // Format each ranking with medal emojis
@@ -3580,7 +3545,7 @@ https://seve1995.github.io/ai-portfolio-experiment/`;
 
         // Countdown timer
         function updateCountdown() {
-            const experimentEnd = new Date('2026-03-31'); // March 31st, 2026
+            const experimentEnd = new Date('2026-12-31'); // December 31st, 2026
             const now = new Date();
             const diffMs = experimentEnd - now;
             const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
@@ -3602,7 +3567,7 @@ https://seve1995.github.io/ai-portfolio-experiment/`;
         let portfolioData = {};
         const holdingsDateSelect = document.getElementById('holdingsDateSelect');
         const holdingsGrid = document.getElementById('holdingsGrid');
-        const modelOrder = ['ChatGPT', 'Gemini', 'Claude', 'Perplexity'];
+        const modelOrder = ['Balanced', 'Aggressive'];
 
         function loadPortfolios() {
             fetch('v1/logs/portfolios.json')
@@ -3611,14 +3576,8 @@ https://seve1995.github.io/ai-portfolio-experiment/`;
                     return response.json();
                 })
                 .then(data => {
-                    const filteredData = {};
-                    Object.keys(data).forEach(date => {
-                        if (date <= '2026-03-31') {
-                            filteredData[date] = data[date];
-                        }
-                    });
-                    portfolioData = filteredData;
-                    window.portfolioData = filteredData; // Expose for modal access
+                    portfolioData = data;
+                    window.portfolioData = data; // Expose for modal access
                     populateDateSelector();
                 })
                 .catch(err => {
@@ -3840,7 +3799,7 @@ https://seve1995.github.io/ai-portfolio-experiment/`;
                     const filteredData = {};
                     Object.keys(data).forEach(model => {
                         if (Array.isArray(data[model])) {
-                            filteredData[model] = data[model].filter(tx => tx.timestamp <= '2026-04-01');
+                            filteredData[model] = data[model];
                         }
                     });
                     renderActivityFeed(filteredData);
@@ -4143,10 +4102,21 @@ https://seve1995.github.io/ai-portfolio-experiment/`;
             });
         }
 
-        // Load portfolios and transactions on page load
+        // Load portfolios and transactions on page load, then keep the whole
+        // dashboard live by re-fetching everything every 60 minutes (matches the
+        // live trading loop's tick cadence during market hours).
+        const DASHBOARD_REFRESH_MS = 60 * 60 * 1000;
+
+        function refreshDashboardData() {
+            loadPerformanceData();
+            loadPortfolios();
+            loadTransactions();
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             loadPortfolios();
             loadTransactions();
+            setInterval(refreshDashboardData, DASHBOARD_REFRESH_MS);
         });
 
         // ============================================

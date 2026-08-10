@@ -1,6 +1,6 @@
 # AI Portfolio Experiment (V2): Automated Agentic LLM Study
 
-A high-fidelity project for benchmarking the financial decision-making of **18 autonomous AI agents** (6 models × 3 personas) in a deterministic, rules-based trading simulation.
+A high-fidelity project for benchmarking the financial decision-making of **2 autonomous AI agents** (OpenAI GPT × 2 personas: Balanced, Aggressive) in a deterministic, rules-based trading simulation.
 
 ## 🚀 The 2026 Architectural Evolution: "Institutional Intelligence"
 
@@ -17,10 +17,9 @@ The MIH acts as the agents' "Bloomberg Terminal," delivering a machine-readable 
 ### 2. TOON Visualization (Token-Oriented Object Notation)
 To maximize context window efficiency, MIH data is serialized into **Markdown Tables (TOON)** rather than JSON. This reduces token overhead by **60%**, allowing larger data payloads without exceeding provider limits.
 
-### 3. The 18-Agent Roster
- benchmarked across:
-- **Providers**: OpenAI (o1/4o), Anthropic (Claude 3.5 Sonnet), Google (Gemini 2.5 Flash), Mistral, DeepSeek, and Qwen.
-- **Risk Profiles**: Conservative, Balanced, and Aggressive (Persona-driven logic).
+### 3. The Agent Roster
+- **Provider**: OpenAI (GPT-4o).
+- **Risk Profiles**: Balanced and Aggressive (Persona-driven logic).
 - **Automation**: Fully autonomous daily execution via **GitHub Actions** at 21:00 UTC (Market Close), with automated state persistence via `git-auto-commit`.
 
 ---
@@ -38,7 +37,7 @@ To maximize context window efficiency, MIH data is serialized into **Markdown Ta
 ## ⚖️ "Code is Law" - Simulator Constraints
 
 LLMs operate within a strict sandbox:
-- **Universe**: Long-only US Equities $3-$50. No Penny Stocks, No Shorts, No Crypto.
+- **Universe**: US Equities, including penny stocks (min price $0.01). Long and Short positions allowed (SHORT to open, COVER to close). No Crypto.
 - **Execution**: T+1 opening prices ONLY (pre-computed slippage).
 - **Sizing**: Max 25% ($2,500 on a $10k base) per position.
 - **Mandatory Stops**: Every trade MUST specify a stop-loss (1.5x-2.0x ATR recommended).
