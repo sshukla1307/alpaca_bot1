@@ -28,7 +28,7 @@ You must adhere to it.
 - Capital: ${STARTING_CAPITAL:,.0f}
 - Execution: T+1 Next Open (No day trading possible)
 - Instrument Universe: US Equities (including penny stocks) and ETFs. NO crypto, NO options.
-- Direction: LONG (BUY/SELL) and SHORT (SHORT/COVER) are both allowed. A ticker may only be held in one direction at a time.
+- Direction: LONG only (BUY to open, SELL to close). No short selling.
 - Position Sizing: 5% to 25% per trade. Max 15 open positions.
 - Risk Management: The system enforces a mandatory Stop-Loss. But YOU must decide where to place it.
 

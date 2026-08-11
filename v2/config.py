@@ -33,7 +33,7 @@ class SystemRules:
     max_daily_buys: int = 3                # Max new buy orders per day
     slippage_pct: float = 0.001            # 0.1% slippage on all fills
     fractional_shares: bool = True         # Allow fractional share trading
-    long_only: bool = False                # Short selling allowed (SHORT to open, COVER to close)
+    long_only: bool = True                  # No short selling — SHORT/COVER rejected by the simulator
     stop_loss_required: bool = True        # Every position must have a stop-loss
     execution_model: str = "T+1_OPEN"      # Decide after close, execute at next open
     stop_trigger_model: str = "OHLC"       # Check High/Low for stop/TP triggers

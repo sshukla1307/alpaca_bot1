@@ -10,6 +10,8 @@ import random
 import logging
 from typing import Dict
 
+from .config import RULES
+
 logger = logging.getLogger(__name__)
 
 # A predefined universe of standard liquid stocks/ETFs for the random agent
@@ -26,7 +28,8 @@ def execute_random_trades(portfolio_state: Dict, intraday: bool = False) -> Dict
     - Max 15 positions
     - Tries to stay mostly invested over time
     - Random stop losses
-    - Randomly goes LONG or SHORT on new positions (coin flip)
+    - Randomly goes LONG or SHORT on new positions (coin flip), unless RULES.long_only
+      disables shorting, in which case every open is a BUY
 
     Args:
         intraday: When True, this is being called on an hourly cadence during market
@@ -99,8 +102,8 @@ def execute_random_trades(portfolio_state: Dict, intraday: bool = False) -> Dict
             # Random take profit between 10% and 50% (or None half the time)
             take_profit = round(random.uniform(10.0, 50.0), 1) if random.random() > 0.5 else None
 
-            # Coin flip: go LONG (BUY) or SHORT
-            action = "SHORT" if random.random() < 0.5 else "BUY"
+            # Coin flip between LONG (BUY) and SHORT, unless shorting is disabled system-wide
+            action = "SHORT" if (not RULES.long_only and random.random() < 0.5) else "BUY"
 
             trade = {
                 "action": action,

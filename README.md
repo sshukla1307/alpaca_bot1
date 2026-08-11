@@ -37,7 +37,7 @@ To maximize context window efficiency, MIH data is serialized into **Markdown Ta
 ## ⚖️ "Code is Law" - Simulator Constraints
 
 LLMs operate within a strict sandbox:
-- **Universe**: US Equities, including penny stocks (min price $0.01). Long and Short positions allowed (SHORT to open, COVER to close). No Crypto.
+- **Universe**: Long-only US Equities, including penny stocks (min price $0.01). No Shorts, No Crypto.
 - **Execution**: T+1 opening prices ONLY (pre-computed slippage).
 - **Sizing**: Max 25% ($2,500 on a $10k base) per position.
 - **Mandatory Stops**: Every trade MUST specify a stop-loss (1.5x-2.0x ATR recommended).

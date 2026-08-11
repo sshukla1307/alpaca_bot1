@@ -66,7 +66,8 @@ def build_system_prompt(agent_config, playbook: str, intraday: bool = False) -> 
 
     prompt += "\n=== INSTRUCTIONS ===\n"
     prompt += "1. Analyze the daily snapshot and use tools to investigate further if needed.\n"
-    prompt += "2. Determine if you want to buy, sell, short, cover, or hold.\n"
+    action_options = "buy, sell, or hold" if RULES.long_only else "buy, sell, short, cover, or hold"
+    prompt += f"2. Determine if you want to {action_options}.\n"
     prompt += "3. You MUST end your turn by calling the `propose_trades` tool.\n"
 
     return prompt

@@ -36,6 +36,8 @@ LIVE_AGENT_ID = "chatgpt_live_aggressive"
 LIVE_DATA_DIR = Path(__file__).parent / "data" / "live_money"
 ORDER_LOG_PATH = LIVE_DATA_DIR / "order_log.jsonl"
 
+SHORTING_ENABLED = False  # SHORT/COVER are rejected outright while this is False
+
 MIN_ALLOCATION_PCT = 5.0
 MAX_ALLOCATION_PCT = 25.0
 MAX_POSITIONS = 15
@@ -100,6 +102,8 @@ def _validate_live_trade(trade: dict, account: dict, positions: dict, broker, to
         return False, f"Invalid action: {action}"
     if not ticker or len(ticker) > 5:
         return False, f"Invalid ticker: {ticker}"
+    if action in ("SHORT", "COVER") and not SHORTING_ENABLED:
+        return False, f"{action} rejected: short selling is disabled for this account"
 
     opening = action in ("BUY", "SHORT")
     existing = positions.get(ticker)
