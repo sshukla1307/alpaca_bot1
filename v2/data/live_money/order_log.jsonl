@@ -1,0 +1,2 @@
+{"date": "2026-08-11", "action": "BUY", "ticker": "NVDA", "status": "REJECTED", "reason": "Could not fetch a live price", "logged_at": "2026-08-11T14:14:35.416560-04:00"}
+{"date": "2026-08-11", "action": "BUY", "ticker": "RGTI", "status": "REJECTED", "reason": "Could not fetch a live price", "logged_at": "2026-08-11T14:14:35.453197-04:00"}
