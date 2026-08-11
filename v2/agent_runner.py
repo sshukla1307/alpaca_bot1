@@ -132,18 +132,53 @@ def get_agent_trades(agent, agent_id: str, snapshot: dict, portfolio_state: dict
         return []
 
 
-def fetch_live_prices(tickers: set[str]) -> dict:
-    """Fetch the current live/last-traded price for a set of tickers."""
+def fetch_live_prices(tickers: set[str], max_retries: int = 3, retry_delay: float = 1.5) -> dict:
+    """Fetch the current live/last-traded price for a set of tickers.
+
+    yfinance's fast_info hits Yahoo Finance directly and is occasionally flaky
+    (transient failures, thin/small-cap tickers) — retries a few times before
+    falling back to the most recent daily bar's close, so a real trade decision
+    isn't silently dropped over a data-fetch hiccup. The fallback price can be
+    a bit stale (up to a few days old around a weekend/holiday), which is
+    logged clearly since it affects the accuracy of any stop-loss/take-profit
+    levels computed from it.
+    """
     prices = {}
     if not tickers:
         return prices
 
+    import time
     import yfinance as yf
+
     for tkr in tickers:
-        try:
-            price = yf.Ticker(tkr).fast_info.get("last_price")
-            if price:
-                prices[tkr] = float(price)
-        except Exception as e:
-            logger.warning(f"Could not fetch live price for {tkr}: {e}")
+        price = None
+
+        for attempt in range(1, max_retries + 1):
+            try:
+                candidate = yf.Ticker(tkr).fast_info.get("last_price")
+                if candidate:
+                    price = float(candidate)
+                    break
+            except Exception as e:
+                logger.warning(f"[{tkr}] fast_info attempt {attempt}/{max_retries} failed: {e}")
+            if attempt < max_retries:
+                time.sleep(retry_delay)
+
+        if price is None:
+            try:
+                hist = yf.Ticker(tkr).history(period="5d")
+                if not hist.empty:
+                    price = float(hist["Close"].iloc[-1])
+                    logger.warning(
+                        f"[{tkr}] fast_info failed after {max_retries} attempts; "
+                        f"using fallback daily-close price ${price:.2f} instead."
+                    )
+            except Exception as e:
+                logger.warning(f"[{tkr}] Fallback history fetch also failed: {e}")
+
+        if price:
+            prices[tkr] = price
+        else:
+            logger.warning(f"[{tkr}] Could not fetch a price via fast_info or fallback history.")
+
     return prices
