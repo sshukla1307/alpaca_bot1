@@ -56,8 +56,16 @@ class AlpacaBroker:
         # on direct access rather than returning None), so default defensively
         # rather than assume every account is on margin.
         multiplier = getattr(acct, "multiplier", None)
+        # non_marginable_buying_power reflects only SETTLED cash (a same-day sale's
+        # proceeds are excluded until they settle, T+1 for equities) — this is the
+        # cash-account equivalent of the margin daytrade_count guard: trading a NEW
+        # position with unsettled funds risks a "good faith violation." Fail closed
+        # (0, not full cash) if the field is ever unexpectedly absent.
+        settled_cash = getattr(acct, "non_marginable_buying_power", None)
+        settled_cash = float(settled_cash) if settled_cash is not None else 0.0
         return {
             "cash": float(acct.cash),
+            "settled_cash": settled_cash,
             "equity": float(acct.equity),
             "buying_power": float(acct.buying_power),
             "daytrade_count": int(getattr(acct, "daytrade_count", 0) or 0),

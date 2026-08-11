@@ -10,9 +10,15 @@ Two independent switches must BOTH be explicitly set for real money to move:
   - ALPACA_LIVE=true                   (paper vs live Alpaca endpoint; defaults to paper)
 Both are set only inside live_money_trading.yml.
 
-Regulatory note: this account is under the $25,000 Pattern Day Trader
-threshold, so v2.pdt_tracker actively blocks any same-day round-trip once
-Alpaca's own daytrade_count hits 3 in the trailing 5 business days.
+Regulatory note: this is a CASH account (confirmed via Alpaca's account
+`multiplier` field — margin-only fields like daytrade_count are simply absent
+from the API response for this account type). The Pattern Day Trader rule
+(v2.pdt_tracker) doesn't apply to cash accounts and is effectively a no-op
+here; the real constraint is T+1 settlement — opening a new position with
+today's still-unsettled sale proceeds risks a "good faith violation" if that
+position closes before the original sale settles. _validate_live_trade sizes
+every opening trade strictly against account["settled_cash"]
+(non_marginable_buying_power) to make that structurally impossible.
 """
 
 import json
@@ -111,18 +117,23 @@ def _build_portfolio_state(account: dict, positions: dict, stop_levels: dict) ->
     return {
         "agent_id": LIVE_AGENT_ID,
         "cash": round(account["cash"], 2),
+        "settled_cash": round(account.get("settled_cash", 0), 2),
         "portfolio_value": round(account["equity"], 2),
         "num_positions": len(positions),
         "max_positions": MAX_POSITIONS,
         "positions": positions_summary,
         "pending_orders": 0,
         "note": (
-            "THIS IS A REAL ALPACA BROKERAGE ACCOUNT. Every trade you propose executes "
-            "with real capital immediately — there is no paper simulation and no human "
-            "reviewing your orders before they fill. Every BUY/SHORT MUST include both "
-            "stop_loss_pct AND take_profit_pct — take-profit is mandatory on this account, "
-            "not optional. Your take-profit is enforced server-side by Alpaca as soon as "
-            "the order fills, so once you set it, profit-taking is automatic."
+            "THIS IS A REAL ALPACA BROKERAGE ACCOUNT (CASH, not margin). Every trade you "
+            "propose executes with real capital immediately — there is no paper simulation "
+            "and no human reviewing your orders before they fill. Every BUY/SHORT MUST "
+            "include both stop_loss_pct AND take_profit_pct — take-profit is mandatory on "
+            "this account, not optional. Your take-profit is enforced server-side by Alpaca "
+            "as soon as the order fills, so once you set it, profit-taking is automatic. "
+            "Because this is a cash account with T+1 settlement, proceeds from a same-day "
+            "sale are NOT available to open a new position until the next business day — "
+            "an opening trade sized beyond currently-settled cash will be rejected, even if "
+            "'cash' shown below looks sufficient."
         ),
     }
 
@@ -158,6 +169,21 @@ def _validate_live_trade(trade: dict, account: dict, positions: dict, broker, to
             return False, f"Stop-loss is mandatory for all {action} orders"
         if not take_profit_pct:
             return False, f"Take-profit is mandatory for all {action} orders on this account"
+
+        # Cash-account guard: this account settles T+1, so today's sale proceeds
+        # aren't usable yet. Opening a new position with unsettled funds risks a
+        # "good faith violation" if that position gets closed (e.g. by its own
+        # stop-loss/take-profit) before the original sale settles. Sizing strictly
+        # against settled_cash makes that structurally impossible, regardless of
+        # whether Alpaca itself would have caught/blocked it.
+        estimated_dollar_amount = account["equity"] * (allocation_pct / 100)
+        settled_cash = account.get("settled_cash", 0)
+        if estimated_dollar_amount > settled_cash:
+            return False, (
+                f"Insufficient SETTLED cash (cash account, T+1 settlement): need "
+                f"~${estimated_dollar_amount:.0f}, have ${settled_cash:.0f} settled "
+                f"(total cash ${account.get('cash', 0):.0f} may include proceeds still settling)"
+            )
 
     if action == "BUY" and existing and existing["direction"] == "SHORT":
         return False, f"Cannot BUY {ticker}: position is SHORT (use COVER first)"

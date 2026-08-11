@@ -20,8 +20,9 @@ Every hour (at :30 past, Mon–Fri, market hours only) `.github/workflows/live_m
 - **Sizing**: 5–25% of account equity per position, max 15 open positions.
 - **Mandatory stop-loss AND take-profit** on every opening trade — both required, no exceptions. Both get submitted as a native Alpaca bracket order, so exits are enforced server-side continuously, not just once an hour.
 - **Profit-lock backstop**: any position that ends up unprotected (no take-profit order) gets force-closed once it's up 15%+.
-- **PDT guard**: this account is under the $25,000 Pattern Day Trader threshold, so `v2/pdt_tracker.py` blocks any same-day round-trip once Alpaca's own `daytrade_count` hits 3 in the trailing 5 business days — a regulatory constraint, not a preference.
-- **Universe**: US equities and ETFs, including penny stocks (min price $0.01). No crypto, no options.
+- **Settled-cash guard (the constraint that actually applies here)**: this is a **cash account**, not margin — confirmed the hard way, via a production crash on Alpaca's `daytrade_count` field, which cash accounts simply don't have. PDT doesn't apply to cash accounts; the real risk is a "good faith violation" from opening a position with a same-day sale's still-unsettled proceeds (equities settle T+1). Every opening trade is sized strictly against `settled_cash` (Alpaca's `non_marginable_buying_power`), never total cash or equity, so that violation is structurally impossible regardless of what "cash" appears to show.
+- `v2/pdt_tracker.py` is kept in place for a margin account (harmless no-op on this one, since `daytrade_count` defaults to 0) but isn't the guard that matters here.
+- **Universe**: US equities and ETFs, including penny stocks (min price $0.01). No crypto, no options, no shorting.
 
 ## Two independent safety switches
 
@@ -57,7 +58,7 @@ python -m v2.main --export
 
 ## Dashboard
 
-`index.html` reads `v2/data/live_money/dashboard/*.json` (equity curve, current positions, recent trade/rejection log) and auto-refreshes hourly. Repo visibility note: if GitHub Pages is enabled on this repo, verify whether the published site is actually private — on the free plan, Pages built from a private repo can still be publicly reachable at its URL.
+`index.html` reads `v2/data/live_money/dashboard/*.json` (equity curve, current positions, recent trade/rejection log) and auto-refreshes hourly. Live at `https://sshukla1307.github.io/alpaca_bot1/` via GitHub Pages. Note: this repo is **public** — real trade/equity history is visible to anyone, by deliberate choice (Pages on the free plan requires a public repo; a private repo would still publish an unauthenticated public URL on paid plans anyway, so there was no truly private option here without self-hosting).
 
 ## License
 MIT
