@@ -1,28 +1,28 @@
 {
-  "timestamp": "2026-08-11T15:02:08.746424-04:00",
+  "timestamp": "2026-08-11T15:16:25.103577-04:00",
   "cash": 1072.41,
-  "settled_cash": 1450.69,
-  "equity": 2000.04,
+  "settled_cash": 1286.85,
+  "equity": 1999.58,
   "positions": [
     {
       "ticker": "FSLY",
       "direction": "LONG",
       "shares": 17.0,
       "entry_price": 28.987,
-      "current_price": 28.99,
-      "market_value": 492.83,
-      "unrealized_pnl": 0.05,
-      "unrealized_pnl_pct": 0.0001
+      "current_price": 28.95,
+      "market_value": 492.15,
+      "unrealized_pnl": -0.63,
+      "unrealized_pnl_pct": -0.00128
     },
     {
       "ticker": "NVDA",
       "direction": "LONG",
       "shares": 2.0,
       "entry_price": 217.3975,
-      "current_price": 217.3999,
-      "market_value": 434.8,
-      "unrealized_pnl": 0.0,
-      "unrealized_pnl_pct": 1e-05
+      "current_price": 217.51,
+      "market_value": 435.02,
+      "unrealized_pnl": 0.23,
+      "unrealized_pnl_pct": 0.00052
     }
   ]
 }
