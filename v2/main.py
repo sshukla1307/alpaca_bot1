@@ -2,17 +2,18 @@
 AI Portfolio Experiment V2 — Main Entrypoint
 
 Flags:
-  --day-0         Run the meta-strategy generation for all agents (setup)
-  --run-date      Execute the daily loop for a specific date (YYYY-MM-DD). Defaults to today.
-  --export        Export the V2 data to V1 dashboard format.
+  --day-0     Generate the live agent's Day 0 playbook (one-time setup)
+  --export    Re-export the dashboard from the current live-money audit trail
+
+The recurring live trading loop itself runs via `python -m v2.live_money_runner`
+(what live_money_trading.yml actually invokes on its hourly schedule) — this
+file is only for one-off setup/maintenance commands.
 """
 
 import argparse
 import logging
-from datetime import date
 from pathlib import Path
 
-# Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s [%(levelname)s] %(name)s - %(message)s',
@@ -21,14 +22,12 @@ logging.basicConfig(
 logger = logging.getLogger("V2_Main")
 
 def main():
-    parser = argparse.ArgumentParser(description="AI Portfolio Experiment V2")
-    parser.add_argument("--day-0", action="store_true", help="Generate Day 0 Playbooks")
-    parser.add_argument("--run-date", type=str, default=date.today().isoformat(), help="Simulation date YYYY-MM-DD")
-    parser.add_argument("--export", action="store_true", help="Export to Dashboard format")
-    
+    parser = argparse.ArgumentParser(description="AI Portfolio Experiment V2 — Live Money Bot")
+    parser.add_argument("--day-0", action="store_true", help="Generate the live agent's Day 0 playbook")
+    parser.add_argument("--export", action="store_true", help="Re-export the dashboard from the current audit trail")
+
     args = parser.parse_args()
-    
-    # Needs dotenv to load keys
+
     try:
         from dotenv import load_dotenv
         load_dotenv(Path(__file__).parent.parent / ".env")
@@ -36,25 +35,19 @@ def main():
         logger.warning("python-dotenv not installed. Using system environment variables.")
 
     if args.day_0:
-        logger.info("Running Day 0 Meta Strategy generation...")
-        from v2.meta_strategy import generate_playbooks
-        generate_playbooks()
-        
-    # Always run the daily loop unless ONLY export or Day 0 was intended
-    # If they specify a run date, we run it. If default, run it.
-    if not args.day_0 and not args.export:
-        logger.info(f"Running daily loop for {args.run_date}...")
-        from v2.agent_runner import run_all_agents
-        run_all_agents(args.run_date)
-        # Auto-export after a run
-        args.export = True
-        
+        logger.info("Generating Day 0 playbook...")
+        from v2.meta_strategy import generate_playbook
+        generate_playbook()
+
     if args.export:
-        logger.info("Exporting to Dashboard...")
+        logger.info("Exporting dashboard from live-money audit trail...")
         from v2.dashboard_exporter import export_for_dashboard
         data_dir = Path(__file__).parent / "data"
-        out_dir = Path(__file__).parent.parent / "v1" / "logs"
+        out_dir = data_dir / "live_money" / "dashboard"
         export_for_dashboard(data_dir, out_dir)
+
+    if not args.day_0 and not args.export:
+        parser.print_help()
 
 if __name__ == "__main__":
     main()

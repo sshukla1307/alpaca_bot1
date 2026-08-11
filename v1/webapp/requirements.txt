@@ -1,6 +1,0 @@
-flask
-gunicorn
-alpaca-trade-api
-python-dotenv
-yfinance
-pandas

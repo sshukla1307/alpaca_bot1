@@ -1,31 +1,21 @@
 """
 AI Portfolio Experiment V2 — Configuration
-All agent definitions, system rules, API settings, and persona modifiers.
+System rules, persona, and API settings for the live-money trading agent.
 """
 
-import os
-from dataclasses import dataclass, field
+import pathlib
+from dataclasses import dataclass
 from enum import Enum
 from typing import Optional
 
 # ─────────────────────────────────────────────
-# Experiment Parameters
-# ─────────────────────────────────────────────
-
-EXPERIMENT_NAME = "AI Portfolio Experiment V2"
-EXPERIMENT_START = "2026-07-01"
-EXPERIMENT_END = "2026-12-31"
-STARTING_CAPITAL = 1_000.00
-CURRENCY = "USD"
-
-# ─────────────────────────────────────────────
 # System-Enforced Rules ("Code is Law")
-# These CANNOT be overridden by any model.
+# These CANNOT be overridden by the model.
 # ─────────────────────────────────────────────
 
 @dataclass(frozen=True)
 class SystemRules:
-    """Immutable trading rules enforced by the portfolio simulator."""
+    """Immutable trading rules enforced by live_money_runner.py."""
     min_stock_price: float = 0.01          # Minimum stock price (penny stocks allowed)
     max_position_pct: float = 0.25         # Max 25% of portfolio in one position
     min_position_pct: float = 0.05         # Min 5% of portfolio per trade
@@ -33,15 +23,16 @@ class SystemRules:
     max_daily_buys: int = 3                # Max new buy orders per day
     slippage_pct: float = 0.001            # 0.1% slippage on all fills
     fractional_shares: bool = True         # Allow fractional share trading
-    long_only: bool = True                  # No short selling — SHORT/COVER rejected by the simulator
+    long_only: bool = True                  # No short selling — SHORT/COVER rejected
     stop_loss_required: bool = True        # Every position must have a stop-loss
-    execution_model: str = "T+1_OPEN"      # Decide after close, execute at next open
-    stop_trigger_model: str = "OHLC"       # Check High/Low for stop/TP triggers
+    take_profit_required: bool = True      # Every position must have a take-profit
+    execution_model: str = "LIVE_IMMEDIATE"  # Orders fill immediately at the current live price
+    stop_trigger_model: str = "ALPACA_BRACKET"  # Stop/TP enforced server-side by Alpaca continuously
 
 RULES = SystemRules()
 
 # ─────────────────────────────────────────────
-# Personas
+# Persona
 # ─────────────────────────────────────────────
 
 class Persona(Enum):
@@ -65,7 +56,7 @@ PERSONA_MODIFIERS = {
 }
 
 # ─────────────────────────────────────────────
-# LLM Provider Configurations
+# LLM Provider Configuration
 # ─────────────────────────────────────────────
 
 @dataclass
@@ -73,13 +64,13 @@ class LLMProvider:
     """Configuration for a single LLM API provider."""
     name: str
     model_id: str
-    api_type: str                          # "openai", "anthropic", "google", "mistral", "deepseek", "qwen", "perplexity"
+    api_type: str
     api_key_env: str                       # Environment variable name for API key
-    base_url: Optional[str] = None         # Custom base URL (for DeepSeek, Qwen, etc.)
+    base_url: Optional[str] = None
     temperature: float = 0.0              # Deterministic output
     max_tokens: int = 4096
     supports_tool_calling: bool = True
-    parallel_tool_calls: bool = False      # DISABLED for fairness (even if provider supports it)
+    parallel_tool_calls: bool = False      # DISABLED for fairness/consistency
 
 PROVIDERS = {
     "chatgpt": LLMProvider(
@@ -91,113 +82,14 @@ PROVIDERS = {
 }
 
 # ─────────────────────────────────────────────
-# Agent Definitions
-# ─────────────────────────────────────────────
-
-@dataclass
-class Agent:
-    """A single trading agent (model + persona combination)."""
-    id: str                                # e.g., "chatgpt_balanced"
-    display_name: str                      # e.g., "ChatGPT (Balanced)"
-    provider_key: str                      # Key into PROVIDERS dict
-    persona: Persona
-    benchmark: str = "SPY"                 # Default benchmark, updated after Day 0
-
-    @property
-    def provider(self) -> Optional[LLMProvider]:
-        return PROVIDERS.get(self.provider_key)
-
-def _build_agents() -> list[Agent]:
-    """Generate all AI agents (1 model × 2 personas) + 1 random control."""
-    agents = []
-    for provider_key, provider in PROVIDERS.items():
-        for persona in Persona:
-            agent_id = f"{provider_key}_{persona.value}"
-            display_name = f"{provider.name} ({persona.value.title()})"
-            agents.append(Agent(
-                id=agent_id,
-                display_name=display_name,
-                provider_key=provider_key,
-                persona=persona,
-            ))
-    # Random control agent
-    agents.append(Agent(
-        id="random_control",
-        display_name="Random Control",
-        provider_key="",  # No LLM provider
-        persona=Persona.BALANCED,
-        benchmark="SPY",
-    ))
-    return agents
-AGENTS = {a.id: a for a in _build_agents()}
-
-# ─────────────────────────────────────────────
-# MCP Tool Configuration
-# ─────────────────────────────────────────────
-
-MAX_TOOL_CALLS_PER_AGENT = 8              # Max incremental tool calls per agent per day
-
-MCP_TOOLS = {
-    "screen_stocks": {
-        "source": "Alpha Vantage",
-        "description": "Screen stocks by fundamentals, technicals, and sector",
-    },
-    "get_technicals": {
-        "source": "Alpha Vantage / yfinance",
-        "description": "Get SMA-20, SMA-50, SMA-200, RSI, and OHLCV history for a ticker",
-    },
-    "get_short_interest": {
-        "source": "FINRA",
-        "description": "Get short sale volume and days to cover for a ticker",
-    },
-    "get_market_news": {
-        "source": "Finnhub",
-        "description": "Get today's market headlines and ticker-specific news",
-    },
-    "get_fundamentals": {
-        "source": "Alpha Vantage / FMP",
-        "description": "Get P/E, EV/EBITDA, revenue, earnings, market cap for a ticker",
-    },
-    "get_macro": {
-        "source": "FRED",
-        "description": "Get macro indicators: DGS10 (10Y yield), VIXCLS (VIX)",
-    },
-    "get_sec_filings": {
-        "source": "SEC EDGAR",
-        "description": "Get recent 8-K, 10-Q, Form 4 filings for a company",
-    },
-    "web_search": {
-        "source": "Brave Search API",
-        "description": "General web search for financial research and catalyst discovery",
-    },
-    "fetch_url": {
-        "source": "Custom (sanitized)",
-        "description": "Read a URL and extract clean text content (HTML stripped, scripts removed)",
-    },
-    "propose_trades": {
-        "source": "Local",
-        "description": "Submit your trading decisions for today. Structured JSON output.",
-    },
-}
-
-# ─────────────────────────────────────────────
 # Paths
 # ─────────────────────────────────────────────
-
-import pathlib
 
 V2_ROOT = pathlib.Path(__file__).parent
 DATA_DIR = V2_ROOT / "data"
 SNAPSHOTS_DIR = DATA_DIR / "snapshots"
 PLAYBOOKS_DIR = DATA_DIR / "playbooks"
-PORTFOLIOS_DIR = DATA_DIR / "portfolios"
-LOGS_DIR = V2_ROOT / "logs"
-TOOL_CALLS_DIR = LOGS_DIR / "tool_calls"
-DECISIONS_DIR = LOGS_DIR / "decisions"
-ADHERENCE_DIR = LOGS_DIR / "adherence"
 SCHEMAS_DIR = V2_ROOT / "schemas"
 
-# Ensure all directories exist
-for d in [SNAPSHOTS_DIR, PLAYBOOKS_DIR, PORTFOLIOS_DIR,
-          TOOL_CALLS_DIR, DECISIONS_DIR, ADHERENCE_DIR]:
+for d in [SNAPSHOTS_DIR, PLAYBOOKS_DIR]:
     d.mkdir(parents=True, exist_ok=True)

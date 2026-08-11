@@ -1,78 +1,76 @@
 """
 AI Portfolio Experiment V2 — Meta Strategy (Day 0)
 
-This script is run exactly ONCE per agent at the start of the experiment (Day 0).
-It asks the LLM to define its custom trading strategy (universe, horizon, risk tolerance, indicators).
-The resulting "Playbook" is saved to disk and injected into the prompt *every single day*
-to prevent the LLM from drifting from its initial strategy.
+Run once to define the live agent's "Playbook" (investment strategy). The
+resulting document is saved to disk and injected into the prompt at every
+live check-in, so the agent doesn't drift from its initial strategy.
 """
 
-import os
 import logging
 from pathlib import Path
 
-from .config import AGENTS, RULES, STARTING_CAPITAL
+from .config import PROVIDERS, PERSONA_MODIFIERS, Persona, PLAYBOOKS_DIR
 from .api_adapters import UnifiedLLMClient
 
 logger = logging.getLogger(__name__)
 
-DAY_0_PROMPT = f"""
-You are about to begin a 6-month autonomous trading experiment.
-You will be competing against other LLMs and a benchmark index.
+LIVE_AGENT_ID = "chatgpt_live_aggressive"
+LIVE_PLAYBOOK_FILENAME = "chatgpt_aggressive.md"
+
+DAY_0_PROMPT = """
+You are about to begin trading a real Alpaca brokerage account autonomously.
 Before we start, you must define your "Meta-Strategy" (Investment Playbook).
 
-This playbook will be injected into your prompt every single day for the next 6 months.
-You must adhere to it.
+This playbook will be injected into your prompt at every live check-in
+(roughly once an hour while the market is open). You must adhere to it.
 
 === SYSTEM CONSTRAINTS ===
-- Capital: ${STARTING_CAPITAL:,.0f}
-- Execution: T+1 Next Open (No day trading possible)
+- Capital: your actual current Alpaca account cash/equity, shown to you fresh at every check-in.
+- Execution: LIVE — orders fill immediately at the current price, not at a future open.
 - Instrument Universe: US Equities (including penny stocks) and ETFs. NO crypto, NO options.
 - Direction: LONG only (BUY to open, SELL to close). No short selling.
 - Position Sizing: 5% to 25% per trade. Max 15 open positions.
-- Risk Management: The system enforces a mandatory Stop-Loss. But YOU must decide where to place it.
+- Risk Management: the system enforces a mandatory Stop-Loss AND Take-Profit on every position
+  (both required, no exceptions) — but YOU decide where to place them.
 
 Please define your Playbook answering the following:
 1. Core Strategy: Are you value, growth, momentum, mean-reversion, or macro-driven?
 2. Asset Selection: How will you pick stocks? What sectors will you favor? Will you use ETFs?
 3. Trade Horizon: How long do you expect to hold a typical position?
 4. Risk Profile: What will be your typical Stop-Loss % and Take-Profit %?
-5. Data Usage: Which of your available tools (FRED macro, FINRA news, Technicals, Fundamentals) will you prioritize?
+5. Data Usage: Which of your available tools (FRED macro, market news, Technicals, Fundamentals) will you prioritize?
 
 Output a detailed, structured markdown document. This is your constitution.
 No greetings, just the markdown document.
 """
 
-def generate_playbooks():
-    """Run Day 0 prompt for all agents."""
-    playbooks_dir = Path(__file__).parent / "data" / "playbooks"
-    playbooks_dir.mkdir(parents=True, exist_ok=True)
-    
-    for agent_id, config in AGENTS.items():
-        if not config.provider:
-            continue
-            
-        playbook_path = playbooks_dir / f"{agent_id}.md"
-        if playbook_path.exists() and playbook_path.stat().st_size > 0:
-            logger.info(f"Playbook already exists for {agent_id}. Skipping.")
-            continue
-            
-        logger.info(f"Generating Day 0 Playbook for {agent_id}...")
-        # Resilience (backoff/ritenta) is now handled in UnifiedLLMClient
-        from .config import PERSONA_MODIFIERS
-        system_prompt = f"YOU ARE {config.display_name}.\nPersona: {PERSONA_MODIFIERS[config.persona]}\n"
-        
-        client = UnifiedLLMClient(config.provider)
-        try:
-            # We don't provide tools for the Day 0 prompt, just ask for the strategy text
-            playbook = client.generate(system_prompt, DAY_0_PROMPT, tools=[], max_tool_calls=0)
-            
-            with open(playbook_path, "w", encoding="utf-8") as f:
-                f.write(playbook)
-                
-            logger.info(f"Playbook saved for {agent_id}.")
-        except Exception as e:
-            logger.error(f"Failed to generate playbook for {agent_id}: {e}")
+
+def generate_playbook(force: bool = False):
+    """Generate the Day 0 playbook for the live agent, unless one already exists."""
+    playbook_path = PLAYBOOKS_DIR / LIVE_PLAYBOOK_FILENAME
+
+    if playbook_path.exists() and playbook_path.stat().st_size > 0 and not force:
+        logger.info(f"Playbook already exists at {playbook_path}. Skipping (pass force=True to regenerate).")
+        return
+
+    logger.info("Generating Day 0 Playbook for the live agent...")
+    provider = PROVIDERS["chatgpt"]
+    system_prompt = (
+        f"YOU ARE ChatGPT (Aggressive) — REAL MONEY.\n"
+        f"Persona: {PERSONA_MODIFIERS[Persona.AGGRESSIVE]}\n"
+    )
+
+    client = UnifiedLLMClient(provider)
+    try:
+        # No tools for the Day 0 prompt, just the strategy text itself
+        playbook = client.generate(system_prompt, DAY_0_PROMPT, tools=[], max_tool_calls=0)
+        playbook_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(playbook_path, "w", encoding="utf-8") as f:
+            f.write(playbook)
+        logger.info(f"Playbook saved to {playbook_path}.")
+    except Exception as e:
+        logger.error(f"Failed to generate playbook: {e}")
+
 
 if __name__ == "__main__":
-    generate_playbooks()
+    generate_playbook()

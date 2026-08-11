@@ -511,8 +511,17 @@ def build_mih_snapshot(snapshot_date: Optional[date] = None, save_dir: Optional[
         filepath = save_dir / f"{snapshot_date.isoformat()}.json"
         with open(filepath, "w") as f:
             json.dump(snapshot, f, indent=2)
-            
+
     return snapshot
+
+
+def load_snapshot(snapshot_date: date, data_dir: Path) -> Optional[Dict[str, Any]]:
+    """Load a previously saved MIH snapshot, if one exists for this date."""
+    filepath = data_dir / f"{snapshot_date.isoformat()}.json"
+    if filepath.exists():
+        with open(filepath) as f:
+            return json.load(f)
+    return None
 
 
 if __name__ == "__main__":

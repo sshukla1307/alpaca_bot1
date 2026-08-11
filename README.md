@@ -1,68 +1,63 @@
-# AI Portfolio Experiment (V2): Automated Agentic LLM Study
+# Live Trading Bot — Alpaca Account
 
-A high-fidelity project for benchmarking the financial decision-making of **2 autonomous AI agents** (OpenAI GPT × 2 personas: Balanced, Aggressive) in a deterministic, rules-based trading simulation.
+An autonomous GPT-4o agent (Aggressive persona) trading a real Alpaca brokerage account, checking in roughly once an hour during NYSE market hours. No paper simulation, no backtest — every trade executes with real capital, subject to a hard-coded rules firewall and two independent kill switches.
 
-## 🚀 The 2026 Architectural Evolution: "Institutional Intelligence"
+## How it works
 
-In contrast to the reactive "V1" (Deep Search) system, the **V2 Framework** pivots to a **deterministic, pre-computed intelligence engine**. We replaced thin 7KB data snapshots with a **150KB Market Intelligence Hub (MIH)** to eliminate LLM arithmetic errors and provide high-alpha context.
+Every hour (at :30 past, Mon–Fri, market hours only) `.github/workflows/live_money_trading.yml` runs `python -m v2.live_money_runner`, which:
 
-### 1. Market Intelligence Hub (MIH)
-The MIH acts as the agents' "Bloomberg Terminal," delivering a machine-readable payload that includes:
-- **Macro Narrative (300 Words)**: Synthesized global context via Brave Search (Freshness: PD).
-- **Macro Indicators (FRED)**: Real-time 10Y/2Y Yields, Fed Funds, VIX, and Credit Spreads.
-- **Dynamic Sector Discovery**: The MIH automatically identifies the Top 3 sectors by RS-Ratio (momentum strength) and injects their current 'Champion' holdings into the catalyst scanner. This ensures the portfolio reacts to macro shifts (e.g., Energy during geopolitical conflict) without human bias.
-- **Catalyst Watchlist (100 Tickers)**: A $3-$50 scanning universe focused on high-volatility catalysts like FDA/PDUFA dates, Earnings Drift, and Short Squeezes.
-- **Technical/Risk Normalization**: Pre-computed ATR (14d), RSI (14d), and Relative Volume (RVOL) Z-scores, providing agents with "alpha-ready" signals.
+1. Skips immediately if it's not a real NYSE trading day/hour (DST-correct via `zoneinfo`, cross-checked against Alpaca's own market clock).
+2. Builds (or reuses) the day's Market Intelligence Hub snapshot — macro data, sector rotation, a catalyst watchlist — built once per day, not once per tick.
+3. Runs a profit-lock backstop: force-closes any position that's up 15%+ with no take-profit order attached, before the agent even gets a turn.
+4. Lets the agent decide to trade or hold. It sets its own cadence — it's told explicitly not to trade just because it was asked.
+5. Validates and executes any accepted trade immediately at the live price, then re-exports the dashboard.
 
-### 2. TOON Visualization (Token-Oriented Object Notation)
-To maximize context window efficiency, MIH data is serialized into **Markdown Tables (TOON)** rather than JSON. This reduces token overhead by **60%**, allowing larger data payloads without exceeding provider limits.
+## "Code is Law" — the rules firewall
 
-### 3. The Agent Roster
-- **Provider**: OpenAI (GPT-4o).
-- **Risk Profiles**: Balanced and Aggressive (Persona-driven logic).
-- **Automation**: Fully autonomous daily execution via **GitHub Actions** at 21:00 UTC (Market Close), with automated state persistence via `git-auto-commit`.
+`v2/live_money_runner.py` enforces these regardless of what the agent wants:
 
----
+- **Long-only.** `SHORT`/`COVER` are rejected outright.
+- **Sizing**: 5–25% of account equity per position, max 15 open positions.
+- **Mandatory stop-loss AND take-profit** on every opening trade — both required, no exceptions. Both get submitted as a native Alpaca bracket order, so exits are enforced server-side continuously, not just once an hour.
+- **Profit-lock backstop**: any position that ends up unprotected (no take-profit order) gets force-closed once it's up 15%+.
+- **PDT guard**: this account is under the $25,000 Pattern Day Trader threshold, so `v2/pdt_tracker.py` blocks any same-day round-trip once Alpaca's own `daytrade_count` hits 3 in the trailing 5 business days — a regulatory constraint, not a preference.
+- **Universe**: US equities and ETFs, including penny stocks (min price $0.01). No crypto, no options.
 
-## 🛠 Project Structure
+## Two independent safety switches
 
-- `v2/snapshot_engine.py`: The MIH Core. Fetches FRED, RRG, and 100-ticker watchlist data.
-- `v2/agent_runner.py`: The daily orchestrator. Injects playbooks/MIH and runs the LLM tool-calling loop.
-- `v2/portfolio_simulator.py`: **"Code is Law" Firewall**. Validates trades, enforces stop-losses, and calculates T+1 execution.
-- `v2/api_adapters.py`: Robust retry logic with exponential backoff (handles 429/503 errors across providers).
-- `v2/mcp_servers/`: Custom tools for Technicals, Fundamentals, and Web Search.
+Both must be explicitly `"true"` for an order to ever be submitted — set only inside `live_money_trading.yml`, never in any other workflow:
 
----
+- `ALPACA_LIVE_TRADING_ENABLED` — master kill switch. Off by default; the broker isn't even constructed if this isn't set.
+- `ALPACA_LIVE` — live vs. paper Alpaca endpoint. Defaults to paper.
 
-## ⚖️ "Code is Law" - Simulator Constraints
+## Project structure
 
-LLMs operate within a strict sandbox:
-- **Universe**: Long-only US Equities, including penny stocks (min price $0.01). No Shorts, No Crypto.
-- **Execution**: T+1 opening prices ONLY (pre-computed slippage).
-- **Sizing**: Max 25% ($2,500 on a $10k base) per position.
-- **Mandatory Stops**: Every trade MUST specify a stop-loss (1.5x-2.0x ATR recommended).
-- **Tool Cap**: Max 15 tool calls per turn to ensure deep analysis before `propose_trades`.
+- `v2/live_money_runner.py` — the tick orchestrator: validation, execution, PDT guard, profit-lock backstop.
+- `v2/alpaca_broker.py` — Alpaca SDK wrapper. Bracket orders for opens, plain market orders for closes.
+- `v2/pdt_tracker.py` — Pattern Day Trader day-trade guard.
+- `v2/agent_runner.py` — prompt-building and the LLM tool-calling loop (no broker dependency of its own).
+- `v2/snapshot_engine.py` — the Market Intelligence Hub: macro, sector rotation, catalyst watchlist.
+- `v2/dashboard_exporter.py` — turns the live audit trail into the JSON files `index.html` reads.
+- `v2/meta_strategy.py` — one-time Day-0 playbook generation for the agent.
+- `v2/mcp_servers/` — tools the agent can call: technicals, fundamentals, macro, news, web search.
 
----
+## Usage
 
-## 📅 Usage
-
-### 1. Reset & Setup (Day 0)
-Generate the 6-month playbooks for both agents (plus the random-control baseline, which needs no playbook):
+**One-time setup** — generate the agent's Day-0 investment playbook:
 ```bash
 python -m v2.main --day-0
 ```
 
-### 2. Daily Simulation Run
-Generate the MIH snapshot and execute all agents for a specific date:
+**The trading loop itself** runs automatically via GitHub Actions — there's no manual daily-run command. To re-export the dashboard from the current audit trail without waiting for the next tick:
 ```bash
-python -m v2.main --run-date 2026-04-07
+python -m v2.main --export
 ```
 
-### 3. Dashboard Integration
-The framework automatically exports data to the static web dashboard in `v1/logs/`.
+**Manual trigger**: Actions tab → "LIVE MONEY Trading Loop (Real Capital)" → Run workflow → type the confirmation phrase.
 
----
+## Dashboard
 
-## 📜 License
+`index.html` reads `v2/data/live_money/dashboard/*.json` (equity curve, current positions, recent trade/rejection log) and auto-refreshes hourly. Repo visibility note: if GitHub Pages is enabled on this repo, verify whether the published site is actually private — on the free plan, Pages built from a private repo can still be publicly reachable at its URL.
+
+## License
 MIT

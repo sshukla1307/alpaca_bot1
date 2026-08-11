@@ -1,5 +1,0 @@
-pyperclip
-alpaca-trade-api
-python-dotenv
-yfinance
-pandas

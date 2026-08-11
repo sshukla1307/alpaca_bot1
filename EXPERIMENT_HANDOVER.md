@@ -1,47 +1,78 @@
-# 🦾 AI Portfolio Experiment V2: Institutional Handover Dossier
+# Live Trading Bot — Handover Dossier
 
-> **DATE**: 2026-08-04  
-> **STATUS**: PROPER DAY 1 READY (CLEAN SLATE)  
-> **CONTEXT**: 2-Agent Autonomous Roster (OpenAI GPT only) with Market Intelligence Hub (MIH).
+> **DATE**: 2026-08-11
+> **STATUS**: LIVE-ONLY. Paper simulation has been removed entirely.
+> **CONTEXT**: One autonomous GPT-4o agent (Aggressive persona) trading a real Alpaca account.
 
-## 1. The Core Objective
-Benchmarking 2 autonomous agents (1 model × 2 personas: Balanced, Aggressive) across a 6-month simulation in the 2026 high-rate, AI-volatile regime. Every agent starts with exactly **$1,000** on Day 1 (**$2,000** total across the roster).
+## 1. What changed
 
-> **Scope Change (2026-08-04)**: The roster was narrowed from 18 agents (6 models × 3 personas) down to 2 (OpenAI GPT × Balanced/Aggressive). Anthropic, Google, Mistral, DeepSeek, and Qwen providers, and the Conservative persona, were removed from `v2/config.py`. A `random_control` baseline agent still runs alongside the 2 GPT agents. See `v2/api_adapters.py` — only the OpenAI request loop remains; the other provider-specific loops were deleted.
+This project started as a paper-trading benchmark comparing multiple LLM personas
+against each other and a random-control baseline (see git history before commit
+`785a6d4` for that era). It has since been fully converted to a single live-money
+bot:
 
-## 2. Technical Architecture (V2 "Institutional")
-We transitioned from the reactive V1 "Deep Search" to a deterministic MIH model.
+- **Paper simulation is gone.** `v2/portfolio_simulator.py`, `v2/live_runner.py`,
+  `v2/random_agent.py`, `v1/` (legacy V1 system + its historical logs), and the old
+  `daily_simulation.yml`/`refresh-data.yml` workflows were deleted outright, not
+  just disabled. They're recoverable from git history if ever needed, but nothing
+  active depends on them.
+- **One persona, one account.** Running two personas against a single real Alpaca
+  account was considered and deliberately rejected — Alpaca only tracks one
+  position per ticker, so two independent strategies sharing an account risks one
+  agent's close order touching the other's shares. The account runs **Aggressive**
+  only, sized against 100% of account equity.
+- **The dashboard (`index.html`) was rebuilt from scratch**, not edited. The old
+  4200-line version was structured entirely around multi-agent comparison
+  (per-persona equity charts, holdings modals, etc.) that no longer applies to a
+  single real account. The new version is a single-account equity curve, current
+  positions, and a recent-activity/rejection log, reading from
+  `v2/data/live_money/dashboard/*.json`.
 
-### 🧠 Market Intelligence Hub (MIH)
-- **Data Load**: 150KB hyper-dense payload (TOON Markdown Tables).
-- **Macro Indicators**: Driven by FRED (Yields, VIX, Spreads).
-- **RRG Rotation Math**: Uses a 90-day window to map institutional capital flows.
-- **Dynamic Discovery (CRITICAL)**: To avoid human bias, the engine identifies the Top 3 "Strength" sectors (Leading/Improving) and automatically injects their Top 10 holdings into the candidate pool for catalyst scanning.
+## 2. Regulatory and safety posture
 
-### 🛡️ "Code is Law" Simulator
-- **Constraints**: T+1 fills at Open, Max 25% sizing, mandatory ATR-based Stop-Losses.
-- **Precision**: The runner now fetches actual `High/Low` bars for the day to ensure real-world fidelity for stop-loss execution.
+- **Pattern Day Trader guard is mandatory, not optional.** The account is under
+  the $25,000 PDT threshold. `v2/pdt_tracker.py` blocks any close that would
+  create a same-day round-trip once Alpaca's own `daytrade_count` hits 3 in the
+  trailing 5 business days. This cannot be disabled by the agent.
+- **Mandatory stop-loss AND take-profit** on every opening trade, submitted as a
+  native Alpaca bracket order — Alpaca enforces the exit server-side continuously,
+  not just when the hourly tick runs. A tick-time backstop
+  (`PROFIT_LOCK_THRESHOLD_PCT = 15.0` in `live_money_runner.py`) force-closes
+  anything that somehow ends up unprotected once it's up 15%+.
+- **Shorting is disabled system-wide** (`SHORTING_ENABLED = False` in
+  `live_money_runner.py`, independent of any other config — this was a deliberate
+  design choice to keep the live and paper rule-sets from ever being coupled,
+  even though paper no longer exists).
+- **Two independent kill switches**, both required for any order to fire:
+  `ALPACA_LIVE_TRADING_ENABLED=true` and `ALPACA_LIVE=true`. Both are set only in
+  `live_money_trading.yml`.
 
-## 3. Recent Structural Stabilizations
-The following fixes were applied to transition from "test" to "proper" execution:
-- **Roster Jitter**: Implemented a randomized 5-15 second delay between agents in `v2/agent_runner.py` to prevent `429 Rate Limit` crashes (a holdover from the larger multi-provider roster; still harmless with the smaller 2-agent roster).
-- **Unbiased Logic**: Rewrote `v2/snapshot_engine.py` to remove hardcoded sector lists in favor of purely RRG-driven discovery.
-- **Automation Pipeline**: Configured `.github/workflows/daily_simulation.yml` to run the "Forever Loop" daily at 21:00 UTC with automated persistence via `git-auto-commit`.
+## 3. Known limitations / things the next person should check
 
-## 4. Current State & Launch Sequence
-The environment is currently in a **CLEAN SLATE** state. All test portfolios and snapshots have been purged.
+- **This code has never been exercised against Alpaca's real API** — only against
+  mocked brokers in local tests (see the test files referenced in commit history;
+  they aren't checked into the repo). Run it against `ALPACA_LIVE=false` (paper
+  endpoint, separate paper-account keys) before trusting `ALPACA_LIVE=true`.
+- **GitHub Pages + private repo**: if Pages is enabled here, verify whether the
+  published dashboard is actually access-restricted — on GitHub's free plan, a
+  Pages site built from a private repo can still be publicly reachable at its URL
+  even though the source repo isn't.
+- **PDT tracking only sees orders this system submitted.** Manual trades on the
+  same Alpaca account (if any) aren't reflected in `v2/data/live_money/`'s local
+  ledger, only in Alpaca's own `daytrade_count`, which the guard also checks as a
+  backstop.
+- **Bracket order `time_in_force="gtc"`** — chosen so stop-loss/take-profit
+  persist across days rather than expiring end-of-day. Worth re-verifying against
+  Alpaca's current API docs periodically.
 
-### ⚡ NEXT STEPS (FOR THE NEXT AI INSTANCE):
-1. **GitHub Secrets**: Ensure the user has added `BRAVE_API_KEY`, `OPENAI_API_KEY`, and `FRED_API_KEY` to the repo secrets.
-2. **Trigger Proper Day 1**: Manually trigger the "Daily Portfolio Simulation" via the GitHub Actions tab.
-3. **Verify Alpha**: Audit the first official MIH snapshot to ensure the "Dynamic Discovery" is correctly picking up leaders in the 2026 regime (e.g., Energy/Defense during the Iran conflict).
+## 4. Key files
 
-## 📁 Key File Inventory
-- `v2/snapshot_engine.py`: Data ingestion, RRG, and Dynamic Alpha logic.
-- `v2/agent_runner.py`: Orchestrator of the agent roster (includes Jitter).
-- `v2/portfolio_simulator.py`: Trade validation, execution, and PnL math.
-- `.github/workflows/daily_simulation.yml`: The "Forever Loop" configuration.
-- `v2/data/`: Current home for snapshots, portfolios (initially $10k), and logs.
+- `v2/live_money_runner.py` — the tick orchestrator.
+- `v2/alpaca_broker.py` — Alpaca SDK wrapper.
+- `v2/pdt_tracker.py` — day-trade guard.
+- `v2/agent_runner.py` — prompt-building, LLM tool-calling loop.
+- `v2/dashboard_exporter.py` — audit trail → dashboard JSON.
+- `.github/workflows/live_money_trading.yml` — the only active automation.
 
 ---
 *End of Handover.*
