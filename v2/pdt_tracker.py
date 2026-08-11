@@ -8,13 +8,14 @@ restricted by the broker. This is a regulatory constraint, not a strategy
 preference — it is enforced here unconditionally whenever equity is under
 $25,000, regardless of which persona or ruleset is driving the account.
 
-Note: PDT applies to margin accounts only. The account this bot actually
-trades is a CASH account, where `daytrade_count` is absent from Alpaca's API
-entirely — alpaca_broker.get_account_state() defaults it to 0, which makes
-pdt_blocks_close() below effectively a permanent no-op for this account. It's
-kept in place (harmless, and correct if the account type ever changes) but
-the constraint that actually matters for a cash account is T+1 settlement —
-see the settled_cash guard in live_money_runner._validate_live_trade instead.
+Note: this account IS margin (Alpaca's `multiplier` field reads "4", i.e.
+PDT-enabled) — confirmed directly against the account after an earlier
+assumption that it was a cash account turned out to be wrong. This module is
+therefore the guard doing real work here, not a no-op. `daytrade_count`
+briefly appeared absent from the API on the very first live tick (the account
+was still provisioning) and crashed that run; alpaca_broker.get_account_state()
+now defaults defensively regardless of account type, so a transient absence
+degrades to "assume 0 day trades" rather than crashing again.
 
 Alpaca's own account object exposes an authoritative `daytrade_count`
 (rolling 5-business-day count) and `pattern_day_trader` flag — this module

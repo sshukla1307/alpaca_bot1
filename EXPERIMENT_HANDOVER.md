@@ -30,32 +30,40 @@ bot:
 
 ## 2. Regulatory and safety posture
 
-- **This account is CASH, not margin — confirmed via a production incident,
-  not assumption.** The very first live tick crashed: `AttributeError: 'Account'
-  object has no attribute 'daytrade_count'`. `alpaca_trade_api`'s Account entity
-  raises on missing fields rather than returning `None`, and `daytrade_count`/
-  `pattern_day_trader` are margin-account-only fields in Alpaca's API — a cash
-  account's response omits them entirely. Fixed in `v2/alpaca_broker.py` via
-  defensive `getattr(...)` with fail-closed defaults.
-- **PDT does not apply to this account and is effectively a no-op.**
-  `v2/pdt_tracker.py` still exists (harmless — `daytrade_count` always defaults
-  to 0 now, so it never blocks anything) but is not the guard doing real work.
-- **The guard that actually matters: settled-cash sizing.** Cash accounts settle
-  T+1 — a same-day sale's proceeds aren't usable for a new position until the
-  next business day, or it risks a "good faith violation." Every opening trade in
-  `_validate_live_trade` is sized strictly against `account["settled_cash"]`
-  (Alpaca's `non_marginable_buying_power`, via `alpaca_broker.get_account_state()`),
-  never total cash/equity — structurally impossible to violate, not just checked.
-  If `settled_cash` is ever absent from the API response, it fails closed to 0
-  (blocks trading) rather than assuming full cash is available.
+- **This account is MARGIN, PDT-enabled (multiplier=4) — took two rounds to
+  pin down correctly, worth understanding why.** The very first live tick
+  crashed: `AttributeError: 'Account' object has no attribute 'daytrade_count'`.
+  That looked exactly like the signature of a cash account (whose API response
+  omits margin-only fields entirely), so the account was assumed to be cash and
+  a settled-cash/T+1-settlement guard was built around that assumption. The
+  *next* successful run then logged `multiplier='4'` — Alpaca's own code for a
+  PDT-enabled margin account — which is inconsistent with a cash account. The
+  account owner confirmed directly in the Alpaca dashboard: it's margin. Best
+  explanation: the account was still provisioning when the very first tick ran,
+  which is why `daytrade_count` was briefly absent (not because it's cash, but
+  because Alpaca hadn't finished attaching margin fields to a brand-new
+  account yet). Lesson: a single missing-field crash isn't sufficient evidence
+  to classify account type — `alpaca_broker.get_account_state()` now reads
+  `multiplier` directly and treats it as the source of truth, with defensive
+  `getattr(...)` defaults so a transient absence never crashes a tick again
+  regardless of which account type it turns out to be.
+- **PDT is the guard that actually matters here**, not settlement.
+  `v2/pdt_tracker.py` blocks any close that would create a same-day round-trip
+  once Alpaca's own `daytrade_count` hits 3 in the trailing 5 business days,
+  since equity is under $25,000. This is real, active protection now — not a
+  no-op like it was briefly assumed to be.
+- **`_validate_live_trade` branches on `account["is_cash_account"]`**: `False`
+  (this account) checks proposed trade size against `buying_power`; anything
+  else (a genuine cash account, or if `multiplier` is ever unreadable) falls
+  back to the settled-cash/T+1 check instead. Both paths are tested; only the
+  margin path is what actually runs against this account.
 - **Mandatory stop-loss AND take-profit** on every opening trade, submitted as a
   native Alpaca bracket order — Alpaca enforces the exit server-side continuously,
   not just when the hourly tick runs. A tick-time backstop
   (`PROFIT_LOCK_THRESHOLD_PCT = 15.0` in `live_money_runner.py`) force-closes
   anything that somehow ends up unprotected once it's up 15%+.
 - **Shorting is disabled system-wide** (`SHORTING_ENABLED = False` in
-  `live_money_runner.py`) — also consistent with a cash account, which can't
-  short at all regardless.
+  `live_money_runner.py`) — a deliberate choice, independent of account type.
 - **Two independent kill switches**, both required for any order to fire:
   `ALPACA_LIVE_TRADING_ENABLED=true` and `ALPACA_LIVE=true`. Both are set only in
   `live_money_trading.yml`.
@@ -69,12 +77,14 @@ bot:
   `https://sshukla1307.github.io/alpaca_bot1/`, and the full trade/equity history
   is public record via the committed `v2/data/live_money/*.jsonl` files, not just
   the dashboard view of them.
-- **This code had exactly one confirmed live run before the cash-account fix**,
-  which crashed. The settled-cash guard added afterward has only been tested
-  against mocked brokers, not a real Alpaca response — watch the next few ticks'
-  logs closely rather than assuming it's now fully correct.
-- **PDT tracking only sees orders this system submitted** (moot for a cash
-  account, but would matter again if this account ever converts to margin).
+- **This code has now placed real trades and it works.** A manually-triggered
+  run bought NVDA and FSLY, both via the fast_info-failed → daily-close-fallback
+  path, both with stop-loss/take-profit brackets attached and Alpaca order IDs
+  confirmed. Not just mocked-broker tests anymore.
+- **PDT tracking only sees orders this system submitted.** Manual trades on the
+  same account (if any) aren't reflected in the local "opened today" ledger,
+  only in Alpaca's own `daytrade_count`, which the guard also checks directly
+  as the primary source of truth.
 - **Bracket order `time_in_force="gtc"`** — chosen so stop-loss/take-profit
   persist across days rather than expiring end-of-day. Worth re-verifying against
   Alpaca's current API docs periodically.
