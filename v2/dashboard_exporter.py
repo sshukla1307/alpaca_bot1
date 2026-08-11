@@ -62,6 +62,7 @@ def export_for_dashboard(data_dir: Path, out_dir: Path):
         json.dump({
             "timestamp": latest["timestamp"],
             "cash": latest["cash"],
+            "settled_cash": latest.get("settled_cash"),  # None for snapshots recorded before this field existed
             "equity": latest["equity"],
             "positions": latest["positions"],
         }, f, indent=2)

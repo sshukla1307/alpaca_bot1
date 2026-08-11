@@ -75,6 +75,7 @@ def _record_equity_snapshot(broker, now_et: datetime):
     snapshot = {
         "timestamp": now_et.isoformat(),
         "cash": round(account["cash"], 2),
+        "settled_cash": round(account.get("settled_cash", 0), 2),
         "equity": round(account["equity"], 2),
         "positions": [
             {

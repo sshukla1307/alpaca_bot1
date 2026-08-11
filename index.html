@@ -257,6 +257,7 @@
     <div class="stat-tile">
       <div class="stat-label">Cash</div>
       <div class="stat-value" id="statCash">—</div>
+      <div class="stat-delta" id="statCashSettled"></div>
     </div>
     <div class="stat-tile">
       <div class="stat-label">Open positions</div>
@@ -571,6 +572,19 @@
         document.getElementById('statCash').textContent = fmtMoney(positionsData.cash);
         document.getElementById('statPositions').textContent = String((positionsData.positions || []).length);
         renderPositions(positionsData.positions);
+
+        // This is a cash account (T+1 settlement) -- same-day sale proceeds aren't
+        // usable for a new position until they settle, so surface the split.
+        const settledEl = document.getElementById('statCashSettled');
+        if (positionsData.settled_cash != null) {
+          const unsettled = Math.max(positionsData.cash - positionsData.settled_cash, 0);
+          settledEl.textContent = unsettled > 0.01
+            ? `${fmtMoney(positionsData.settled_cash)} settled · ${fmtMoney(unsettled)} pending T+1`
+            : `${fmtMoney(positionsData.settled_cash)} settled (fully available)`;
+          settledEl.className = 'stat-delta';
+        } else {
+          settledEl.textContent = '';
+        }
 
         if (equitySeries.length > 1) {
           const first = equitySeries[0].equity;
