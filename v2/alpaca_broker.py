@@ -51,14 +51,21 @@ class AlpacaBroker:
 
     def get_account_state(self) -> dict:
         acct = self.api.get_account()
+        # daytrade_count/pattern_day_trader are margin-account concepts in Alpaca's
+        # API — a cash account's response simply omits them (raises AttributeError
+        # on direct access rather than returning None), so default defensively
+        # rather than assume every account is on margin.
+        multiplier = getattr(acct, "multiplier", None)
         return {
             "cash": float(acct.cash),
             "equity": float(acct.equity),
             "buying_power": float(acct.buying_power),
-            "daytrade_count": int(acct.daytrade_count),
-            "pattern_day_trader": bool(acct.pattern_day_trader),
+            "daytrade_count": int(getattr(acct, "daytrade_count", 0) or 0),
+            "pattern_day_trader": bool(getattr(acct, "pattern_day_trader", False)),
             "trading_blocked": bool(acct.trading_blocked),
             "account_blocked": bool(acct.account_blocked),
+            "multiplier": multiplier,  # "1" = cash account, "2"/"4" = margin
+            "is_cash_account": multiplier == "1" if multiplier is not None else None,
         }
 
     def get_positions(self) -> dict:

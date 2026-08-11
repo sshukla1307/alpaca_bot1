@@ -252,6 +252,12 @@ def run_live_money_tick():
         return
 
     account = broker.get_account_state()
+    logger.warning(
+        f"[LIVE-MONEY] Account type: multiplier={account['multiplier']!r} "
+        f"(is_cash_account={account['is_cash_account']}), "
+        f"daytrade_count={account['daytrade_count']}, "
+        f"pattern_day_trader={account['pattern_day_trader']}"
+    )
     if account["trading_blocked"] or account["account_blocked"]:
         logger.error(f"[LIVE-MONEY] Trading is blocked on this account by Alpaca. Skipping. State: {account}")
         return
