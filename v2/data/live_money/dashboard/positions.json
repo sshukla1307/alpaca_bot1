@@ -1,28 +1,58 @@
 {
-  "timestamp": "2026-08-11T15:16:25.103577-04:00",
-  "cash": 1072.41,
-  "settled_cash": 1286.85,
-  "equity": 1999.58,
+  "timestamp": "2026-08-12T10:34:45.334256-04:00",
+  "cash": 185.91,
+  "settled_cash": 185.91,
+  "equity": 2015.9,
   "positions": [
     {
       "ticker": "FSLY",
       "direction": "LONG",
       "shares": 17.0,
       "entry_price": 28.987,
-      "current_price": 28.95,
-      "market_value": 492.15,
-      "unrealized_pnl": -0.63,
-      "unrealized_pnl_pct": -0.00128
+      "current_price": 29.815,
+      "market_value": 506.86,
+      "unrealized_pnl": 14.08,
+      "unrealized_pnl_pct": 0.02856
+    },
+    {
+      "ticker": "MARA",
+      "direction": "LONG",
+      "shares": 51.0,
+      "entry_price": 9.7697,
+      "current_price": 9.64,
+      "market_value": 491.64,
+      "unrealized_pnl": -6.61,
+      "unrealized_pnl_pct": -0.01328
+    },
+    {
+      "ticker": "NTHI",
+      "direction": "LONG",
+      "shares": 47.0,
+      "entry_price": 4.3732,
+      "current_price": 4.27,
+      "market_value": 200.69,
+      "unrealized_pnl": -4.85,
+      "unrealized_pnl_pct": -0.0236
     },
     {
       "ticker": "NVDA",
       "direction": "LONG",
       "shares": 2.0,
       "entry_price": 217.3975,
-      "current_price": 217.51,
-      "market_value": 435.02,
-      "unrealized_pnl": 0.23,
-      "unrealized_pnl_pct": 0.00052
+      "current_price": 224.12,
+      "market_value": 448.24,
+      "unrealized_pnl": 13.45,
+      "unrealized_pnl_pct": 0.03092
+    },
+    {
+      "ticker": "XLE",
+      "direction": "LONG",
+      "shares": 3.0,
+      "entry_price": 60.8997,
+      "current_price": 60.855,
+      "market_value": 182.56,
+      "unrealized_pnl": -0.13,
+      "unrealized_pnl_pct": -0.00073
     }
   ]
 }
