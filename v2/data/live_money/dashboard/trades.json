@@ -1,5 +1,30 @@
 [
   {
+    "date": "2026-08-12",
+    "action": "BUY",
+    "ticker": "NVDA",
+    "qty": 0,
+    "price": 224.125,
+    "stop_loss_price": 212.91875,
+    "take_profit_price": 268.95,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-08-12T10:35:44.747689-04:00"
+  },
+  {
+    "date": "2026-08-12",
+    "action": "BUY",
+    "ticker": "NTHI",
+    "qty": 47,
+    "price": 4.269999980926514,
+    "stop_loss_price": 3.8429999828338626,
+    "take_profit_price": 5.337499976158142,
+    "reason": "Catalyst-driven opportunity with Phase 2a results. High-risk, high-reward play.",
+    "status": "submitted",
+    "order_id": "f2f8261d-9878-41f3-b2e5-825c991c05bb",
+    "logged_at": "2026-08-12T10:35:44.688591-04:00"
+  },
+  {
     "date": "2026-08-11",
     "action": "BUY",
     "ticker": "XLE",
