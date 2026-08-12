@@ -1,6 +1,54 @@
 [
   {
     "date": "2026-08-12",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 0,
+    "price": 60.85499954223633,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-08-12T13:27:12.680959-04:00"
+  },
+  {
+    "date": "2026-08-12",
+    "action": "SELL",
+    "ticker": "MARA",
+    "qty": 2,
+    "price": 9.6850004196167,
+    "reason": "insufficient qty available for order (requested: 2, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-12T13:27:12.680680-04:00"
+  },
+  {
+    "date": "2026-08-12",
+    "action": "SELL",
+    "ticker": "FSLY",
+    "qty": 0,
+    "price": 28.8799991607666,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-08-12T13:27:12.639522-04:00"
+  },
+  {
+    "date": "2026-08-12",
+    "action": "BUY",
+    "ticker": "NVDA",
+    "status": "REJECTED",
+    "reason": "Insufficient SETTLED cash (cash account, T+1 settlement): need ~$198, have $170 settled (total cash $170 may include proceeds still settling)",
+    "logged_at": "2026-08-12T13:27:12.639235-04:00"
+  },
+  {
+    "date": "2026-08-12",
+    "action": "SELL",
+    "ticker": "NTHI",
+    "qty": 2,
+    "price": 3.549999952316284,
+    "reason": "insufficient qty available for order (requested: 2, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-12T13:27:12.638873-04:00"
+  },
+  {
+    "date": "2026-08-12",
     "action": "BUY",
     "ticker": "XLK",
     "qty": 1,
