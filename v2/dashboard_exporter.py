@@ -9,7 +9,7 @@ paper-simulation exporter this replaces.
 
 import json
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -75,7 +75,7 @@ def export_for_dashboard(data_dir: Path, out_dir: Path):
 
     # 4. last_updated.json
     with open(out_dir / "last_updated.json", "w") as f:
-        json.dump({"timestamp": datetime.now().isoformat()}, f, indent=2)
+        json.dump({"timestamp": datetime.now(timezone.utc).isoformat()}, f, indent=2)
 
     logger.info(
         f"Dashboard export complete. {len(equity_series)} equity points, "
