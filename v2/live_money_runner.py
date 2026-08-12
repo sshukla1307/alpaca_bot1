@@ -301,6 +301,12 @@ def run_live_money_tick():
         f"daytrade_count={account['daytrade_count']}, "
         f"pattern_day_trader={account['pattern_day_trader']}"
     )
+    logger.warning(
+        f"[LIVE-MONEY] Account balances: cash=${account['cash']:.2f}, "
+        f"settled_cash=${account['settled_cash']:.2f}, "
+        f"buying_power=${account['buying_power']:.2f}, "
+        f"equity=${account['equity']:.2f}"
+    )
     if account["trading_blocked"] or account["account_blocked"]:
         logger.error(f"[LIVE-MONEY] Trading is blocked on this account by Alpaca. Skipping. State: {account}")
         return
