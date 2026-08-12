@@ -3,6 +3,30 @@
     "date": "2026-08-12",
     "action": "BUY",
     "ticker": "NVDA",
+    "status": "REJECTED",
+    "reason": "Insufficient SETTLED cash (cash account, T+1 settlement): need ~$498, have $368 settled (total cash $368 may include proceeds still settling)",
+    "logged_at": "2026-08-12T12:24:52.276956-04:00"
+  },
+  {
+    "date": "2026-08-12",
+    "action": "BUY",
+    "ticker": "RIOT",
+    "status": "REJECTED",
+    "reason": "Insufficient SETTLED cash (cash account, T+1 settlement): need ~$498, have $368 settled (total cash $368 may include proceeds still settling)",
+    "logged_at": "2026-08-12T12:24:52.276801-04:00"
+  },
+  {
+    "date": "2026-08-12",
+    "action": "BUY",
+    "ticker": "NTHI",
+    "status": "REJECTED",
+    "reason": "Insufficient SETTLED cash (cash account, T+1 settlement): need ~$498, have $368 settled (total cash $368 may include proceeds still settling)",
+    "logged_at": "2026-08-12T12:24:52.276549-04:00"
+  },
+  {
+    "date": "2026-08-12",
+    "action": "BUY",
+    "ticker": "NVDA",
     "qty": 0,
     "price": 224.125,
     "stop_loss_price": 212.91875,
