@@ -2,6 +2,31 @@
   {
     "date": "2026-08-12",
     "action": "BUY",
+    "ticker": "XLK",
+    "qty": 1,
+    "price": 189.0399932861328,
+    "stop_loss_price": 179.58799362182617,
+    "take_profit_price": 207.94399261474612,
+    "reason": "insufficient buying power",
+    "status": "rejected",
+    "logged_at": "2026-08-12T12:41:16.831911-04:00"
+  },
+  {
+    "date": "2026-08-12",
+    "action": "BUY",
+    "ticker": "NTHI",
+    "qty": 55,
+    "price": 3.5999999046325684,
+    "stop_loss_price": 3.2399999141693114,
+    "take_profit_price": 4.319999885559082,
+    "reason": "Positive clinical trial results could lead to a significant price increase.",
+    "status": "submitted",
+    "order_id": "bbed5e51-db8e-4fec-bbcc-7e757dc374e5",
+    "logged_at": "2026-08-12T12:41:16.722190-04:00"
+  },
+  {
+    "date": "2026-08-12",
+    "action": "BUY",
     "ticker": "NVDA",
     "status": "REJECTED",
     "reason": "Insufficient SETTLED cash (cash account, T+1 settlement): need ~$498, have $368 settled (total cash $368 may include proceeds still settling)",
