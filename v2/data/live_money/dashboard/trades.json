@@ -2,6 +2,16 @@
   {
     "date": "2026-08-13",
     "action": "SELL",
+    "ticker": "WEN",
+    "qty": 138,
+    "price": 8.661100387573242,
+    "reason": "insufficient qty available for order (requested: 138, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-13T15:33:02.289527-04:00"
+  },
+  {
+    "date": "2026-08-13",
+    "action": "SELL",
     "ticker": "MARA",
     "qty": 51,
     "price": 9.225000381469727,

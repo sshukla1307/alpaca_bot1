@@ -1,58 +1,58 @@
 {
-  "timestamp": "2026-08-13T14:15:07.383184-04:00",
+  "timestamp": "2026-08-13T15:32:20.368057-04:00",
   "cash": 943.65,
   "settled_cash": 943.65,
-  "equity": 3935.17,
+  "equity": 3974.21,
   "positions": [
     {
       "ticker": "FSLY",
       "direction": "LONG",
       "shares": 17.0,
       "entry_price": 28.987,
-      "current_price": 28.48,
-      "market_value": 484.16,
-      "unrealized_pnl": -8.62,
-      "unrealized_pnl_pct": -0.01749
+      "current_price": 29.665,
+      "market_value": 504.31,
+      "unrealized_pnl": 11.53,
+      "unrealized_pnl_pct": 0.02339
     },
     {
       "ticker": "MARA",
       "direction": "LONG",
       "shares": 51.0,
       "entry_price": 9.7697,
-      "current_price": 9.2299,
-      "market_value": 470.72,
-      "unrealized_pnl": -27.53,
-      "unrealized_pnl_pct": -0.05525
+      "current_price": 9.22,
+      "market_value": 470.22,
+      "unrealized_pnl": -28.03,
+      "unrealized_pnl_pct": -0.05627
     },
     {
       "ticker": "NVDA",
       "direction": "LONG",
       "shares": 3.0,
       "entry_price": 220.080567,
-      "current_price": 225.355,
-      "market_value": 676.07,
-      "unrealized_pnl": 15.82,
-      "unrealized_pnl_pct": 0.02397
+      "current_price": 225.945,
+      "market_value": 677.84,
+      "unrealized_pnl": 17.59,
+      "unrealized_pnl_pct": 0.02665
     },
     {
       "ticker": "WEN",
       "direction": "LONG",
       "shares": 138.0,
       "entry_price": 8.541733,
-      "current_price": 8.535,
-      "market_value": 1177.83,
-      "unrealized_pnl": -0.93,
-      "unrealized_pnl_pct": -0.00079
+      "current_price": 8.6611,
+      "market_value": 1195.23,
+      "unrealized_pnl": 16.47,
+      "unrealized_pnl_pct": 0.01397
     },
     {
       "ticker": "XLE",
       "direction": "LONG",
       "shares": 3.0,
       "entry_price": 60.8997,
-      "current_price": 60.9125,
-      "market_value": 182.74,
-      "unrealized_pnl": 0.04,
-      "unrealized_pnl_pct": 0.00021
+      "current_price": 60.99,
+      "market_value": 182.97,
+      "unrealized_pnl": 0.27,
+      "unrealized_pnl_pct": 0.00148
     }
   ]
 }
