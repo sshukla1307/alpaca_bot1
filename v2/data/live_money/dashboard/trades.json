@@ -1,5 +1,21 @@
 [
   {
+    "date": "2026-08-13",
+    "action": "BUY",
+    "ticker": "NVDA",
+    "status": "REJECTED",
+    "reason": "Insufficient SETTLED cash (cash account, T+1 settlement): need ~$196, have $170 settled (total cash $170 may include proceeds still settling)",
+    "logged_at": "2026-08-13T10:37:31.419416-04:00"
+  },
+  {
+    "date": "2026-08-13",
+    "action": "BUY",
+    "ticker": "WEN",
+    "status": "REJECTED",
+    "reason": "Insufficient SETTLED cash (cash account, T+1 settlement): need ~$294, have $170 settled (total cash $170 may include proceeds still settling)",
+    "logged_at": "2026-08-13T10:37:31.419157-04:00"
+  },
+  {
     "date": "2026-08-12",
     "action": "SELL",
     "ticker": "XLE",
