@@ -36,3 +36,5 @@
 {"date": "2026-08-14", "action": "SELL", "ticker": "FSLY", "qty": 1, "price": 29.759899139404297, "reason": "insufficient qty available for order (requested: 1, available: 0)", "status": "rejected", "logged_at": "2026-08-14T12:13:31.690997-04:00"}
 {"date": "2026-08-14", "action": "SELL", "ticker": "MARA", "qty": 51, "price": 9.204999923706055, "reason": "insufficient qty available for order (requested: 51, available: 0)", "status": "rejected", "logged_at": "2026-08-14T13:25:10.985833-04:00"}
 {"date": "2026-08-14", "action": "BUY", "ticker": "SMCI", "status": "REJECTED", "reason": "Insufficient buying power: need ~$398, have $0 available", "logged_at": "2026-08-14T13:25:10.986073-04:00"}
+{"date": "2026-08-14", "action": "SELL", "ticker": "MARA", "qty": 51, "price": 9.154999732971191, "reason": "insufficient qty available for order (requested: 51, available: 0)", "status": "rejected", "logged_at": "2026-08-14T15:26:33.218536-04:00"}
+{"date": "2026-08-14", "action": "BUY", "ticker": "SMCI", "status": "REJECTED", "reason": "Insufficient buying power: need ~$399, have $0 available", "logged_at": "2026-08-14T15:26:33.218824-04:00"}
