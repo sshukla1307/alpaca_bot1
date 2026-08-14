@@ -1,5 +1,18 @@
 [
   {
+    "date": "2026-08-14",
+    "action": "BUY",
+    "ticker": "SMCI",
+    "qty": 25,
+    "price": 39.56999969482422,
+    "stop_loss_price": 35.6129997253418,
+    "take_profit_price": 47.48399963378906,
+    "reason": "Strong earnings guidance and undervaluation relative to growth metrics. High-conviction opportunity in the technology sector.",
+    "status": "submitted",
+    "order_id": "2227f508-2260-4750-ac6c-8cc440768dc5",
+    "logged_at": "2026-08-14T10:31:42.274823-04:00"
+  },
+  {
     "date": "2026-08-13",
     "action": "SELL",
     "ticker": "WEN",
