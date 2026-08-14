@@ -1,6 +1,24 @@
 [
   {
     "date": "2026-08-14",
+    "action": "BUY",
+    "ticker": "SMCI",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$398, have $0 available",
+    "logged_at": "2026-08-14T13:25:10.986073-04:00"
+  },
+  {
+    "date": "2026-08-14",
+    "action": "SELL",
+    "ticker": "MARA",
+    "qty": 51,
+    "price": 9.204999923706055,
+    "reason": "insufficient qty available for order (requested: 51, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-14T13:25:10.985833-04:00"
+  },
+  {
+    "date": "2026-08-14",
     "action": "SELL",
     "ticker": "FSLY",
     "qty": 1,
