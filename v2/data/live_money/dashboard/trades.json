@@ -1,5 +1,18 @@
 [
   {
+    "date": "2026-08-17",
+    "action": "BUY",
+    "ticker": "XLK",
+    "qty": 6,
+    "price": 191.16000366210938,
+    "stop_loss_price": 181.6020034790039,
+    "take_profit_price": 210.27600402832033,
+    "reason": "Capitalize on strong tech momentum driven by AI spending, despite overbought RSI. Tight stop-loss to manage risk.",
+    "status": "submitted",
+    "order_id": "792da5e8-6a78-4e53-9977-4fd189cecc4d",
+    "logged_at": "2026-08-17T10:52:42.280610-04:00"
+  },
+  {
     "date": "2026-08-14",
     "action": "BUY",
     "ticker": "SMCI",
