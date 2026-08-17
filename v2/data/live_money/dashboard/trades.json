@@ -1,5 +1,231 @@
 [
   {
+    "date": "2026-08-17",
+    "action": "SELL",
+    "ticker": "LUNR",
+    "qty": 180,
+    "price": 20.30500030517578,
+    "reason": "Setting stop-loss and take-profit to manage risk and lock in gains.",
+    "status": "submitted",
+    "order_id": "1dcc6120-039e-4a17-b664-a9d1b62658ca",
+    "logged_at": "2026-08-17T13:53:08.780022-04:00"
+  },
+  {
+    "date": "2026-08-17",
+    "action": "SELL",
+    "ticker": "KLAR",
+    "qty": 250,
+    "price": 19.395000457763672,
+    "reason": "Setting stop-loss and take-profit to manage risk and lock in gains.",
+    "status": "submitted",
+    "order_id": "7fe6347b-ab1c-4b39-b8fb-260fd2850b4b",
+    "logged_at": "2026-08-17T13:53:08.769052-04:00"
+  },
+  {
+    "date": "2026-08-17",
+    "action": "SELL",
+    "ticker": "FSLY",
+    "qty": 17,
+    "price": 29.040000915527344,
+    "reason": "insufficient qty available for order (requested: 17, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-17T13:53:08.757181-04:00"
+  },
+  {
+    "date": "2026-08-17",
+    "action": "SELL",
+    "ticker": "XLK",
+    "qty": 6,
+    "price": 191.11000061035156,
+    "reason": "insufficient qty available for order (requested: 6, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-17T12:54:00.065595-04:00"
+  },
+  {
+    "date": "2026-08-17",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 3,
+    "price": 62.32849884033203,
+    "reason": "insufficient qty available for order (requested: 3, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-17T12:53:59.980434-04:00"
+  },
+  {
+    "date": "2026-08-17",
+    "action": "SELL",
+    "ticker": "WEN",
+    "qty": 138,
+    "price": 8.574999809265137,
+    "reason": "insufficient qty available for order (requested: 138, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-17T12:53:59.903876-04:00"
+  },
+  {
+    "date": "2026-08-17",
+    "action": "SELL",
+    "ticker": "SMCI",
+    "qty": 25,
+    "price": 38.18360137939453,
+    "reason": "insufficient qty available for order (requested: 25, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-17T12:53:59.826446-04:00"
+  },
+  {
+    "date": "2026-08-17",
+    "action": "SELL",
+    "ticker": "NVDA",
+    "qty": 3,
+    "price": 226.83999633789062,
+    "reason": "insufficient qty available for order (requested: 3, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-17T12:53:59.750074-04:00"
+  },
+  {
+    "date": "2026-08-17",
+    "action": "SELL",
+    "ticker": "NOK",
+    "qty": 150,
+    "price": 10.975000381469727,
+    "reason": "Secure gains in a volatile market.",
+    "status": "submitted",
+    "order_id": "33f3856d-3b69-4371-957c-4663270369a1",
+    "logged_at": "2026-08-17T12:53:59.673803-04:00"
+  },
+  {
+    "date": "2026-08-17",
+    "action": "SELL",
+    "ticker": "MARA",
+    "qty": 51,
+    "price": 9.585000038146973,
+    "reason": "insufficient qty available for order (requested: 51, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-17T12:53:59.595280-04:00"
+  },
+  {
+    "date": "2026-08-17",
+    "action": "SELL",
+    "ticker": "IONQ",
+    "qty": 20,
+    "price": 46.8650016784668,
+    "reason": "Lock in gains and manage risk in a volatile market.",
+    "status": "submitted",
+    "order_id": "71d87d7c-7bc5-4d58-8fb2-1da3524649b1",
+    "logged_at": "2026-08-17T12:53:59.506701-04:00"
+  },
+  {
+    "date": "2026-08-17",
+    "action": "SELL",
+    "ticker": "FSLY",
+    "qty": 17,
+    "price": 28.635000228881836,
+    "reason": "insufficient qty available for order (requested: 17, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-17T12:53:59.419179-04:00"
+  },
+  {
+    "date": "2026-08-17",
+    "action": "BUY",
+    "ticker": "XLK",
+    "qty": 6,
+    "price": 191.16000366210938,
+    "stop_loss_price": 181.6020034790039,
+    "take_profit_price": 210.27600402832033,
+    "reason": "Capitalize on strong tech momentum driven by AI spending, despite overbought RSI. Tight stop-loss to manage risk.",
+    "status": "submitted",
+    "order_id": "792da5e8-6a78-4e53-9977-4fd189cecc4d",
+    "logged_at": "2026-08-17T10:52:42.280610-04:00"
+  },
+  {
+    "date": "2026-08-14",
+    "action": "BUY",
+    "ticker": "SMCI",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$399, have $0 available",
+    "logged_at": "2026-08-14T15:26:33.218824-04:00"
+  },
+  {
+    "date": "2026-08-14",
+    "action": "SELL",
+    "ticker": "MARA",
+    "qty": 51,
+    "price": 9.154999732971191,
+    "reason": "insufficient qty available for order (requested: 51, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-14T15:26:33.218536-04:00"
+  },
+  {
+    "date": "2026-08-14",
+    "action": "BUY",
+    "ticker": "SMCI",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$398, have $0 available",
+    "logged_at": "2026-08-14T13:25:10.986073-04:00"
+  },
+  {
+    "date": "2026-08-14",
+    "action": "SELL",
+    "ticker": "MARA",
+    "qty": 51,
+    "price": 9.204999923706055,
+    "reason": "insufficient qty available for order (requested: 51, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-14T13:25:10.985833-04:00"
+  },
+  {
+    "date": "2026-08-14",
+    "action": "SELL",
+    "ticker": "FSLY",
+    "qty": 1,
+    "price": 29.759899139404297,
+    "reason": "insufficient qty available for order (requested: 1, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-14T12:13:31.690997-04:00"
+  },
+  {
+    "date": "2026-08-14",
+    "action": "SELL",
+    "ticker": "SMCI",
+    "qty": 2,
+    "price": 39.18320083618164,
+    "reason": "insufficient qty available for order (requested: 2, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-14T12:13:31.593496-04:00"
+  },
+  {
+    "date": "2026-08-14",
+    "action": "SELL",
+    "ticker": "MARA",
+    "qty": 51,
+    "price": 9.0649995803833,
+    "reason": "insufficient qty available for order (requested: 51, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-14T12:13:31.511248-04:00"
+  },
+  {
+    "date": "2026-08-14",
+    "action": "BUY",
+    "ticker": "SMCI",
+    "qty": 25,
+    "price": 39.56999969482422,
+    "stop_loss_price": 35.6129997253418,
+    "take_profit_price": 47.48399963378906,
+    "reason": "Strong earnings guidance and undervaluation relative to growth metrics. High-conviction opportunity in the technology sector.",
+    "status": "submitted",
+    "order_id": "2227f508-2260-4750-ac6c-8cc440768dc5",
+    "logged_at": "2026-08-14T10:31:42.274823-04:00"
+  },
+  {
+    "date": "2026-08-13",
+    "action": "SELL",
+    "ticker": "WEN",
+    "qty": 138,
+    "price": 8.661100387573242,
+    "reason": "insufficient qty available for order (requested: 138, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-13T15:33:02.289527-04:00"
+  },
+  {
     "date": "2026-08-13",
     "action": "SELL",
     "ticker": "MARA",
