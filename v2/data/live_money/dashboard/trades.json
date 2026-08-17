@@ -1,6 +1,30 @@
 [
   {
     "date": "2026-08-17",
+    "action": "BUY",
+    "ticker": "MARA",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$251, have $0 available",
+    "logged_at": "2026-08-17T15:49:45.560713-04:00"
+  },
+  {
+    "date": "2026-08-17",
+    "action": "BUY",
+    "ticker": "IMVT",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$502, have $0 available",
+    "logged_at": "2026-08-17T15:49:45.560560-04:00"
+  },
+  {
+    "date": "2026-08-17",
+    "action": "BUY",
+    "ticker": "STNE",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$502, have $0 available",
+    "logged_at": "2026-08-17T15:49:45.560293-04:00"
+  },
+  {
+    "date": "2026-08-17",
     "action": "SELL",
     "ticker": "SMCI",
     "qty": 25,
