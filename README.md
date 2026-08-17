@@ -24,6 +24,18 @@ Every hour (at :30 past, Mon–Fri, market hours only) `.github/workflows/live_m
 - **Buying-power guard**: every opening trade is checked against Alpaca's `buying_power` before submission, so a rejection comes with a clear reason instead of relying solely on the broker's own error. A settled-cash/T+1 check also remains in the code as the correct path *if* this were ever a genuine cash account (or account classification is unavailable) — it just isn't the active path for this account.
 - **Universe**: US equities and ETFs, including penny stocks (min price $0.01). No crypto, no options, no shorting.
 
+## Protecting manually-held positions from the bot
+
+If you buy a stock yourself in the same Alpaca account and want to hold it long-term without the bot ever touching it, add the ticker to `v2/data/live_money/protected_tickers.json`:
+
+```json
+{
+  "tickers": ["ACHR", "NVDA"]
+}
+```
+
+Edit the file directly and commit — no code change or redeploy needed. A protected ticker is completely hands-off: the agent is told about it but blocked at the validation layer from BUY/SELL/SHORT/COVER regardless of what it proposes, the profit-lock backstop skips it no matter how far it's up, and it never counts against the bot's own `MAX_POSITIONS` cap. It still shows up in the dashboard (flagged "Manual") and counts toward total account equity — it's just never traded by the bot.
+
 ## Two independent safety switches
 
 Both must be explicitly `"true"` for an order to ever be submitted — set only inside `live_money_trading.yml`, never in any other workflow:

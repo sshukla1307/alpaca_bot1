@@ -509,8 +509,11 @@
       const tr = document.createElement('tr');
       const pnlClass = p.unrealized_pnl >= 0 ? 'pnl-pos' : 'pnl-neg';
       const dirClass = p.direction === 'LONG' ? 'direction-long' : 'direction-short';
+      const protectedBadge = p.protected
+        ? ' <span class="pill" style="color: var(--text-muted); border: 1px solid var(--border); padding: 1px 6px; border-radius: 4px;" title="Manually held — the bot will never trade this">Manual</span>'
+        : '';
       tr.innerHTML =
-        `<td>${escapeHtml(p.ticker)}</td>` +
+        `<td>${escapeHtml(p.ticker)}${protectedBadge}</td>` +
         `<td class="${dirClass}">${escapeHtml(p.direction)}</td>` +
         `<td class="num">${Number(p.shares).toLocaleString()}</td>` +
         `<td class="num">${fmtMoney(p.entry_price)}</td>` +

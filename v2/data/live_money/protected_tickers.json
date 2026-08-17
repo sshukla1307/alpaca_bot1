@@ -1,0 +1,4 @@
+{
+  "_comment": "Tickers listed here are completely off-limits to the autonomous bot: it will never BUY, SELL, SHORT, or COVER them, they never count toward MAX_POSITIONS, and the profit-lock backstop skips them entirely regardless of unrealized P&L. Add/remove tickers by editing this list directly (uppercase, no quotes needed beyond JSON string syntax) -- no code change needed. The bot still sees these positions for portfolio-value/equity accuracy, just never acts on them.",
+  "tickers": []
+}

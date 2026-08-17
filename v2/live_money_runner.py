@@ -56,6 +56,24 @@ MAX_POSITIONS = 15
 PROFIT_LOCK_THRESHOLD_PCT = 15.0
 
 
+def load_protected_tickers() -> set:
+    """Tickers the bot must never trade -- manually held positions the user
+    wants left alone indefinitely. Edit v2/data/live_money/protected_tickers.json
+    directly to add/remove tickers; no code change needed. Missing or malformed
+    file fails safe to an empty set (nothing protected), not an error, since a
+    protection *list* failing shouldn't block the whole tick."""
+    path = LIVE_DATA_DIR / "protected_tickers.json"
+    if not path.exists():
+        return set()
+    try:
+        with open(path) as f:
+            data = json.load(f)
+        return {t.upper() for t in data.get("tickers", [])}
+    except Exception as e:
+        logger.warning(f"[LIVE-MONEY] Could not read protected_tickers.json: {e}. Treating as empty.")
+        return set()
+
+
 def _log_order_event(event: dict):
     LIVE_DATA_DIR.mkdir(parents=True, exist_ok=True)
     event = dict(event)
@@ -65,7 +83,7 @@ def _log_order_event(event: dict):
     logger.warning(f"[LIVE-MONEY] {event}")
 
 
-def _record_equity_snapshot(broker, now_et: datetime):
+def _record_equity_snapshot(broker, now_et: datetime, protected_tickers: set = frozenset()):
     """Append a {timestamp, cash, equity, positions} snapshot for the dashboard.
     Fetches fresh state so it reflects any trades this tick just executed."""
     try:
@@ -90,6 +108,7 @@ def _record_equity_snapshot(broker, now_et: datetime):
                 "market_value": round(pos["market_value"], 2),
                 "unrealized_pnl": round(pos["unrealized_pnl"], 2),
                 "unrealized_pnl_pct": pos["unrealized_pnl_pct"],
+                "protected": ticker in protected_tickers,
             }
             for ticker, pos in positions.items()
         ],
@@ -100,7 +119,8 @@ def _record_equity_snapshot(broker, now_et: datetime):
         f.write(json.dumps(snapshot, default=str) + "\n")
 
 
-def _build_portfolio_state(account: dict, positions: dict, stop_levels: dict) -> dict:
+def _build_portfolio_state(account: dict, positions: dict, stop_levels: dict,
+                            protected_tickers: set = frozenset()) -> dict:
     """Shape live Alpaca account/positions into the plain dict shape
     agent_runner.get_agent_trades() expects for prompt-building."""
     positions_summary = []
@@ -116,33 +136,48 @@ def _build_portfolio_state(account: dict, positions: dict, stop_levels: dict) ->
             "market_value": round(pos["market_value"], 2),
             "stop_loss": levels.get("stop_loss_price"),
             "take_profit": levels.get("take_profit_price"),
+            "protected": ticker in protected_tickers,
         })
+
+    # Protected positions don't count against the bot's own trading capacity --
+    # they're the user's manual holdings, not slots the bot is using.
+    active_bot_position_count = len(set(positions.keys()) - protected_tickers)
+
+    note = (
+        "THIS IS A REAL ALPACA BROKERAGE ACCOUNT (MARGIN, PDT-enabled, multiplier=4). "
+        "Every trade you propose executes with real capital immediately — there is no "
+        "paper simulation and no human reviewing your orders before they fill. Every "
+        "BUY/SHORT MUST include both stop_loss_pct AND take_profit_pct — take-profit is "
+        "mandatory on this account, not optional. Your take-profit is enforced server-side "
+        "by Alpaca as soon as the order fills, so once you set it, profit-taking is "
+        "automatic. Because this account is under $25,000 equity, the Pattern Day Trader "
+        "rule applies: closing a position you opened THIS SAME DAY counts as a day trade, "
+        "and the 4th one in a rolling 5-business-day window will be rejected to avoid a "
+        "PDT restriction — plan exits accordingly if you're trading intraday."
+    )
+    if protected_tickers:
+        note += (
+            f" PROTECTED POSITIONS ({', '.join(sorted(protected_tickers))}): these are the "
+            "user's manual long-term holdings, marked \"protected\": true below. Any BUY, "
+            "SELL, SHORT, or COVER you propose on them will be rejected outright — do not "
+            "propose trades on these tickers under any circumstances."
+        )
 
     return {
         "agent_id": LIVE_AGENT_ID,
         "cash": round(account["cash"], 2),
         "settled_cash": round(account.get("settled_cash", 0), 2),
         "portfolio_value": round(account["equity"], 2),
-        "num_positions": len(positions),
+        "num_positions": active_bot_position_count,
         "max_positions": MAX_POSITIONS,
         "positions": positions_summary,
         "pending_orders": 0,
-        "note": (
-            "THIS IS A REAL ALPACA BROKERAGE ACCOUNT (MARGIN, PDT-enabled, multiplier=4). "
-            "Every trade you propose executes with real capital immediately — there is no "
-            "paper simulation and no human reviewing your orders before they fill. Every "
-            "BUY/SHORT MUST include both stop_loss_pct AND take_profit_pct — take-profit is "
-            "mandatory on this account, not optional. Your take-profit is enforced server-side "
-            "by Alpaca as soon as the order fills, so once you set it, profit-taking is "
-            "automatic. Because this account is under $25,000 equity, the Pattern Day Trader "
-            "rule applies: closing a position you opened THIS SAME DAY counts as a day trade, "
-            "and the 4th one in a rolling 5-business-day window will be rejected to avoid a "
-            "PDT restriction — plan exits accordingly if you're trading intraday."
-        ),
+        "note": note,
     }
 
 
-def _validate_live_trade(trade: dict, account: dict, positions: dict, broker, today: str):
+def _validate_live_trade(trade: dict, account: dict, positions: dict, broker, today: str,
+                          protected_tickers: set = frozenset()):
     """Mirrors the paper simulator's 'Code is Law' checks, adapted for a real
     Alpaca account (position sizing, direction consistency, mandatory stop-loss,
     PDT day-trade guard, and Alpaca tradability/shortability). Returns (ok, reason)."""
@@ -158,6 +193,8 @@ def _validate_live_trade(trade: dict, account: dict, positions: dict, broker, to
         return False, f"Invalid action: {action}"
     if not ticker or len(ticker) > 5:
         return False, f"Invalid ticker: {ticker}"
+    if ticker in protected_tickers:
+        return False, f"{ticker} is on the protected-tickers list (manually held, bot may never trade it)"
     if action in ("SHORT", "COVER") and not SHORTING_ENABLED:
         return False, f"{action} rejected: short selling is disabled for this account"
 
@@ -167,7 +204,9 @@ def _validate_live_trade(trade: dict, account: dict, positions: dict, broker, to
     if opening:
         if allocation_pct < MIN_ALLOCATION_PCT or allocation_pct > MAX_ALLOCATION_PCT:
             return False, f"Allocation {allocation_pct}% outside [{MIN_ALLOCATION_PCT}, {MAX_ALLOCATION_PCT}]%"
-        if not existing and len(positions) >= MAX_POSITIONS:
+        # Protected positions don't count against the bot's own capacity.
+        active_bot_positions = len(set(positions.keys()) - protected_tickers)
+        if not existing and active_bot_positions >= MAX_POSITIONS:
             return False, f"Max positions ({MAX_POSITIONS}) reached"
         if not stop_loss_pct:
             return False, f"Stop-loss is mandatory for all {action} orders"
@@ -226,14 +265,18 @@ def _validate_live_trade(trade: dict, account: dict, positions: dict, broker, to
     return True, "OK"
 
 
-def _check_profit_lock(broker, positions: dict, stop_levels: dict, account: dict, today: str):
+def _check_profit_lock(broker, positions: dict, stop_levels: dict, account: dict, today: str,
+                        protected_tickers: set = frozenset()):
     """Backstop for any position with no take-profit order attached (see
     PROFIT_LOCK_THRESHOLD_PCT above). Force-closes at market once such a
     position's unrealized gain reaches the threshold, respecting the same
-    PDT guard as any other close."""
+    PDT guard as any other close. Tickers on the protected list are skipped
+    unconditionally -- they're never touched, no matter the P&L."""
     from .pdt_tracker import pdt_blocks_close, mark_closed
 
     for ticker, pos in positions.items():
+        if ticker in protected_tickers:
+            continue  # manually held -- hands off, regardless of P&L or protection status
         if stop_levels.get(ticker, {}).get("take_profit_price"):
             continue  # already protected by its own bracket take-profit order
 
@@ -314,10 +357,14 @@ def run_live_money_tick():
     positions = broker.get_positions()
     stop_levels = broker.get_open_stop_levels()
 
+    protected_tickers = load_protected_tickers()
+    if protected_tickers:
+        logger.warning(f"[LIVE-MONEY] Protected tickers (bot will never trade these): {sorted(protected_tickers)}")
+
     # Backstop: force-close anything unprotected that's already up a meaningful
     # amount, before the agent's turn even starts. Then refresh state in case
-    # anything just got closed.
-    _check_profit_lock(broker, positions, stop_levels, account, today)
+    # anything just got closed. Protected tickers are skipped unconditionally.
+    _check_profit_lock(broker, positions, stop_levels, account, today, protected_tickers=protected_tickers)
     positions = broker.get_positions()
     stop_levels = broker.get_open_stop_levels()
 
@@ -334,7 +381,7 @@ def run_live_money_tick():
     if not snapshot:
         snapshot = build_mih_snapshot(now_et.date(), save_dir=SNAPSHOTS_DIR)
 
-    portfolio_state = _build_portfolio_state(account, positions, stop_levels)
+    portfolio_state = _build_portfolio_state(account, positions, stop_levels, protected_tickers=protected_tickers)
 
     playbook_path = PLAYBOOKS_DIR / "chatgpt_aggressive.md"
     playbook = (
@@ -365,7 +412,7 @@ def run_live_money_tick():
             ticker = trade.get("ticker", "").upper()
             action = trade.get("action", "").upper()
 
-            ok, reason = _validate_live_trade(trade, account, positions, broker, today)
+            ok, reason = _validate_live_trade(trade, account, positions, broker, today, protected_tickers=protected_tickers)
             if not ok:
                 _log_order_event({"date": today, "action": action, "ticker": ticker, "status": "REJECTED", "reason": reason})
                 continue
@@ -408,7 +455,7 @@ def run_live_money_tick():
 
     # Record an equity/position snapshot for the dashboard, reflecting state
     # after any trades this tick just executed.
-    _record_equity_snapshot(broker, now_et)
+    _record_equity_snapshot(broker, now_et, protected_tickers=protected_tickers)
 
     from .dashboard_exporter import export_for_dashboard
     export_for_dashboard(LIVE_DATA_DIR.parent, LIVE_DATA_DIR / "dashboard")
