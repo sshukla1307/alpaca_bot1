@@ -65,3 +65,4 @@
 {"date": "2026-08-18", "action": "SELL", "ticker": "SMCI", "qty": 25, "price": 37.54990005493164, "reason": "insufficient qty available for order (requested: 25, available: 0)", "status": "rejected", "logged_at": "2026-08-18T10:05:15.946287-04:00"}
 {"date": "2026-08-18", "action": "SELL", "ticker": "WEN", "qty": 138, "price": 8.444999694824219, "reason": "insufficient qty available for order (requested: 138, available: 0)", "status": "rejected", "logged_at": "2026-08-18T10:05:16.026207-04:00"}
 {"date": "2026-08-18", "action": "SELL", "ticker": "XLK", "qty": 6, "price": 186.41000366210938, "reason": "insufficient qty available for order (requested: 6, available: 0)", "status": "rejected", "logged_at": "2026-08-18T10:05:16.138917-04:00"}
+{"date": "2026-08-18", "action": "BUY", "ticker": "XLV", "status": "REJECTED", "reason": "Insufficient buying power: need ~$338, have $0 available", "logged_at": "2026-08-18T11:01:06.835428-04:00"}
