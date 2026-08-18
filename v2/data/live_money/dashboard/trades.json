@@ -1,6 +1,66 @@
 [
   {
     "date": "2026-08-18",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 3,
+    "price": 63.43000030517578,
+    "reason": "insufficient qty available for order (requested: 3, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-18T11:56:20.812585-04:00"
+  },
+  {
+    "date": "2026-08-18",
+    "action": "SELL",
+    "ticker": "XLK",
+    "qty": 6,
+    "price": 185.49000549316406,
+    "reason": "insufficient qty available for order (requested: 6, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-18T11:56:20.744953-04:00"
+  },
+  {
+    "date": "2026-08-18",
+    "action": "SELL",
+    "ticker": "WEN",
+    "qty": 138,
+    "price": 8.444899559020996,
+    "reason": "insufficient qty available for order (requested: 138, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-18T11:56:20.677335-04:00"
+  },
+  {
+    "date": "2026-08-18",
+    "action": "SELL",
+    "ticker": "SMCI",
+    "qty": 25,
+    "price": 36.73649978637695,
+    "reason": "insufficient qty available for order (requested: 25, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-18T11:56:20.610869-04:00"
+  },
+  {
+    "date": "2026-08-18",
+    "action": "SELL",
+    "ticker": "MARA",
+    "qty": 51,
+    "price": 9.274999618530273,
+    "reason": "insufficient qty available for order (requested: 51, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-18T11:56:20.542900-04:00"
+  },
+  {
+    "date": "2026-08-18",
+    "action": "SELL",
+    "ticker": "FSLY",
+    "qty": 17,
+    "price": 26.959999084472656,
+    "reason": "insufficient qty available for order (requested: 17, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-18T11:56:20.474893-04:00"
+  },
+  {
+    "date": "2026-08-18",
     "action": "BUY",
     "ticker": "XLV",
     "status": "REJECTED",
