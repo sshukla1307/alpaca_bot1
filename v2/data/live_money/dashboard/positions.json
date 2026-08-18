@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-08-18T13:50:49.792866-04:00",
-  "cash": -7286.95,
+  "timestamp": "2026-08-18T15:05:29.320467-04:00",
+  "cash": -5922.62,
   "settled_cash": 0.0,
-  "equity": 3130.02,
+  "equity": 3111.71,
   "positions": [
     {
       "ticker": "FSLY",
       "direction": "LONG",
       "shares": 17.0,
       "entry_price": 28.987,
-      "current_price": 26.6,
-      "market_value": 452.2,
-      "unrealized_pnl": -40.58,
-      "unrealized_pnl_pct": -0.08235,
+      "current_price": 26.78,
+      "market_value": 455.26,
+      "unrealized_pnl": -37.52,
+      "unrealized_pnl_pct": -0.07614,
       "protected": false
     },
     {
@@ -20,10 +20,10 @@
       "direction": "LONG",
       "shares": 400.0,
       "entry_price": 19.488077,
-      "current_price": 15.225,
-      "market_value": 6090.0,
-      "unrealized_pnl": -1705.23,
-      "unrealized_pnl_pct": -0.21875,
+      "current_price": 15.19,
+      "market_value": 6076.0,
+      "unrealized_pnl": -1719.23,
+      "unrealized_pnl_pct": -0.22055,
       "protected": true
     },
     {
@@ -31,10 +31,10 @@
       "direction": "LONG",
       "shares": 51.0,
       "entry_price": 9.7697,
-      "current_price": 9.035,
-      "market_value": 460.79,
-      "unrealized_pnl": -37.47,
-      "unrealized_pnl_pct": -0.0752,
+      "current_price": 8.9486,
+      "market_value": 456.38,
+      "unrealized_pnl": -41.88,
+      "unrealized_pnl_pct": -0.08405,
       "protected": false
     },
     {
@@ -42,32 +42,10 @@
       "direction": "LONG",
       "shares": 25.0,
       "entry_price": 39.5763,
-      "current_price": 37.26,
-      "market_value": 931.5,
-      "unrealized_pnl": -57.91,
-      "unrealized_pnl_pct": -0.05853,
-      "protected": false
-    },
-    {
-      "ticker": "WEN",
-      "direction": "LONG",
-      "shares": 138.0,
-      "entry_price": 8.541733,
-      "current_price": 8.55,
-      "market_value": 1179.9,
-      "unrealized_pnl": 1.14,
-      "unrealized_pnl_pct": 0.00097,
-      "protected": false
-    },
-    {
-      "ticker": "XLE",
-      "direction": "LONG",
-      "shares": 3.0,
-      "entry_price": 60.8997,
-      "current_price": 63.455,
-      "market_value": 190.37,
-      "unrealized_pnl": 7.67,
-      "unrealized_pnl_pct": 0.04196,
+      "current_price": 37.3799,
+      "market_value": 934.5,
+      "unrealized_pnl": -54.91,
+      "unrealized_pnl_pct": -0.0555,
       "protected": false
     },
     {
@@ -75,10 +53,10 @@
       "direction": "LONG",
       "shares": 6.0,
       "entry_price": 191.13,
-      "current_price": 185.37,
-      "market_value": 1112.22,
-      "unrealized_pnl": -34.56,
-      "unrealized_pnl_pct": -0.03014,
+      "current_price": 185.365,
+      "market_value": 1112.19,
+      "unrealized_pnl": -34.59,
+      "unrealized_pnl_pct": -0.03016,
       "protected": false
     }
   ]
