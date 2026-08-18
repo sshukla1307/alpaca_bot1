@@ -2,6 +2,16 @@
   {
     "date": "2026-08-18",
     "action": "SELL",
+    "ticker": "MARA",
+    "qty": 51,
+    "price": 9.039999961853027,
+    "reason": "insufficient qty available for order (requested: 51, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-18T13:51:47.953940-04:00"
+  },
+  {
+    "date": "2026-08-18",
+    "action": "SELL",
     "ticker": "SMCI",
     "qty": 25,
     "price": 37.46500015258789,

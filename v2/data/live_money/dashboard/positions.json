@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-08-18T12:55:58.333792-04:00",
+  "timestamp": "2026-08-18T13:50:49.792866-04:00",
   "cash": -7286.95,
   "settled_cash": 0.0,
-  "equity": 3182.47,
+  "equity": 3130.02,
   "positions": [
     {
       "ticker": "FSLY",
       "direction": "LONG",
       "shares": 17.0,
       "entry_price": 28.987,
-      "current_price": 26.75,
-      "market_value": 454.75,
-      "unrealized_pnl": -38.03,
-      "unrealized_pnl_pct": -0.07717,
+      "current_price": 26.6,
+      "market_value": 452.2,
+      "unrealized_pnl": -40.58,
+      "unrealized_pnl_pct": -0.08235,
       "protected": false
     },
     {
@@ -20,10 +20,10 @@
       "direction": "LONG",
       "shares": 400.0,
       "entry_price": 19.488077,
-      "current_price": 15.3201,
-      "market_value": 6128.04,
-      "unrealized_pnl": -1667.19,
-      "unrealized_pnl_pct": -0.21387,
+      "current_price": 15.225,
+      "market_value": 6090.0,
+      "unrealized_pnl": -1705.23,
+      "unrealized_pnl_pct": -0.21875,
       "protected": true
     },
     {
@@ -31,10 +31,10 @@
       "direction": "LONG",
       "shares": 51.0,
       "entry_price": 9.7697,
-      "current_price": 9.2864,
-      "market_value": 473.61,
-      "unrealized_pnl": -24.65,
-      "unrealized_pnl_pct": -0.04947,
+      "current_price": 9.035,
+      "market_value": 460.79,
+      "unrealized_pnl": -37.47,
+      "unrealized_pnl_pct": -0.0752,
       "protected": false
     },
     {
@@ -42,10 +42,10 @@
       "direction": "LONG",
       "shares": 25.0,
       "entry_price": 39.5763,
-      "current_price": 37.48,
-      "market_value": 937.0,
-      "unrealized_pnl": -52.41,
-      "unrealized_pnl_pct": -0.05297,
+      "current_price": 37.26,
+      "market_value": 931.5,
+      "unrealized_pnl": -57.91,
+      "unrealized_pnl_pct": -0.05853,
       "protected": false
     },
     {
@@ -53,10 +53,10 @@
       "direction": "LONG",
       "shares": 138.0,
       "entry_price": 8.541733,
-      "current_price": 8.495,
-      "market_value": 1172.31,
-      "unrealized_pnl": -6.45,
-      "unrealized_pnl_pct": -0.00547,
+      "current_price": 8.55,
+      "market_value": 1179.9,
+      "unrealized_pnl": 1.14,
+      "unrealized_pnl_pct": 0.00097,
       "protected": false
     },
     {
@@ -64,10 +64,10 @@
       "direction": "LONG",
       "shares": 3.0,
       "entry_price": 60.8997,
-      "current_price": 63.4499,
-      "market_value": 190.35,
-      "unrealized_pnl": 7.65,
-      "unrealized_pnl_pct": 0.04188,
+      "current_price": 63.455,
+      "market_value": 190.37,
+      "unrealized_pnl": 7.67,
+      "unrealized_pnl_pct": 0.04196,
       "protected": false
     },
     {
@@ -75,10 +75,10 @@
       "direction": "LONG",
       "shares": 6.0,
       "entry_price": 191.13,
-      "current_price": 185.56,
-      "market_value": 1113.36,
-      "unrealized_pnl": -33.42,
-      "unrealized_pnl_pct": -0.02914,
+      "current_price": 185.37,
+      "market_value": 1112.22,
+      "unrealized_pnl": -34.56,
+      "unrealized_pnl_pct": -0.03014,
       "protected": false
     }
   ]
