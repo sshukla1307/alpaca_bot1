@@ -1,6 +1,32 @@
 [
   {
     "date": "2026-08-19",
+    "action": "BUY",
+    "ticker": "MRK",
+    "qty": 6,
+    "price": 151.2126007080078,
+    "stop_loss_price": 136.09134063720703,
+    "take_profit_price": 181.45512084960936,
+    "reason": "Riding the same vaccine catalyst as Moderna. RSI is overbought, but the short-term bullish signal from SMA-20 above SMA-50 supports the trade.",
+    "status": "submitted",
+    "order_id": "b682ee15-2646-4d8c-a425-aa310253368d",
+    "logged_at": "2026-08-19T13:49:02.848099-04:00"
+  },
+  {
+    "date": "2026-08-19",
+    "action": "BUY",
+    "ticker": "MRNA",
+    "qty": 6,
+    "price": 153.66000366210938,
+    "stop_loss_price": 138.29400329589845,
+    "take_profit_price": 184.39200439453126,
+    "reason": "Strong momentum from vaccine trial results. RSI indicates overbought, but the catalyst is significant enough to justify the risk.",
+    "status": "submitted",
+    "order_id": "8d89bd54-36d7-490a-89d2-77b94198e44e",
+    "logged_at": "2026-08-19T13:49:02.758543-04:00"
+  },
+  {
+    "date": "2026-08-19",
     "action": "SELL",
     "ticker": "MRNA",
     "qty": 1,
