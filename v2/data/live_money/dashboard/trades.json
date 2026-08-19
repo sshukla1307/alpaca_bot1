@@ -1,6 +1,16 @@
 [
   {
     "date": "2026-08-19",
+    "action": "SELL",
+    "ticker": "MRNA",
+    "qty": 1,
+    "price": 144.02000427246094,
+    "reason": "insufficient qty available for order (requested: 1, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-19T11:01:38.122569-04:00"
+  },
+  {
+    "date": "2026-08-19",
     "action": "BUY",
     "ticker": "MRNA",
     "qty": 1,
