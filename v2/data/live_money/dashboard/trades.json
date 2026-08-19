@@ -2,6 +2,32 @@
   {
     "date": "2026-08-19",
     "action": "BUY",
+    "ticker": "XLE",
+    "qty": 16,
+    "price": 63.64500045776367,
+    "stop_loss_price": 60.46275043487549,
+    "take_profit_price": 73.19175052642822,
+    "reason": "Energy sector is leading due to rising oil prices. Short-term bullish signal with SMA-20 above SMA-50 and close to 52-week high.",
+    "status": "submitted",
+    "order_id": "9a78e0cc-55bf-41a3-b43b-60539c4c646f",
+    "logged_at": "2026-08-19T15:02:33.900427-04:00"
+  },
+  {
+    "date": "2026-08-19",
+    "action": "BUY",
+    "ticker": "MRNA",
+    "qty": 6,
+    "price": 153.27999877929688,
+    "stop_loss_price": 137.9519989013672,
+    "take_profit_price": 183.93599853515624,
+    "reason": "Strong momentum from positive vaccine trial results. Despite being overbought (RSI 92.8), the catalyst is significant enough to drive further gains.",
+    "status": "submitted",
+    "order_id": "48d3f309-0eea-4c37-9859-95062c714ab0",
+    "logged_at": "2026-08-19T15:02:33.878265-04:00"
+  },
+  {
+    "date": "2026-08-19",
+    "action": "BUY",
     "ticker": "MRK",
     "qty": 6,
     "price": 151.2126007080078,

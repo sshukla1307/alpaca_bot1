@@ -1,51 +1,29 @@
 {
-  "timestamp": "2026-08-19T13:47:44.672148-04:00",
-  "cash": -4668.35,
+  "timestamp": "2026-08-19T15:00:41.199883-04:00",
+  "cash": -3729.49,
   "settled_cash": 0.0,
-  "equity": 4146.7,
+  "equity": 4134.73,
   "positions": [
     {
       "ticker": "KLAR",
       "direction": "LONG",
       "shares": 400.0,
       "entry_price": 19.488077,
-      "current_price": 14.635,
-      "market_value": 5854.0,
-      "unrealized_pnl": -1941.23,
-      "unrealized_pnl_pct": -0.24903,
+      "current_price": 14.6088,
+      "market_value": 5843.52,
+      "unrealized_pnl": -1951.71,
+      "unrealized_pnl_pct": -0.25037,
       "protected": true
-    },
-    {
-      "ticker": "MRK",
-      "direction": "LONG",
-      "shares": 6.0,
-      "entry_price": 151.2399,
-      "current_price": 151.205,
-      "market_value": 907.23,
-      "unrealized_pnl": -0.21,
-      "unrealized_pnl_pct": -0.00023,
-      "protected": false
-    },
-    {
-      "ticker": "MRNA",
-      "direction": "LONG",
-      "shares": 6.0,
-      "entry_price": 153.64,
-      "current_price": 153.612,
-      "market_value": 921.67,
-      "unrealized_pnl": -0.17,
-      "unrealized_pnl_pct": -0.00018,
-      "protected": false
     },
     {
       "ticker": "SMCI",
       "direction": "LONG",
       "shares": 25.0,
       "entry_price": 39.5763,
-      "current_price": 37.425,
-      "market_value": 935.62,
-      "unrealized_pnl": -53.78,
-      "unrealized_pnl_pct": -0.05436,
+      "current_price": 36.705,
+      "market_value": 917.62,
+      "unrealized_pnl": -71.78,
+      "unrealized_pnl_pct": -0.07255,
       "protected": false
     },
     {
@@ -53,10 +31,10 @@
       "direction": "LONG",
       "shares": 6.0,
       "entry_price": 191.13,
-      "current_price": 183.93,
-      "market_value": 1103.58,
-      "unrealized_pnl": -43.2,
-      "unrealized_pnl_pct": -0.03767,
+      "current_price": 183.845,
+      "market_value": 1103.07,
+      "unrealized_pnl": -43.71,
+      "unrealized_pnl_pct": -0.03812,
       "protected": false
     }
   ]
