@@ -1,5 +1,48 @@
 [
   {
+    "date": "2026-08-19",
+    "action": "BUY",
+    "ticker": "MRNA",
+    "qty": 1,
+    "price": 141.6094970703125,
+    "stop_loss_price": 127.44854736328125,
+    "take_profit_price": 169.931396484375,
+    "reason": "Strong momentum due to significant pipeline catalyst, despite overbought conditions.",
+    "status": "submitted",
+    "order_id": "e8f29f13-d2e6-4ed8-b74f-27713edd1967",
+    "logged_at": "2026-08-19T10:06:07.146428-04:00"
+  },
+  {
+    "date": "2026-08-19",
+    "action": "SELL",
+    "ticker": "XLK",
+    "qty": 6,
+    "price": 183.80999755859375,
+    "reason": "insufficient qty available for order (requested: 6, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-19T10:06:07.119160-04:00"
+  },
+  {
+    "date": "2026-08-19",
+    "action": "SELL",
+    "ticker": "SMCI",
+    "qty": 25,
+    "price": 36.34000015258789,
+    "reason": "insufficient qty available for order (requested: 25, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-19T10:06:07.106966-04:00"
+  },
+  {
+    "date": "2026-08-19",
+    "action": "SELL",
+    "ticker": "FSLY",
+    "qty": 17,
+    "price": 24.940000534057617,
+    "reason": "insufficient qty available for order (requested: 17, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-19T10:06:07.094968-04:00"
+  },
+  {
     "date": "2026-08-18",
     "action": "SELL",
     "ticker": "SMCI",
