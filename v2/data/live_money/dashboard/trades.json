@@ -1,6 +1,49 @@
 [
   {
     "date": "2026-08-20",
+    "action": "SELL",
+    "ticker": "XLK",
+    "qty": 0,
+    "price": 183.85499572753906,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-08-20T13:00:40.878435-04:00"
+  },
+  {
+    "date": "2026-08-20",
+    "action": "SELL",
+    "ticker": "STNE",
+    "qty": 0,
+    "price": 9.229999542236328,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-08-20T13:00:40.878188-04:00"
+  },
+  {
+    "date": "2026-08-20",
+    "action": "SELL",
+    "ticker": "MRK",
+    "qty": 0,
+    "price": 151.52999877929688,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-08-20T13:00:40.877923-04:00"
+  },
+  {
+    "date": "2026-08-20",
+    "action": "BUY",
+    "ticker": "RUN",
+    "qty": 40,
+    "price": 9.330699920654297,
+    "stop_loss_price": 8.864164924621582,
+    "take_profit_price": 10.73030490875244,
+    "reason": "RUN is trading significantly below its 50-day SMA with high volatility, indicating potential for a strong rebound. High-alpha potential with a tight stop-loss and take-profit.",
+    "status": "submitted",
+    "order_id": "bdcabf5e-d8bd-4748-8346-523b7e6ad82b",
+    "logged_at": "2026-08-20T13:00:40.877165-04:00"
+  },
+  {
+    "date": "2026-08-20",
     "action": "BUY",
     "ticker": "MRNA",
     "status": "REJECTED",

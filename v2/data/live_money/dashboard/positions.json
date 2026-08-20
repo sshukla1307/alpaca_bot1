@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-08-20T11:56:36.408581-04:00",
-  "cash": -5868.08,
+  "timestamp": "2026-08-20T12:59:24.781895-04:00",
+  "cash": -4775.15,
   "settled_cash": 0.0,
-  "equity": 3789.42,
+  "equity": 3747.26,
   "positions": [
     {
       "ticker": "KLAR",
       "direction": "LONG",
       "shares": 400.0,
       "entry_price": 19.488077,
-      "current_price": 14.03,
-      "market_value": 5612.0,
-      "unrealized_pnl": -2183.23,
-      "unrealized_pnl_pct": -0.28007,
+      "current_price": 13.935,
+      "market_value": 5574.0,
+      "unrealized_pnl": -2221.23,
+      "unrealized_pnl_pct": -0.28495,
       "protected": true
     },
     {
@@ -20,32 +20,21 @@
       "direction": "LONG",
       "shares": 6.0,
       "entry_price": 151.77495,
-      "current_price": 152.085,
-      "market_value": 912.51,
-      "unrealized_pnl": 1.86,
-      "unrealized_pnl_pct": 0.00204,
+      "current_price": 151.6,
+      "market_value": 909.6,
+      "unrealized_pnl": -1.05,
+      "unrealized_pnl_pct": -0.00115,
       "protected": false
     },
     {
-      "ticker": "RBLX",
+      "ticker": "RUN",
       "direction": "LONG",
-      "shares": 15.0,
-      "entry_price": 37.53,
-      "current_price": 37.82,
-      "market_value": 567.3,
-      "unrealized_pnl": 4.35,
-      "unrealized_pnl_pct": 0.00773,
-      "protected": false
-    },
-    {
-      "ticker": "SMCI",
-      "direction": "LONG",
-      "shares": 25.0,
-      "entry_price": 39.5763,
-      "current_price": 36.01,
-      "market_value": 900.25,
-      "unrealized_pnl": -89.16,
-      "unrealized_pnl_pct": -0.09011,
+      "shares": 40.0,
+      "entry_price": 9.335,
+      "current_price": 9.3307,
+      "market_value": 373.23,
+      "unrealized_pnl": -0.17,
+      "unrealized_pnl_pct": -0.00046,
       "protected": false
     },
     {
@@ -53,10 +42,10 @@
       "direction": "LONG",
       "shares": 61.0,
       "entry_price": 9.3887,
-      "current_price": 9.255,
-      "market_value": 564.55,
-      "unrealized_pnl": -8.16,
-      "unrealized_pnl_pct": -0.01424,
+      "current_price": 9.225,
+      "market_value": 562.73,
+      "unrealized_pnl": -9.99,
+      "unrealized_pnl_pct": -0.01744,
       "protected": false
     },
     {
@@ -64,10 +53,10 @@
       "direction": "LONG",
       "shares": 6.0,
       "entry_price": 191.13,
-      "current_price": 183.48,
-      "market_value": 1100.88,
-      "unrealized_pnl": -45.9,
-      "unrealized_pnl_pct": -0.04003,
+      "current_price": 183.81,
+      "market_value": 1102.86,
+      "unrealized_pnl": -43.92,
+      "unrealized_pnl_pct": -0.0383,
       "protected": false
     }
   ]
