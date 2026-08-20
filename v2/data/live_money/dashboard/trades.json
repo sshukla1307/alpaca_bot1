@@ -3,6 +3,36 @@
     "date": "2026-08-20",
     "action": "SELL",
     "ticker": "XLK",
+    "qty": 6,
+    "price": 183.38999938964844,
+    "reason": "insufficient qty available for order (requested: 6, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-20T13:54:33.869070-04:00"
+  },
+  {
+    "date": "2026-08-20",
+    "action": "SELL",
+    "ticker": "STNE",
+    "qty": 61,
+    "price": 9.204999923706055,
+    "reason": "insufficient qty available for order (requested: 61, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-20T13:54:33.794504-04:00"
+  },
+  {
+    "date": "2026-08-20",
+    "action": "SELL",
+    "ticker": "RUN",
+    "qty": 40,
+    "price": 9.3100004196167,
+    "reason": "insufficient qty available for order (requested: 40, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-20T13:54:33.720937-04:00"
+  },
+  {
+    "date": "2026-08-20",
+    "action": "SELL",
+    "ticker": "XLK",
     "qty": 0,
     "price": 183.85499572753906,
     "reason": "Computed qty 0 < 1 share",
