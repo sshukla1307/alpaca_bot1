@@ -1,5 +1,41 @@
 [
   {
+    "date": "2026-08-20",
+    "action": "BUY",
+    "ticker": "STNE",
+    "qty": 61,
+    "price": 9.385000228881836,
+    "stop_loss_price": 8.915750217437743,
+    "take_profit_price": 10.79275026321411,
+    "reason": "High volatility with potential for quick rebound. Aggressive entry with tight risk management.",
+    "status": "submitted",
+    "order_id": "d10d4de2-d638-4702-bc14-a989924a3a86",
+    "logged_at": "2026-08-20T11:03:20.174281-04:00"
+  },
+  {
+    "date": "2026-08-20",
+    "action": "BUY",
+    "ticker": "RBLX",
+    "qty": 15,
+    "price": 37.54999923706055,
+    "stop_loss_price": 35.67249927520752,
+    "take_profit_price": 43.182499122619625,
+    "reason": "High volatility with potential for quick rebound. Aggressive entry with tight risk management.",
+    "status": "submitted",
+    "order_id": "8faad760-141a-40a1-bad8-08fe3784ddee",
+    "logged_at": "2026-08-20T11:03:20.138214-04:00"
+  },
+  {
+    "date": "2026-08-20",
+    "action": "SELL",
+    "ticker": "XLK",
+    "qty": 6,
+    "price": 184.52499389648438,
+    "reason": "insufficient qty available for order (requested: 6, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-20T11:03:20.109265-04:00"
+  },
+  {
     "date": "2026-08-19",
     "action": "SELL",
     "ticker": "XLK",
