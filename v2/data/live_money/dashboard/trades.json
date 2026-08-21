@@ -2,6 +2,22 @@
   {
     "date": "2026-08-21",
     "action": "BUY",
+    "ticker": "TSLL",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$391, have $24 available",
+    "logged_at": "2026-08-21T15:46:25.048010-04:00"
+  },
+  {
+    "date": "2026-08-21",
+    "action": "BUY",
+    "ticker": "IMVT",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$586, have $24 available",
+    "logged_at": "2026-08-21T15:46:25.047771-04:00"
+  },
+  {
+    "date": "2026-08-21",
+    "action": "BUY",
     "ticker": "XLV",
     "status": "REJECTED",
     "reason": "Insufficient buying power: need ~$393, have $83 available",
