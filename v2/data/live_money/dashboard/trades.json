@@ -1,5 +1,40 @@
 [
   {
+    "date": "2026-08-21",
+    "action": "BUY",
+    "ticker": "XLV",
+    "qty": 2,
+    "price": 175.50999450683594,
+    "stop_loss_price": 166.73449478149413,
+    "take_profit_price": 201.83649368286132,
+    "reason": "insufficient buying power",
+    "status": "rejected",
+    "logged_at": "2026-08-21T11:02:27.828652-04:00"
+  },
+  {
+    "date": "2026-08-21",
+    "action": "BUY",
+    "ticker": "XLE",
+    "qty": 6,
+    "price": 63.619998931884766,
+    "stop_loss_price": 60.438998985290525,
+    "take_profit_price": 73.16299877166747,
+    "reason": "Energy sector is leading, and geopolitical tensions are driving oil prices higher.",
+    "status": "submitted",
+    "order_id": "5e093a7f-b0db-43a2-88ea-c7c69d0950f9",
+    "logged_at": "2026-08-21T11:02:27.646454-04:00"
+  },
+  {
+    "date": "2026-08-21",
+    "action": "SELL",
+    "ticker": "XLK",
+    "qty": 6,
+    "price": 182.66000366210938,
+    "reason": "insufficient qty available for order (requested: 6, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-21T11:02:27.488905-04:00"
+  },
+  {
     "date": "2026-08-20",
     "action": "BUY",
     "ticker": "XLV",
