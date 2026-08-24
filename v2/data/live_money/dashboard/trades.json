@@ -2,6 +2,30 @@
   {
     "date": "2026-08-24",
     "action": "BUY",
+    "ticker": "SOFI",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$194, have $0 available",
+    "logged_at": "2026-08-24T11:08:35.213383-04:00"
+  },
+  {
+    "date": "2026-08-24",
+    "action": "BUY",
+    "ticker": "XLE",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$388, have $0 available",
+    "logged_at": "2026-08-24T11:08:35.213268-04:00"
+  },
+  {
+    "date": "2026-08-24",
+    "action": "BUY",
+    "ticker": "XLV",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$388, have $0 available",
+    "logged_at": "2026-08-24T11:08:35.213068-04:00"
+  },
+  {
+    "date": "2026-08-24",
+    "action": "BUY",
     "ticker": "EDIT",
     "qty": 322,
     "price": 3.0299999713897705,
