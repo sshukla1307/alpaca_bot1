@@ -3,6 +3,46 @@
     "date": "2026-08-24",
     "action": "SELL",
     "ticker": "XLV",
+    "qty": 3,
+    "price": 174.57000732421875,
+    "reason": "insufficient qty available for order (requested: 3, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-24T15:09:49.578797-04:00"
+  },
+  {
+    "date": "2026-08-24",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 20,
+    "price": 63.1150016784668,
+    "reason": "insufficient qty available for order (requested: 20, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-24T15:09:49.566626-04:00"
+  },
+  {
+    "date": "2026-08-24",
+    "action": "SELL",
+    "ticker": "RUN",
+    "qty": 40,
+    "price": 8.979999542236328,
+    "reason": "insufficient qty available for order (requested: 40, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-24T15:09:49.553167-04:00"
+  },
+  {
+    "date": "2026-08-24",
+    "action": "SELL",
+    "ticker": "MRK",
+    "qty": 6,
+    "price": 150.5850067138672,
+    "reason": "insufficient qty available for order (requested: 6, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-24T15:09:49.541227-04:00"
+  },
+  {
+    "date": "2026-08-24",
+    "action": "SELL",
+    "ticker": "XLV",
     "qty": 0,
     "price": 174.5399932861328,
     "reason": "Computed qty 0 < 1 share",
