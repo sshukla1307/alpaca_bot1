@@ -1,6 +1,26 @@
 [
   {
     "date": "2026-08-25",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 20,
+    "price": 62.494998931884766,
+    "reason": "insufficient qty available for order (requested: 20, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-25T14:50:38.742834-04:00"
+  },
+  {
+    "date": "2026-08-25",
+    "action": "SELL",
+    "ticker": "RUN",
+    "qty": 40,
+    "price": 9.260000228881836,
+    "reason": "insufficient qty available for order (requested: 40, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-25T14:50:38.699551-04:00"
+  },
+  {
+    "date": "2026-08-25",
     "action": "BUY",
     "ticker": "IONQ",
     "qty": 9,
