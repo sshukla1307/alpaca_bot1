@@ -1,9 +1,31 @@
 {
-  "timestamp": "2026-08-25T14:49:20.940673-04:00",
-  "cash": -3417.72,
+  "timestamp": "2026-08-25T14:52:27.356244-04:00",
+  "cash": -5360.28,
   "settled_cash": 0.0,
-  "equity": 3902.38,
+  "equity": 3902.37,
   "positions": [
+    {
+      "ticker": "BITO",
+      "direction": "LONG",
+      "shares": 91.0,
+      "entry_price": 10.685,
+      "current_price": 10.685,
+      "market_value": 972.34,
+      "unrealized_pnl": 0.0,
+      "unrealized_pnl_pct": 0.0,
+      "protected": false
+    },
+    {
+      "ticker": "DKNG",
+      "direction": "LONG",
+      "shares": 37.0,
+      "entry_price": 25.9293,
+      "current_price": 25.9298,
+      "market_value": 959.4,
+      "unrealized_pnl": 0.02,
+      "unrealized_pnl_pct": 2e-05,
+      "protected": false
+    },
     {
       "ticker": "KLAR",
       "direction": "LONG",
@@ -14,6 +36,17 @@
       "unrealized_pnl": -2095.23,
       "unrealized_pnl_pct": -0.26878,
       "protected": true
+    },
+    {
+      "ticker": "NTLA",
+      "direction": "LONG",
+      "shares": 71.0,
+      "entry_price": 13.665,
+      "current_price": 13.665,
+      "market_value": 970.22,
+      "unrealized_pnl": 0.0,
+      "unrealized_pnl_pct": 0.0,
+      "protected": false
     },
     {
       "ticker": "RUN",
