@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-08-24T15:52:04.691298-04:00",
-  "cash": -4881.18,
+  "timestamp": "2026-08-25T10:11:56.227382-04:00",
+  "cash": -4884.47,
   "settled_cash": 0.0,
-  "equity": 3836.25,
+  "equity": 3851.88,
   "positions": [
     {
       "ticker": "KLAR",
       "direction": "LONG",
       "shares": 400.0,
       "entry_price": 19.488077,
-      "current_price": 14.165,
-      "market_value": 5666.0,
-      "unrealized_pnl": -2129.23,
-      "unrealized_pnl_pct": -0.27315,
+      "current_price": 14.1894,
+      "market_value": 5675.76,
+      "unrealized_pnl": -2119.47,
+      "unrealized_pnl_pct": -0.27189,
       "protected": true
     },
     {
@@ -20,10 +20,10 @@
       "direction": "LONG",
       "shares": 6.0,
       "entry_price": 151.77495,
-      "current_price": 151.02,
-      "market_value": 906.12,
-      "unrealized_pnl": -4.53,
-      "unrealized_pnl_pct": -0.00497,
+      "current_price": 152.83,
+      "market_value": 916.98,
+      "unrealized_pnl": 6.33,
+      "unrealized_pnl_pct": 0.00695,
       "protected": false
     },
     {
@@ -31,10 +31,10 @@
       "direction": "LONG",
       "shares": 40.0,
       "entry_price": 9.335,
-      "current_price": 8.965,
-      "market_value": 358.6,
-      "unrealized_pnl": -14.8,
-      "unrealized_pnl_pct": -0.03964,
+      "current_price": 9.165,
+      "market_value": 366.6,
+      "unrealized_pnl": -6.8,
+      "unrealized_pnl_pct": -0.01821,
       "protected": false
     },
     {
@@ -42,10 +42,10 @@
       "direction": "LONG",
       "shares": 20.0,
       "entry_price": 63.71047,
-      "current_price": 63.105,
-      "market_value": 1262.1,
-      "unrealized_pnl": -12.11,
-      "unrealized_pnl_pct": -0.0095,
+      "current_price": 62.65,
+      "market_value": 1253.0,
+      "unrealized_pnl": -21.21,
+      "unrealized_pnl_pct": -0.01665,
       "protected": false
     },
     {
@@ -53,10 +53,10 @@
       "direction": "LONG",
       "shares": 3.0,
       "entry_price": 172.63,
-      "current_price": 174.87,
-      "market_value": 524.61,
-      "unrealized_pnl": 6.72,
-      "unrealized_pnl_pct": 0.01298,
+      "current_price": 174.6694,
+      "market_value": 524.01,
+      "unrealized_pnl": 6.12,
+      "unrealized_pnl_pct": 0.01181,
       "protected": false
     }
   ]
