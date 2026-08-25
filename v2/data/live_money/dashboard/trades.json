@@ -4,6 +4,26 @@
     "action": "SELL",
     "ticker": "XLE",
     "qty": 20,
+    "price": 62.625,
+    "reason": "insufficient qty available for order (requested: 20, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-25T13:04:35.830181-04:00"
+  },
+  {
+    "date": "2026-08-25",
+    "action": "SELL",
+    "ticker": "RUN",
+    "qty": 40,
+    "price": 9.237099647521973,
+    "reason": "insufficient qty available for order (requested: 40, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-25T13:04:35.765039-04:00"
+  },
+  {
+    "date": "2026-08-25",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 20,
     "price": 62.502498626708984,
     "reason": "insufficient qty available for order (requested: 20, available: 0)",
     "status": "rejected",
