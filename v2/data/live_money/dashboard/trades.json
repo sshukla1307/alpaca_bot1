@@ -1,6 +1,30 @@
 [
   {
     "date": "2026-08-26",
+    "action": "BUY",
+    "ticker": "ENPH",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$563, have $0 available",
+    "logged_at": "2026-08-26T12:01:07.991857-04:00"
+  },
+  {
+    "date": "2026-08-26",
+    "action": "BUY",
+    "ticker": "ASAN",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$563, have $0 available",
+    "logged_at": "2026-08-26T12:01:07.991712-04:00"
+  },
+  {
+    "date": "2026-08-26",
+    "action": "BUY",
+    "ticker": "SNAP",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$563, have $0 available",
+    "logged_at": "2026-08-26T12:01:07.991482-04:00"
+  },
+  {
+    "date": "2026-08-26",
     "action": "SELL",
     "ticker": "XLE",
     "qty": 20,
