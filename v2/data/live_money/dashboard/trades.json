@@ -1,5 +1,71 @@
 [
   {
+    "date": "2026-08-27",
+    "action": "BUY",
+    "ticker": "SOFI",
+    "qty": 19,
+    "price": 19.290000915527344,
+    "stop_loss_price": 18.325500869750975,
+    "take_profit_price": 22.183501052856442,
+    "reason": "Strong catalysts and momentum.",
+    "status": "submitted",
+    "order_id": "47ed2a31-dde5-499c-b396-cac20ed3fbdc",
+    "logged_at": "2026-08-27T12:08:25.154270-04:00"
+  },
+  {
+    "date": "2026-08-27",
+    "action": "BUY",
+    "ticker": "NVDA",
+    "qty": 1,
+    "price": 226.97000122070312,
+    "stop_loss_price": 215.62150115966796,
+    "take_profit_price": 261.01550140380857,
+    "reason": "Anticipate post-earnings momentum.",
+    "status": "submitted",
+    "order_id": "800ad25a-f34d-4763-8f52-83a69fa2c7ea",
+    "logged_at": "2026-08-27T12:08:25.125096-04:00"
+  },
+  {
+    "date": "2026-08-27",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 20,
+    "price": 61.904998779296875,
+    "reason": "insufficient qty available for order (requested: 20, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-27T12:08:25.105300-04:00"
+  },
+  {
+    "date": "2026-08-27",
+    "action": "SELL",
+    "ticker": "RUN",
+    "qty": 40,
+    "price": 9.119999885559082,
+    "reason": "insufficient qty available for order (requested: 40, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-27T12:08:25.091121-04:00"
+  },
+  {
+    "date": "2026-08-27",
+    "action": "SELL",
+    "ticker": "NTLA",
+    "qty": 71,
+    "price": 13.1899995803833,
+    "reason": "insufficient qty available for order (requested: 71, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-27T12:08:25.077119-04:00"
+  },
+  {
+    "date": "2026-08-27",
+    "action": "SELL",
+    "ticker": "DKNG",
+    "qty": 37,
+    "price": 24.639999389648438,
+    "reason": "insufficient qty available for order (requested: 37, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-27T12:08:25.067171-04:00"
+  },
+  {
     "date": "2026-08-26",
     "action": "SELL",
     "ticker": "NTLA",
