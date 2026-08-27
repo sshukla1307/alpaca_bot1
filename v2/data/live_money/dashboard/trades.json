@@ -2,6 +2,14 @@
   {
     "date": "2026-08-27",
     "action": "BUY",
+    "ticker": "NVDA",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$932, have $0 available",
+    "logged_at": "2026-08-27T15:45:33.960538-04:00"
+  },
+  {
+    "date": "2026-08-27",
+    "action": "BUY",
     "ticker": "SOFI",
     "qty": 19,
     "price": 19.290000915527344,
