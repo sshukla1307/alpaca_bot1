@@ -4,6 +4,16 @@
     "action": "SELL",
     "ticker": "NTLA",
     "qty": 71,
+    "price": 12.595000267028809,
+    "reason": "insufficient qty available for order (requested: 71, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-08-31T14:32:19.937607-04:00"
+  },
+  {
+    "date": "2026-08-31",
+    "action": "SELL",
+    "ticker": "NTLA",
+    "qty": 71,
     "price": 12.640000343322754,
     "reason": "insufficient qty available for order (requested: 71, available: 0)",
     "status": "rejected",
