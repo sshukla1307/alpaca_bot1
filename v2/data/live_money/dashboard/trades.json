@@ -2,6 +2,26 @@
   {
     "date": "2026-09-01",
     "action": "SELL",
+    "ticker": "XLE",
+    "qty": 18,
+    "price": 64.63999938964844,
+    "reason": "insufficient qty available for order (requested: 18, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-09-01T13:42:58.818538-04:00"
+  },
+  {
+    "date": "2026-09-01",
+    "action": "SELL",
+    "ticker": "NTLA",
+    "qty": 86,
+    "price": 12.779999732971191,
+    "reason": "insufficient qty available for order (requested: 86, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-09-01T13:42:58.720724-04:00"
+  },
+  {
+    "date": "2026-09-01",
+    "action": "SELL",
     "ticker": "NTLA",
     "qty": 86,
     "price": 12.800000190734863,
@@ -2037,31 +2057,5 @@
     "status": "submitted",
     "order_id": "56521ef9-6a3e-41b3-b915-7e886d4c416f",
     "logged_at": "2026-08-11T15:17:02.543596-04:00"
-  },
-  {
-    "date": "2026-08-11",
-    "action": "BUY",
-    "ticker": "FSLY",
-    "qty": 17,
-    "price": 28.989999771118164,
-    "stop_loss_price": 24.64149980545044,
-    "take_profit_price": 37.68699970245361,
-    "reason": "High momentum and potential for growth driven by AI demand, despite overbought conditions.",
-    "status": "submitted",
-    "order_id": "d456c80d-1a20-459a-9538-ce19829a7076",
-    "logged_at": "2026-08-11T15:03:26.508796-04:00"
-  },
-  {
-    "date": "2026-08-11",
-    "action": "BUY",
-    "ticker": "NVDA",
-    "qty": 2,
-    "price": 217.39500427246094,
-    "stop_loss_price": 195.65550384521484,
-    "take_profit_price": 260.87400512695314,
-    "reason": "Strong momentum in the AI sector and bullish technical indicators.",
-    "status": "submitted",
-    "order_id": "95bcd9a8-0ae9-4625-96fa-e6f85a50df4b",
-    "logged_at": "2026-08-11T15:03:26.344796-04:00"
   }
 ]
