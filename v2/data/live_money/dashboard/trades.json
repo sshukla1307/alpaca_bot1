@@ -1,6 +1,19 @@
 [
   {
     "date": "2026-09-01",
+    "action": "BUY",
+    "ticker": "CVX",
+    "qty": 4,
+    "price": 210.3000030517578,
+    "stop_loss_price": 189.27000274658204,
+    "take_profit_price": 252.36000366210936,
+    "reason": "Chevron is a leading energy company with a strong dividend track record and high cash margins. Rising oil prices and its global leadership in natural gas production make it an attractive buy in the current market environment.",
+    "status": "submitted",
+    "order_id": "a622f4f8-e891-482a-8064-2fb7ed947776",
+    "logged_at": "2026-09-01T15:23:02.208748-04:00"
+  },
+  {
+    "date": "2026-09-01",
     "action": "SELL",
     "ticker": "NTLA",
     "qty": 86,
@@ -2036,15 +2049,5 @@
     "reason": "Computed qty 0 < 1 share",
     "status": "rejected",
     "logged_at": "2026-08-12T13:27:12.680959-04:00"
-  },
-  {
-    "date": "2026-08-12",
-    "action": "SELL",
-    "ticker": "MARA",
-    "qty": 2,
-    "price": 9.6850004196167,
-    "reason": "insufficient qty available for order (requested: 2, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-12T13:27:12.680680-04:00"
   }
 ]

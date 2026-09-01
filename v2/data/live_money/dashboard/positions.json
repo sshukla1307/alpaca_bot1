@@ -1,18 +1,29 @@
 {
-  "timestamp": "2026-09-01T15:11:39.260160-04:00",
-  "cash": -1397.48,
-  "settled_cash": 0.0,
-  "equity": 3837.76,
+  "timestamp": "2026-09-01T15:21:32.962579-04:00",
+  "cash": -2238.72,
+  "settled_cash": 150.92,
+  "equity": 3845.05,
   "positions": [
+    {
+      "ticker": "CVX",
+      "direction": "LONG",
+      "shares": 4.0,
+      "entry_price": 210.31,
+      "current_price": 210.29,
+      "market_value": 841.16,
+      "unrealized_pnl": -0.08,
+      "unrealized_pnl_pct": -0.0001,
+      "protected": false
+    },
     {
       "ticker": "KLAR",
       "direction": "LONG",
       "shares": 368.5493,
       "entry_price": 19.488077,
-      "current_price": 14.205,
-      "market_value": 5235.24,
-      "unrealized_pnl": -1947.07,
-      "unrealized_pnl_pct": -0.27109,
+      "current_price": 14.225,
+      "market_value": 5242.61,
+      "unrealized_pnl": -1939.7,
+      "unrealized_pnl_pct": -0.27007,
       "protected": true
     }
   ]
