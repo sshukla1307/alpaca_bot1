@@ -291,7 +291,21 @@ def _check_profit_lock(broker, positions: dict, stop_levels: dict, account: dict
 
         qty = int(pos["shares"])
         side = "sell" if pos["direction"] == "LONG" else "buy"
+        # Frees the shares from their resting stop-loss leg -- this path
+        # only ever fires on positions with no take-profit leg (see the
+        # `continue` above), which still have an open stop-loss reserving
+        # the full quantity, so the close would otherwise be rejected.
+        # Capture the stop level first in case the close itself fails below
+        # and the position needs to be re-protected rather than left naked.
+        existing_stop = stop_levels.get(ticker, {}).get("stop_loss_price")
+        broker.cancel_open_orders(ticker)
         result = broker.submit_market_order(ticker, side, qty)
+        if result["status"] != "submitted" and existing_stop:
+            reprotect_result = broker.submit_oco_exit(ticker, side, qty, existing_stop)
+            _log_order_event({"date": today, "action": "REPROTECT", "ticker": ticker, "qty": qty,
+                               "reason": "Profit-lock close failed after cancelling the prior stop-loss -- "
+                                         "re-establishing it so the position isn't left unprotected",
+                               **reprotect_result})
         _log_order_event({
             "date": today, "action": "PROFIT_LOCK_SELL" if side == "sell" else "PROFIT_LOCK_COVER",
             "ticker": ticker, "qty": qty, "pnl_pct": round(pnl_pct, 2),
@@ -447,11 +461,40 @@ def run_live_money_tick():
                 qty = min(qty, int(pos["shares"]))
                 side = "sell" if action == "SELL" else "buy"
 
+                # The position's shares are reserved by its resting bracket
+                # stop-loss/take-profit legs -- cancel them first so Alpaca
+                # treats the shares as available for this closing order.
+                # Capture the existing levels first so whatever doesn't end
+                # up sold (a partial remainder, or the whole position if
+                # this close itself fails) can be re-protected below rather
+                # than left with no stop-loss/take-profit at all.
+                existing_levels = stop_levels.get(ticker, {})
+                broker.cancel_open_orders(ticker)
+
                 result = broker.submit_market_order(ticker, side, qty)
                 _log_order_event({"date": today, "action": action, "ticker": ticker, "qty": qty,
                                    "price": price, "reason": trade.get("reason", ""), **result})
-                if result["status"] == "submitted" and qty >= int(pos["shares"]):
+
+                sold_qty = qty if result["status"] == "submitted" else 0
+                remaining = int(pos["shares"]) - sold_qty
+                if sold_qty >= int(pos["shares"]):
                     mark_closed(LIVE_DATA_DIR, ticker)
+                elif remaining >= 1:
+                    if existing_levels.get("stop_loss_price"):
+                        reprotect_result = broker.submit_oco_exit(
+                            ticker, side, remaining,
+                            existing_levels["stop_loss_price"],
+                            existing_levels.get("take_profit_price"),
+                        )
+                        _log_order_event({"date": today, "action": "REPROTECT", "ticker": ticker,
+                                           "qty": remaining,
+                                           "reason": "Re-establishing stop-loss/take-profit on the remainder "
+                                                     "after cancelling the prior bracket to free shares for a close",
+                                           **reprotect_result})
+                    else:
+                        logger.warning(f"[LIVE-MONEY] {ticker}: {remaining} shares now UNPROTECTED after "
+                                        f"cancelling the prior bracket -- no captured stop-loss level to "
+                                        f"re-establish.")
 
     # Record an equity/position snapshot for the dashboard, reflecting state
     # after any trades this tick just executed.

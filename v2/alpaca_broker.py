@@ -193,3 +193,56 @@ class AlpacaBroker:
         except Exception as e:
             logger.error(f"Market order failed for {ticker}: {e}")
             return {"status": "rejected", "reason": str(e)}
+
+    def cancel_open_orders(self, ticker: str) -> None:
+        """A position's shares are reserved by its own resting bracket
+        stop-loss/take-profit legs -- Alpaca reports 0 'available' for any
+        NEW closing order on that symbol until those legs are cancelled.
+        Call this before submit_market_order on an existing position."""
+        try:
+            orders = self.api.list_orders(status="open", symbols=[ticker])
+        except Exception as e:
+            logger.warning(f"Could not list open orders for {ticker}: {e}")
+            return
+        for o in orders:
+            try:
+                self.api.cancel_order(o.id)
+            except Exception as e:
+                logger.warning(f"Could not cancel order {o.id} for {ticker}: {e}")
+
+    def submit_oco_exit(self, ticker: str, side: str, qty: int, stop_loss_price: float,
+                         take_profit_price: Optional[float] = None) -> dict:
+        """Re-protects shares already held (e.g. the remainder left over
+        after a partial close cancelled the original bracket) with a fresh
+        stop-loss and optional take-profit, without opening a new position.
+        Uses order_class='oco' when both legs are given, so filling one
+        cancels the other; falls back to a lone stop order if no
+        take-profit level was captured from the original bracket."""
+        if qty < 1:
+            return {"status": "rejected", "reason": f"Computed qty {qty} < 1 share"}
+
+        try:
+            if take_profit_price:
+                order = self.api.submit_order(
+                    symbol=ticker,
+                    qty=qty,
+                    side=side,
+                    type="limit",
+                    limit_price=round(take_profit_price, 2),
+                    time_in_force="gtc",
+                    order_class="oco",
+                    stop_loss={"stop_price": round(stop_loss_price, 2)},
+                )
+            else:
+                order = self.api.submit_order(
+                    symbol=ticker,
+                    qty=qty,
+                    side=side,
+                    type="stop",
+                    stop_price=round(stop_loss_price, 2),
+                    time_in_force="gtc",
+                )
+            return {"status": "submitted", "order_id": order.id, "qty": qty}
+        except Exception as e:
+            logger.error(f"Re-protect exit order failed for {ticker}: {e}")
+            return {"status": "rejected", "reason": str(e)}
