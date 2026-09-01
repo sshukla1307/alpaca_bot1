@@ -2,6 +2,26 @@
   {
     "date": "2026-09-01",
     "action": "SELL",
+    "ticker": "NTLA",
+    "qty": 0,
+    "price": 12.710000038146973,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-09-01T14:12:15.413469-04:00"
+  },
+  {
+    "date": "2026-09-01",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 0,
+    "price": 64.5999984741211,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-09-01T14:12:15.413224-04:00"
+  },
+  {
+    "date": "2026-09-01",
+    "action": "SELL",
     "ticker": "XLE",
     "qty": 18,
     "price": 64.67500305175781,
@@ -2026,25 +2046,5 @@
     "status": "REJECTED",
     "reason": "Insufficient SETTLED cash (cash account, T+1 settlement): need ~$498, have $368 settled (total cash $368 may include proceeds still settling)",
     "logged_at": "2026-08-12T12:24:52.276801-04:00"
-  },
-  {
-    "date": "2026-08-12",
-    "action": "BUY",
-    "ticker": "NTHI",
-    "status": "REJECTED",
-    "reason": "Insufficient SETTLED cash (cash account, T+1 settlement): need ~$498, have $368 settled (total cash $368 may include proceeds still settling)",
-    "logged_at": "2026-08-12T12:24:52.276549-04:00"
-  },
-  {
-    "date": "2026-08-12",
-    "action": "BUY",
-    "ticker": "NVDA",
-    "qty": 0,
-    "price": 224.125,
-    "stop_loss_price": 212.91875,
-    "take_profit_price": 268.95,
-    "reason": "Computed qty 0 < 1 share",
-    "status": "rejected",
-    "logged_at": "2026-08-12T10:35:44.747689-04:00"
   }
 ]
