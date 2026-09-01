@@ -2,6 +2,19 @@
   {
     "date": "2026-09-01",
     "action": "BUY",
+    "ticker": "XLE",
+    "qty": 14,
+    "price": 64.73500061035156,
+    "stop_loss_price": 58.26150054931641,
+    "take_profit_price": 74.44525070190429,
+    "reason": "Strong momentum in the energy sector driven by rising oil prices and geopolitical tensions. XLE is trading near its 52-week high with bullish technical indicators.",
+    "status": "submitted",
+    "order_id": "f86d38af-9386-480b-a750-ad52ea5c950a",
+    "logged_at": "2026-09-01T15:32:35.312460-04:00"
+  },
+  {
+    "date": "2026-09-01",
+    "action": "BUY",
     "ticker": "CVX",
     "qty": 4,
     "price": 210.3000030517578,
@@ -2039,15 +2052,5 @@
     "reason": "insufficient qty available for order (requested: 55, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-12T14:15:27.535012-04:00"
-  },
-  {
-    "date": "2026-08-12",
-    "action": "SELL",
-    "ticker": "XLE",
-    "qty": 0,
-    "price": 60.85499954223633,
-    "reason": "Computed qty 0 < 1 share",
-    "status": "rejected",
-    "logged_at": "2026-08-12T13:27:12.680959-04:00"
   }
 ]
