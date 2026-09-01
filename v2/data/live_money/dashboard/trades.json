@@ -2,6 +2,26 @@
   {
     "date": "2026-09-01",
     "action": "SELL",
+    "ticker": "XLE",
+    "qty": 0,
+    "price": 64.36000061035156,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-09-01T12:32:44.969498-04:00"
+  },
+  {
+    "date": "2026-09-01",
+    "action": "SELL",
+    "ticker": "NTLA",
+    "qty": 0,
+    "price": 12.59000015258789,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-09-01T12:32:44.969258-04:00"
+  },
+  {
+    "date": "2026-09-01",
+    "action": "SELL",
     "ticker": "NTLA",
     "qty": 86,
     "price": 12.710000038146973,
