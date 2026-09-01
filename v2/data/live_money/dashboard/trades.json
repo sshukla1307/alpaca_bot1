@@ -2,6 +2,17 @@
   {
     "date": "2026-09-01",
     "action": "SELL",
+    "ticker": "NTLA",
+    "qty": 86,
+    "price": 12.75,
+    "reason": "Setting stop-loss and take-profit to manage risk in a volatile market environment.",
+    "status": "submitted",
+    "order_id": "81cbefc6-4316-4349-80a5-3e25a6676b78",
+    "logged_at": "2026-09-01T14:59:17.790535-04:00"
+  },
+  {
+    "date": "2026-09-01",
+    "action": "SELL",
     "ticker": "XLE",
     "qty": 18,
     "price": 64.6449966430664,
@@ -2035,15 +2046,5 @@
     "reason": "insufficient qty available for order (requested: 2, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-12T13:27:12.680680-04:00"
-  },
-  {
-    "date": "2026-08-12",
-    "action": "SELL",
-    "ticker": "FSLY",
-    "qty": 0,
-    "price": 28.8799991607666,
-    "reason": "Computed qty 0 < 1 share",
-    "status": "rejected",
-    "logged_at": "2026-08-12T13:27:12.639522-04:00"
   }
 ]
