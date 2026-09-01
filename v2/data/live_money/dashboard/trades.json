@@ -1,6 +1,26 @@
 [
   {
     "date": "2026-09-01",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 15,
+    "price": 64.30999755859375,
+    "reason": "insufficient qty available for order (requested: 15, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-09-01T10:33:08.289916-04:00"
+  },
+  {
+    "date": "2026-09-01",
+    "action": "SELL",
+    "ticker": "NTLA",
+    "qty": 71,
+    "price": 12.604999542236328,
+    "reason": "insufficient qty available for order (requested: 71, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-09-01T10:33:08.224631-04:00"
+  },
+  {
+    "date": "2026-09-01",
     "action": "BUY",
     "ticker": "XLF",
     "qty": 16,
