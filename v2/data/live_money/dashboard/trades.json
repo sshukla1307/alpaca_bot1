@@ -1,6 +1,26 @@
 [
   {
     "date": "2026-09-01",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 0,
+    "price": 64.6050033569336,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-09-01T15:40:20.997671-04:00"
+  },
+  {
+    "date": "2026-09-01",
+    "action": "SELL",
+    "ticker": "CVX",
+    "qty": 0,
+    "price": 210.13999938964844,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-09-01T15:40:20.860825-04:00"
+  },
+  {
+    "date": "2026-09-01",
     "action": "BUY",
     "ticker": "XLE",
     "qty": 14,
@@ -2032,25 +2052,5 @@
     "reason": "insufficient qty available for order (requested: 17, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-12T14:15:27.573732-04:00"
-  },
-  {
-    "date": "2026-08-12",
-    "action": "SELL",
-    "ticker": "NVDA",
-    "qty": 2,
-    "price": 223.87010192871094,
-    "reason": "insufficient qty available for order (requested: 2, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-12T14:15:27.560763-04:00"
-  },
-  {
-    "date": "2026-08-12",
-    "action": "SELL",
-    "ticker": "NTHI",
-    "qty": 55,
-    "price": 3.4488000869750977,
-    "reason": "insufficient qty available for order (requested: 55, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-12T14:15:27.535012-04:00"
   }
 ]

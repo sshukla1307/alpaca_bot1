@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-09-01T15:31:28.521753-04:00",
+  "timestamp": "2026-09-01T15:39:49.202354-04:00",
   "cash": -3145.03,
   "settled_cash": 0.0,
-  "equity": 3862.24,
+  "equity": 3842.42,
   "positions": [
     {
       "ticker": "CVX",
       "direction": "LONG",
       "shares": 4.0,
       "entry_price": 210.31,
-      "current_price": 210.52,
-      "market_value": 842.08,
-      "unrealized_pnl": 0.84,
-      "unrealized_pnl_pct": 0.001,
+      "current_price": 210.11,
+      "market_value": 840.44,
+      "unrealized_pnl": -0.8,
+      "unrealized_pnl_pct": -0.00095,
       "protected": false
     },
     {
@@ -20,10 +20,10 @@
       "direction": "LONG",
       "shares": 368.5493,
       "entry_price": 19.488077,
-      "current_price": 14.269,
-      "market_value": 5258.83,
-      "unrealized_pnl": -1923.49,
-      "unrealized_pnl_pct": -0.26781,
+      "current_price": 14.225,
+      "market_value": 5242.61,
+      "unrealized_pnl": -1939.7,
+      "unrealized_pnl_pct": -0.27007,
       "protected": true
     },
     {
@@ -31,10 +31,10 @@
       "direction": "LONG",
       "shares": 14.0,
       "entry_price": 64.7363,
-      "current_price": 64.74,
-      "market_value": 906.36,
-      "unrealized_pnl": 0.05,
-      "unrealized_pnl_pct": 6e-05,
+      "current_price": 64.6,
+      "market_value": 904.4,
+      "unrealized_pnl": -1.91,
+      "unrealized_pnl_pct": -0.00211,
       "protected": false
     }
   ]
