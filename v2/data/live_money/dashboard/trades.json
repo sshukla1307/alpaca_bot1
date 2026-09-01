@@ -1,6 +1,32 @@
 [
   {
     "date": "2026-09-01",
+    "action": "BUY",
+    "ticker": "XLE",
+    "qty": 3,
+    "price": 64.45860290527344,
+    "stop_loss_price": 61.23567276000976,
+    "take_profit_price": 70.90446319580079,
+    "reason": "Energy sector is leading due to geopolitical tensions and rising oil prices. Setting stop-loss to protect against sudden downturns.",
+    "status": "submitted",
+    "order_id": "d4166f05-65bb-422e-822e-c1c05bbac939",
+    "logged_at": "2026-09-01T11:02:56.659699-04:00"
+  },
+  {
+    "date": "2026-09-01",
+    "action": "BUY",
+    "ticker": "NTLA",
+    "qty": 15,
+    "price": 12.609999656677246,
+    "stop_loss_price": 11.348999691009523,
+    "take_profit_price": 15.131999588012695,
+    "reason": "Positive Phase 3 trial results provide a potential catalyst for upside. Setting stop-loss to manage downside risk in a volatile market.",
+    "status": "submitted",
+    "order_id": "f44c2b2f-5abb-49c1-a751-fe75d5fe5343",
+    "logged_at": "2026-09-01T11:02:56.500334-04:00"
+  },
+  {
+    "date": "2026-09-01",
     "action": "SELL",
     "ticker": "XLE",
     "qty": 15,
