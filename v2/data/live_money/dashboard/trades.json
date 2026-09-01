@@ -2,6 +2,16 @@
   {
     "date": "2026-09-01",
     "action": "SELL",
+    "ticker": "NTLA",
+    "qty": 86,
+    "price": 12.710000038146973,
+    "reason": "insufficient qty available for order (requested: 86, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-09-01T12:02:59.439116-04:00"
+  },
+  {
+    "date": "2026-09-01",
+    "action": "SELL",
     "ticker": "XLE",
     "qty": 18,
     "price": 64.4749984741211,
