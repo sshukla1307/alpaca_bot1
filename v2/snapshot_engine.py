@@ -204,6 +204,16 @@ def fetch_watchlist_universe() -> List[str]:
     logger.info("Scanning for $3-$50 Watchlist Universe...")
     # For now, we use a curated list of high-activity mid/small caps representative of the 2026 regime
     # In a production AI system, this would be a real-time screener.
+    # Deduplicated 2026-09-01 -- this list had ~20 duplicate entries, two
+    # literal typos ("Airbnb"/"Unity" used as if they were ticker symbols,
+    # when the correct tickers ABNB/U were already present elsewhere in the
+    # list), and three tickers delisted via real M&A (BPMC/Blueprint
+    # Medicines -> Sanofi, KRTX/Karuna -> Bristol Myers Squibb, VERV/Verve
+    # -> Eli Lilly), all of which failed every yfinance call, every tick.
+    # SQ was also renamed to XYZ when Block Inc. rebranded its ticker in
+    # 2025. CPRX is kept as-is (uncertain whether its repeated failures
+    # reflect delisting or a transient Yahoo data gap -- worth checking
+    # directly if it keeps failing).
     core_tickers = [
         "AEHR", "CPRX", "IONQ", "RGTI", "QUBT", "BMEA", "VRTX", "TSLL", "SOXL", "LABU",
         "TNA", "SRTY", "BITO", "MARA", "RIOT", "CLSK", "PLTR", "SOFI", "AFRM", "UPST",
@@ -211,15 +221,10 @@ def fetch_watchlist_universe() -> List[str]:
         "HOOD", "COIN", "DKNG", "PENN", "U", "EXEL", "Z", "OPEN", "CPRI", "PTON",
         "RBLX", "SNAP", "DASH", "ABNB", "PATH", "SNOW", "FSLY", "NET", "OKTA", "ZS",
         "MDB", "DDOG", "TEAM", "ASAN", "DOCU", "ZM", "SHOP", "SE", "MELI", "STNE",
-        "NU", "PAGS", "ERAS", "IMVT", "FSLR", "ENPH", "RUN", "PLUG", "BE", "BLNK",
-        "CELH", "DUOL", "AXON", "GTLB", "CRWD", "PANW", "S", "MSTR", "HOOD", "PYPL",
-        "SQ", "MARA", "COIN", "DKNG", "PENN", "SOFI", "AFRM", "UPST", "CVNA", "CHPT",
-        "BLNK", "LCID", "RIVN", "QS", "HOOD", "COIN", "DKNG", "PENN", "CPRX", "AEHR",
-        "ALNY", "ARWR", "EDIT", "BEAM", "CRSP", "NTLA", "VERV", "BMEA", "BPMC", "KRTX",
-        "TSLA", "AAPL", "MSFT", "AMZN", "GOOGL", "META", "NVDA", "AMD", "INTC", "MU",
-        "PYPL", "ABNB", "Airbnb", "SNAP", "DASH", "U", "Unity", "RBLX", "PLTR", "SOFI",
-        "AFRM", "UPST", "CVNA", "CHPT", "BLNK", "BE", "PLUG", "LCID", "RIVN", "QS",
-        "COIN", "HOOD", "DKNG", "PENN", "PAGS", "STNE", "NU", "SE", "MELI", "SHOP"
+        "NU", "PAGS", "ERAS", "IMVT", "FSLR", "ENPH", "RUN", "CELH", "DUOL", "AXON",
+        "GTLB", "CRWD", "PANW", "S", "MSTR", "PYPL", "XYZ", "ALNY", "ARWR", "EDIT",
+        "BEAM", "CRSP", "NTLA", "TSLA", "AAPL", "MSFT", "AMZN", "GOOGL", "META", "NVDA",
+        "AMD", "INTC", "MU"
     ]
     # We add more dynamically if needed
     return core_tickers
