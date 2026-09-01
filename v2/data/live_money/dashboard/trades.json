@@ -2,6 +2,26 @@
   {
     "date": "2026-09-01",
     "action": "SELL",
+    "ticker": "XLE",
+    "qty": 18,
+    "price": 64.55500030517578,
+    "reason": "insufficient qty available for order (requested: 18, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-09-01T14:22:16.652803-04:00"
+  },
+  {
+    "date": "2026-09-01",
+    "action": "SELL",
+    "ticker": "NTLA",
+    "qty": 86,
+    "price": 12.694999694824219,
+    "reason": "insufficient qty available for order (requested: 86, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-09-01T14:22:16.580736-04:00"
+  },
+  {
+    "date": "2026-09-01",
+    "action": "SELL",
     "ticker": "NTLA",
     "qty": 0,
     "price": 12.710000038146973,
@@ -2030,21 +2050,5 @@
     "status": "submitted",
     "order_id": "bbed5e51-db8e-4fec-bbcc-7e757dc374e5",
     "logged_at": "2026-08-12T12:41:16.722190-04:00"
-  },
-  {
-    "date": "2026-08-12",
-    "action": "BUY",
-    "ticker": "NVDA",
-    "status": "REJECTED",
-    "reason": "Insufficient SETTLED cash (cash account, T+1 settlement): need ~$498, have $368 settled (total cash $368 may include proceeds still settling)",
-    "logged_at": "2026-08-12T12:24:52.276956-04:00"
-  },
-  {
-    "date": "2026-08-12",
-    "action": "BUY",
-    "ticker": "RIOT",
-    "status": "REJECTED",
-    "reason": "Insufficient SETTLED cash (cash account, T+1 settlement): need ~$498, have $368 settled (total cash $368 may include proceeds still settling)",
-    "logged_at": "2026-08-12T12:24:52.276801-04:00"
   }
 ]

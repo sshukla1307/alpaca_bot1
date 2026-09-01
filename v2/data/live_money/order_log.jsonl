@@ -208,3 +208,5 @@
 {"date": "2026-09-01", "action": "SELL", "ticker": "XLE", "qty": 18, "price": 64.67500305175781, "reason": "insufficient qty available for order (requested: 18, available: 0)", "status": "rejected", "logged_at": "2026-09-01T14:03:08.841263-04:00"}
 {"date": "2026-09-01", "action": "SELL", "ticker": "XLE", "qty": 0, "price": 64.5999984741211, "reason": "Computed qty 0 < 1 share", "status": "rejected", "logged_at": "2026-09-01T14:12:15.413224-04:00"}
 {"date": "2026-09-01", "action": "SELL", "ticker": "NTLA", "qty": 0, "price": 12.710000038146973, "reason": "Computed qty 0 < 1 share", "status": "rejected", "logged_at": "2026-09-01T14:12:15.413469-04:00"}
+{"date": "2026-09-01", "action": "SELL", "ticker": "NTLA", "qty": 86, "price": 12.694999694824219, "reason": "insufficient qty available for order (requested: 86, available: 0)", "status": "rejected", "logged_at": "2026-09-01T14:22:16.580736-04:00"}
+{"date": "2026-09-01", "action": "SELL", "ticker": "XLE", "qty": 18, "price": 64.55500030517578, "reason": "insufficient qty available for order (requested: 18, available: 0)", "status": "rejected", "logged_at": "2026-09-01T14:22:16.652803-04:00"}
