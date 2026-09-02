@@ -1,6 +1,17 @@
 [
   {
     "date": "2026-09-02",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 20,
+    "price": 64.8550033569336,
+    "reason": "Energy sector is leading due to geopolitical tensions and rising oil prices. Setting stop-loss and take-profit to manage risk and capture potential upside.",
+    "status": "submitted",
+    "order_id": "33c92ea3-38a8-4697-84fa-c66cfdb561d7",
+    "logged_at": "2026-09-02T11:32:10.895253-04:00"
+  },
+  {
+    "date": "2026-09-02",
     "action": "BUY",
     "ticker": "XLE",
     "qty": 6,
@@ -2048,15 +2059,5 @@
     "reason": "insufficient qty available for order (requested: 17, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-13T14:16:45.041743-04:00"
-  },
-  {
-    "date": "2026-08-13",
-    "action": "SELL",
-    "ticker": "WEN",
-    "qty": 69,
-    "price": 8.530200004577637,
-    "reason": "insufficient qty available for order (requested: 69, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-13T14:16:44.978113-04:00"
   }
 ]
