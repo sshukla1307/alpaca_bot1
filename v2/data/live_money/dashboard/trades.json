@@ -1,6 +1,19 @@
 [
   {
     "date": "2026-09-02",
+    "action": "BUY",
+    "ticker": "XLE",
+    "qty": 14,
+    "price": 64.62999725341797,
+    "stop_loss_price": 58.16699752807617,
+    "take_profit_price": 77.55599670410156,
+    "reason": "Energy sector is leading due to geopolitical risks and rising oil prices. XLE shows strong bullish momentum, presenting a high-conviction opportunity to capitalize on current market conditions.",
+    "status": "submitted",
+    "order_id": "479148db-fa93-4d04-abcf-a13b268aa9bb",
+    "logged_at": "2026-09-02T09:42:01.988713-04:00"
+  },
+  {
+    "date": "2026-09-02",
     "action": "SELL",
     "ticker": "XLE",
     "qty": 14,
@@ -2048,13 +2061,5 @@
     "status": "submitted",
     "order_id": "eb7022c4-a43c-4317-85c9-981da5457da1",
     "logged_at": "2026-08-13T13:08:04.793904-04:00"
-  },
-  {
-    "date": "2026-08-13",
-    "action": "BUY",
-    "ticker": "NVDA",
-    "status": "REJECTED",
-    "reason": "Insufficient SETTLED cash (cash account, T+1 settlement): need ~$196, have $170 settled (total cash $170 may include proceeds still settling)",
-    "logged_at": "2026-08-13T10:37:31.419416-04:00"
   }
 ]
