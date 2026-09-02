@@ -1,6 +1,28 @@
 [
   {
     "date": "2026-09-02",
+    "action": "SELL",
+    "ticker": "NVDA",
+    "qty": 4,
+    "price": 224.53799438476562,
+    "reason": "Manage risk and potential upside from acquisition news.",
+    "status": "submitted",
+    "order_id": "c20f1005-ef19-4bff-b9ce-e52f896cb28b",
+    "logged_at": "2026-09-02T14:52:13.486222-04:00"
+  },
+  {
+    "date": "2026-09-02",
+    "action": "SELL",
+    "ticker": "DELL",
+    "qty": 2,
+    "price": 483.3949890136719,
+    "reason": "Protect gains from strong earnings report and capitalize on positive momentum.",
+    "status": "submitted",
+    "order_id": "1a733197-e4e3-4073-a293-6cc97bdbfb8e",
+    "logged_at": "2026-09-02T14:52:13.309539-04:00"
+  },
+  {
+    "date": "2026-09-02",
     "action": "BUY",
     "ticker": "NVDA",
     "qty": 4,
@@ -2062,26 +2084,5 @@
     "reason": "insufficient qty available for order (requested: 3, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-17T12:53:59.750074-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "SELL",
-    "ticker": "NOK",
-    "qty": 150,
-    "price": 10.975000381469727,
-    "reason": "Secure gains in a volatile market.",
-    "status": "submitted",
-    "order_id": "33f3856d-3b69-4371-957c-4663270369a1",
-    "logged_at": "2026-08-17T12:53:59.673803-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "SELL",
-    "ticker": "MARA",
-    "qty": 51,
-    "price": 9.585000038146973,
-    "reason": "insufficient qty available for order (requested: 51, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-17T12:53:59.595280-04:00"
   }
 ]
