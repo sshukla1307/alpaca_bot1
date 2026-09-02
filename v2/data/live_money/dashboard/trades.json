@@ -1,6 +1,26 @@
 [
   {
     "date": "2026-09-02",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 12,
+    "price": 64.91500091552734,
+    "reason": "insufficient qty available for order (requested: 12, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-09-02T12:32:15.450303-04:00"
+  },
+  {
+    "date": "2026-09-02",
+    "action": "SELL",
+    "ticker": "RIOT",
+    "qty": 33,
+    "price": 18.024999618530273,
+    "reason": "insufficient qty available for order (requested: 33, available: 0)",
+    "status": "rejected",
+    "logged_at": "2026-09-02T12:32:15.425058-04:00"
+  },
+  {
+    "date": "2026-09-02",
     "action": "BUY",
     "ticker": "RIOT",
     "qty": 33,
@@ -2042,28 +2062,5 @@
     "reason": "insufficient qty available for order (requested: 51, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-14T12:13:31.511248-04:00"
-  },
-  {
-    "date": "2026-08-14",
-    "action": "BUY",
-    "ticker": "SMCI",
-    "qty": 25,
-    "price": 39.56999969482422,
-    "stop_loss_price": 35.6129997253418,
-    "take_profit_price": 47.48399963378906,
-    "reason": "Strong earnings guidance and undervaluation relative to growth metrics. High-conviction opportunity in the technology sector.",
-    "status": "submitted",
-    "order_id": "2227f508-2260-4750-ac6c-8cc440768dc5",
-    "logged_at": "2026-08-14T10:31:42.274823-04:00"
-  },
-  {
-    "date": "2026-08-13",
-    "action": "SELL",
-    "ticker": "WEN",
-    "qty": 138,
-    "price": 8.661100387573242,
-    "reason": "insufficient qty available for order (requested: 138, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-13T15:33:02.289527-04:00"
   }
 ]
