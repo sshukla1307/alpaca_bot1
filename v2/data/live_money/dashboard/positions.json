@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-09-02T14:51:29.243116-04:00",
+  "timestamp": "2026-09-02T15:01:28.504575-04:00",
   "cash": -1391.84,
   "settled_cash": 0.0,
-  "equity": 3946.6,
+  "equity": 3953.97,
   "positions": [
     {
       "ticker": "KLAR",
       "direction": "LONG",
       "shares": 368.5493,
       "entry_price": 19.488077,
-      "current_price": 14.485,
-      "market_value": 5338.44,
-      "unrealized_pnl": -1843.88,
-      "unrealized_pnl_pct": -0.25673,
+      "current_price": 14.505,
+      "market_value": 5345.81,
+      "unrealized_pnl": -1836.51,
+      "unrealized_pnl_pct": -0.2557,
       "protected": true
     }
   ]
