@@ -1,6 +1,32 @@
 [
   {
     "date": "2026-09-02",
+    "action": "BUY",
+    "ticker": "NVDA",
+    "qty": 4,
+    "price": 225.33599853515625,
+    "stop_loss_price": 202.80239868164062,
+    "take_profit_price": 270.4031982421875,
+    "reason": "Nvidia's acquisition talks could significantly enhance its AI capabilities, providing a strong growth catalyst.",
+    "status": "submitted",
+    "order_id": "afbdacda-7c71-43c9-becd-3493f3d21f32",
+    "logged_at": "2026-09-02T13:32:13.847613-04:00"
+  },
+  {
+    "date": "2026-09-02",
+    "action": "BUY",
+    "ticker": "DELL",
+    "qty": 2,
+    "price": 465.19000244140625,
+    "stop_loss_price": 418.67100219726564,
+    "take_profit_price": 558.2280029296875,
+    "reason": "Dell's strong earnings and guidance raise provide a clear catalyst for continued momentum. The technical setup supports a bullish outlook.",
+    "status": "submitted",
+    "order_id": "725a2a80-de04-40bf-ad83-017654fc59a8",
+    "logged_at": "2026-09-02T13:32:13.692766-04:00"
+  },
+  {
+    "date": "2026-09-02",
     "action": "SELL",
     "ticker": "XLE",
     "qty": 12,
@@ -2044,25 +2070,5 @@
     "status": "REJECTED",
     "reason": "Insufficient buying power: need ~$398, have $0 available",
     "logged_at": "2026-08-14T13:25:10.986073-04:00"
-  },
-  {
-    "date": "2026-08-14",
-    "action": "SELL",
-    "ticker": "MARA",
-    "qty": 51,
-    "price": 9.204999923706055,
-    "reason": "insufficient qty available for order (requested: 51, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-14T13:25:10.985833-04:00"
-  },
-  {
-    "date": "2026-08-14",
-    "action": "SELL",
-    "ticker": "FSLY",
-    "qty": 1,
-    "price": 29.759899139404297,
-    "reason": "insufficient qty available for order (requested: 1, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-14T12:13:31.690997-04:00"
   }
 ]
