@@ -1,5 +1,27 @@
 [
   {
+    "date": "2026-09-02",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 14,
+    "price": 64.5999984741211,
+    "reason": "Setting stop-loss and take-profit to manage risk in a volatile market with rising yields and oil prices.",
+    "status": "submitted",
+    "order_id": "ecdba93b-929e-416a-9f55-b8d6652a5e69",
+    "logged_at": "2026-09-02T09:32:45.656904-04:00"
+  },
+  {
+    "date": "2026-09-02",
+    "action": "SELL",
+    "ticker": "CVX",
+    "qty": 4,
+    "price": 210.97500610351562,
+    "reason": "Setting stop-loss and take-profit to manage risk in a volatile market with rising yields and oil prices.",
+    "status": "submitted",
+    "order_id": "595ccb8a-aded-4d70-8f5b-3d66ec11150a",
+    "logged_at": "2026-09-02T09:32:45.537596-04:00"
+  },
+  {
     "date": "2026-09-01",
     "action": "SELL",
     "ticker": "XLE",
@@ -2034,23 +2056,5 @@
     "status": "REJECTED",
     "reason": "Insufficient SETTLED cash (cash account, T+1 settlement): need ~$196, have $170 settled (total cash $170 may include proceeds still settling)",
     "logged_at": "2026-08-13T10:37:31.419416-04:00"
-  },
-  {
-    "date": "2026-08-13",
-    "action": "BUY",
-    "ticker": "WEN",
-    "status": "REJECTED",
-    "reason": "Insufficient SETTLED cash (cash account, T+1 settlement): need ~$294, have $170 settled (total cash $170 may include proceeds still settling)",
-    "logged_at": "2026-08-13T10:37:31.419157-04:00"
-  },
-  {
-    "date": "2026-08-12",
-    "action": "SELL",
-    "ticker": "XLE",
-    "qty": 3,
-    "price": 61.07500076293945,
-    "reason": "insufficient qty available for order (requested: 3, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-12T14:15:27.598991-04:00"
   }
 ]
