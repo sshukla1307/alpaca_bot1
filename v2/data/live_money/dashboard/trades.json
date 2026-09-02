@@ -1,6 +1,19 @@
 [
   {
     "date": "2026-09-02",
+    "action": "BUY",
+    "ticker": "XLE",
+    "qty": 6,
+    "price": 64.80999755859375,
+    "stop_loss_price": 61.56949768066406,
+    "take_profit_price": 71.29099731445314,
+    "reason": "The energy sector is leading due to geopolitical tensions and rising oil prices. Increasing exposure to XLE aligns with the current market conditions and sector strength.",
+    "status": "submitted",
+    "order_id": "f387eb2e-869d-41ac-bc8a-986f0194df02",
+    "logged_at": "2026-09-02T10:42:03.832528-04:00"
+  },
+  {
+    "date": "2026-09-02",
     "action": "SELL",
     "ticker": "XLE",
     "qty": 0,
@@ -2045,18 +2058,5 @@
     "reason": "insufficient qty available for order (requested: 69, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-13T14:16:44.978113-04:00"
-  },
-  {
-    "date": "2026-08-13",
-    "action": "BUY",
-    "ticker": "NVDA",
-    "qty": 1,
-    "price": 225.42999267578125,
-    "stop_loss_price": 214.1584930419922,
-    "take_profit_price": 270.5159912109375,
-    "reason": "Strong AI trends and recent positive performance.",
-    "status": "submitted",
-    "order_id": "6fc58e03-ba1c-4c42-8785-5e8ea33fc967",
-    "logged_at": "2026-08-13T13:08:04.815083-04:00"
   }
 ]
