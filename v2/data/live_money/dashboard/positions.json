@@ -1,9 +1,20 @@
 {
-  "timestamp": "2026-09-02T15:11:46.693111-04:00",
+  "timestamp": "2026-09-02T15:21:34.718722-04:00",
   "cash": -1391.84,
   "settled_cash": 0.0,
   "equity": 3955.81,
   "positions": [
+    {
+      "ticker": "DELL",
+      "direction": "LONG",
+      "shares": 2.0,
+      "entry_price": 489.0,
+      "current_price": 488.97,
+      "market_value": 977.94,
+      "unrealized_pnl": -0.06,
+      "unrealized_pnl_pct": -6e-05,
+      "protected": false
+    },
     {
       "ticker": "KLAR",
       "direction": "LONG",

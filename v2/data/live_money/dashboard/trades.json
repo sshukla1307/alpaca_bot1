@@ -1,6 +1,19 @@
 [
   {
     "date": "2026-09-02",
+    "action": "BUY",
+    "ticker": "DELL",
+    "qty": 2,
+    "price": 488.8949890136719,
+    "stop_loss_price": 440.0054901123047,
+    "take_profit_price": 586.6739868164062,
+    "reason": "Dell's strong earnings and raised guidance provide a compelling short-term catalyst, supported by bullish technical indicators.",
+    "status": "submitted",
+    "order_id": "5de725bb-dda4-44c2-940b-badec2683351",
+    "logged_at": "2026-09-02T15:22:15.846267-04:00"
+  },
+  {
+    "date": "2026-09-02",
     "action": "SELL",
     "ticker": "NVDA",
     "qty": 4,
@@ -2074,15 +2087,5 @@
     "reason": "insufficient qty available for order (requested: 25, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-17T12:53:59.826446-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "SELL",
-    "ticker": "NVDA",
-    "qty": 3,
-    "price": 226.83999633789062,
-    "reason": "insufficient qty available for order (requested: 3, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-17T12:53:59.750074-04:00"
   }
 ]
