@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-09-02T13:41:29.592154-04:00",
+  "timestamp": "2026-09-02T13:51:29.159868-04:00",
   "cash": -3445.43,
   "settled_cash": 0.0,
-  "equity": 3941.34,
+  "equity": 3966.99,
   "positions": [
     {
       "ticker": "DELL",
       "direction": "LONG",
       "shares": 2.0,
       "entry_price": 465.1283,
-      "current_price": 459.105,
-      "market_value": 918.21,
-      "unrealized_pnl": -12.05,
-      "unrealized_pnl_pct": -0.01295,
+      "current_price": 463.0,
+      "market_value": 926.0,
+      "unrealized_pnl": -4.26,
+      "unrealized_pnl_pct": -0.00458,
       "protected": false
     },
     {
@@ -20,10 +20,10 @@
       "direction": "LONG",
       "shares": 368.5493,
       "entry_price": 19.488077,
-      "current_price": 14.5,
-      "market_value": 5343.96,
-      "unrealized_pnl": -1838.35,
-      "unrealized_pnl_pct": -0.25596,
+      "current_price": 14.55,
+      "market_value": 5362.39,
+      "unrealized_pnl": -1819.92,
+      "unrealized_pnl_pct": -0.25339,
       "protected": true
     },
     {
@@ -31,10 +31,10 @@
       "direction": "LONG",
       "shares": 5.0,
       "entry_price": 225.26278,
-      "current_price": 224.92,
-      "market_value": 1124.6,
-      "unrealized_pnl": -1.71,
-      "unrealized_pnl_pct": -0.00152,
+      "current_price": 224.805,
+      "market_value": 1124.03,
+      "unrealized_pnl": -2.29,
+      "unrealized_pnl_pct": -0.00203,
       "protected": false
     }
   ]
