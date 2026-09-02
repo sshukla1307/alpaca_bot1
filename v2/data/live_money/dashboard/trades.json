@@ -1,6 +1,32 @@
 [
   {
     "date": "2026-09-02",
+    "action": "BUY",
+    "ticker": "RIOT",
+    "qty": 33,
+    "price": 17.954999923706055,
+    "stop_loss_price": 15.261749935150146,
+    "take_profit_price": 23.341499900817873,
+    "reason": "Riot Platforms is highly volatile and trading significantly below its 50-day SMA. Potential for a sharp rebound if sentiment shifts.",
+    "status": "submitted",
+    "order_id": "58843420-0b07-41c5-a044-69929eb9bd3d",
+    "logged_at": "2026-09-02T12:12:12.615934-04:00"
+  },
+  {
+    "date": "2026-09-02",
+    "action": "BUY",
+    "ticker": "XLE",
+    "qty": 12,
+    "price": 64.90499877929688,
+    "stop_loss_price": 58.41449890136719,
+    "take_profit_price": 77.88599853515625,
+    "reason": "Energy sector is leading with strong momentum. XLE offers exposure to this sector, which is currently outperforming others.",
+    "status": "submitted",
+    "order_id": "260157d6-e766-45b0-82bb-4fe626b23bfe",
+    "logged_at": "2026-09-02T12:12:12.478473-04:00"
+  },
+  {
+    "date": "2026-09-02",
     "action": "SELL",
     "ticker": "XLE",
     "qty": 20,
@@ -2039,25 +2065,5 @@
     "reason": "insufficient qty available for order (requested: 138, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-13T15:33:02.289527-04:00"
-  },
-  {
-    "date": "2026-08-13",
-    "action": "SELL",
-    "ticker": "MARA",
-    "qty": 51,
-    "price": 9.225000381469727,
-    "reason": "insufficient qty available for order (requested: 51, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-13T14:16:45.107113-04:00"
-  },
-  {
-    "date": "2026-08-13",
-    "action": "SELL",
-    "ticker": "FSLY",
-    "qty": 17,
-    "price": 28.479999542236328,
-    "reason": "insufficient qty available for order (requested: 17, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-13T14:16:45.041743-04:00"
   }
 ]

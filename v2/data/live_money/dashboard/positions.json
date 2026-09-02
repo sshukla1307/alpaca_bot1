@@ -1,19 +1,41 @@
 {
-  "timestamp": "2026-09-02T12:01:40.584518-04:00",
-  "cash": -1394.11,
+  "timestamp": "2026-09-02T12:11:35.676364-04:00",
+  "cash": -2765.49,
   "settled_cash": 0.0,
-  "equity": 3953.54,
+  "equity": 3965.82,
   "positions": [
     {
       "ticker": "KLAR",
       "direction": "LONG",
       "shares": 368.5493,
       "entry_price": 19.488077,
-      "current_price": 14.51,
-      "market_value": 5347.65,
-      "unrealized_pnl": -1834.67,
-      "unrealized_pnl_pct": -0.25544,
+      "current_price": 14.5435,
+      "market_value": 5360.0,
+      "unrealized_pnl": -1822.32,
+      "unrealized_pnl_pct": -0.25372,
       "protected": true
+    },
+    {
+      "ticker": "RIOT",
+      "direction": "LONG",
+      "shares": 33.0,
+      "entry_price": 17.955,
+      "current_price": 17.955,
+      "market_value": 592.51,
+      "unrealized_pnl": 0.0,
+      "unrealized_pnl_pct": 0.0,
+      "protected": false
+    },
+    {
+      "ticker": "XLE",
+      "direction": "LONG",
+      "shares": 12.0,
+      "entry_price": 64.905,
+      "current_price": 64.9,
+      "market_value": 778.8,
+      "unrealized_pnl": -0.06,
+      "unrealized_pnl_pct": -8e-05,
+      "protected": false
     }
   ]
 }
