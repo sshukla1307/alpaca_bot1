@@ -1,6 +1,28 @@
 [
   {
     "date": "2026-09-02",
+    "action": "SELL",
+    "ticker": "NVDA",
+    "qty": 5,
+    "price": 224.72000122070312,
+    "reason": "Nvidia is in acquisition talks, presenting potential upside. Setting stop-loss and take-profit to manage risk and capture gains.",
+    "status": "submitted",
+    "order_id": "3c81cbe5-f123-4292-b33e-8360cf40bd6a",
+    "logged_at": "2026-09-02T14:03:18.452571-04:00"
+  },
+  {
+    "date": "2026-09-02",
+    "action": "SELL",
+    "ticker": "DELL",
+    "qty": 2,
+    "price": 462.17498779296875,
+    "reason": "Dell has surged 10% post-earnings. Locking in gains with a stop-loss and take-profit to manage risk.",
+    "status": "submitted",
+    "order_id": "fee9b522-18fd-4577-8506-06576167808c",
+    "logged_at": "2026-09-02T14:03:18.331639-04:00"
+  },
+  {
+    "date": "2026-09-02",
     "action": "BUY",
     "ticker": "NVDA",
     "qty": 1,
@@ -2056,26 +2078,5 @@
     "reason": "insufficient qty available for order (requested: 17, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-17T12:53:59.419179-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "BUY",
-    "ticker": "XLK",
-    "qty": 6,
-    "price": 191.16000366210938,
-    "stop_loss_price": 181.6020034790039,
-    "take_profit_price": 210.27600402832033,
-    "reason": "Capitalize on strong tech momentum driven by AI spending, despite overbought RSI. Tight stop-loss to manage risk.",
-    "status": "submitted",
-    "order_id": "792da5e8-6a78-4e53-9977-4fd189cecc4d",
-    "logged_at": "2026-08-17T10:52:42.280610-04:00"
-  },
-  {
-    "date": "2026-08-14",
-    "action": "BUY",
-    "ticker": "SMCI",
-    "status": "REJECTED",
-    "reason": "Insufficient buying power: need ~$399, have $0 available",
-    "logged_at": "2026-08-14T15:26:33.218824-04:00"
   }
 ]

@@ -1,41 +1,19 @@
 {
-  "timestamp": "2026-09-02T13:51:29.159868-04:00",
-  "cash": -3445.43,
+  "timestamp": "2026-09-02T14:01:35.260273-04:00",
+  "cash": -1397.2,
   "settled_cash": 0.0,
-  "equity": 3966.99,
+  "equity": 3968.88,
   "positions": [
-    {
-      "ticker": "DELL",
-      "direction": "LONG",
-      "shares": 2.0,
-      "entry_price": 465.1283,
-      "current_price": 463.0,
-      "market_value": 926.0,
-      "unrealized_pnl": -4.26,
-      "unrealized_pnl_pct": -0.00458,
-      "protected": false
-    },
     {
       "ticker": "KLAR",
       "direction": "LONG",
       "shares": 368.5493,
       "entry_price": 19.488077,
-      "current_price": 14.55,
-      "market_value": 5362.39,
-      "unrealized_pnl": -1819.92,
-      "unrealized_pnl_pct": -0.25339,
+      "current_price": 14.56,
+      "market_value": 5366.08,
+      "unrealized_pnl": -1816.24,
+      "unrealized_pnl_pct": -0.25288,
       "protected": true
-    },
-    {
-      "ticker": "NVDA",
-      "direction": "LONG",
-      "shares": 5.0,
-      "entry_price": 225.26278,
-      "current_price": 224.805,
-      "market_value": 1124.03,
-      "unrealized_pnl": -2.29,
-      "unrealized_pnl_pct": -0.00203,
-      "protected": false
     }
   ]
 }
