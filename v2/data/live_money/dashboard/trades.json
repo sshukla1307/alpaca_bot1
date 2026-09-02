@@ -1,6 +1,16 @@
 [
   {
     "date": "2026-09-02",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 0,
+    "price": 64.58499908447266,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-09-02T10:03:06.551574-04:00"
+  },
+  {
+    "date": "2026-09-02",
     "action": "BUY",
     "ticker": "XLE",
     "qty": 14,
@@ -2048,18 +2058,5 @@
     "status": "submitted",
     "order_id": "6fc58e03-ba1c-4c42-8785-5e8ea33fc967",
     "logged_at": "2026-08-13T13:08:04.815083-04:00"
-  },
-  {
-    "date": "2026-08-13",
-    "action": "BUY",
-    "ticker": "WEN",
-    "qty": 46,
-    "price": 8.510000228881836,
-    "stop_loss_price": 8.084500217437744,
-    "take_profit_price": 9.78650026321411,
-    "reason": "Capitalize on the momentum from the buyout news.",
-    "status": "submitted",
-    "order_id": "eb7022c4-a43c-4317-85c9-981da5457da1",
-    "logged_at": "2026-08-13T13:08:04.793904-04:00"
   }
 ]
