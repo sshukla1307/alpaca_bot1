@@ -3,6 +3,31 @@
     "date": "2026-09-02",
     "action": "BUY",
     "ticker": "NVDA",
+    "qty": 1,
+    "price": 224.97999572753906,
+    "stop_loss_price": 213.7309959411621,
+    "take_profit_price": 258.7269950866699,
+    "reason": "Acquisition talks with Hugging Face, short-term bullish technicals.",
+    "status": "submitted",
+    "order_id": "da09ebc0-d295-4de6-aaf1-6d2a0d0e5c64",
+    "logged_at": "2026-09-02T13:42:25.031042-04:00"
+  },
+  {
+    "date": "2026-09-02",
+    "action": "BUY",
+    "ticker": "DELL",
+    "qty": 0,
+    "price": 458.92498779296875,
+    "stop_loss_price": 435.9787384033203,
+    "take_profit_price": 527.763735961914,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-09-02T13:42:24.903646-04:00"
+  },
+  {
+    "date": "2026-09-02",
+    "action": "BUY",
+    "ticker": "NVDA",
     "qty": 4,
     "price": 225.33599853515625,
     "stop_loss_price": 202.80239868164062,
@@ -2052,23 +2077,5 @@
     "status": "REJECTED",
     "reason": "Insufficient buying power: need ~$399, have $0 available",
     "logged_at": "2026-08-14T15:26:33.218824-04:00"
-  },
-  {
-    "date": "2026-08-14",
-    "action": "SELL",
-    "ticker": "MARA",
-    "qty": 51,
-    "price": 9.154999732971191,
-    "reason": "insufficient qty available for order (requested: 51, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-14T15:26:33.218536-04:00"
-  },
-  {
-    "date": "2026-08-14",
-    "action": "BUY",
-    "ticker": "SMCI",
-    "status": "REJECTED",
-    "reason": "Insufficient buying power: need ~$398, have $0 available",
-    "logged_at": "2026-08-14T13:25:10.986073-04:00"
   }
 ]
