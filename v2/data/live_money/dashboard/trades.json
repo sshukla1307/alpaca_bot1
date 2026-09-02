@@ -1,6 +1,17 @@
 [
   {
     "date": "2026-09-02",
+    "action": "SELL",
+    "ticker": "DELL",
+    "qty": 2,
+    "price": 491.5199890136719,
+    "reason": "Lock in gains and manage risk with a stop-loss and take-profit on DELL after its earnings beat.",
+    "status": "submitted",
+    "order_id": "da5684fa-1c0a-4db1-99be-32a571412432",
+    "logged_at": "2026-09-02T15:32:22.444567-04:00"
+  },
+  {
+    "date": "2026-09-02",
     "action": "BUY",
     "ticker": "DELL",
     "qty": 2,
@@ -2077,15 +2088,5 @@
     "reason": "insufficient qty available for order (requested: 138, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-17T12:53:59.903876-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "SELL",
-    "ticker": "SMCI",
-    "qty": 25,
-    "price": 38.18360137939453,
-    "reason": "insufficient qty available for order (requested: 25, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-17T12:53:59.826446-04:00"
   }
 ]
