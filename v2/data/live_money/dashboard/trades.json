@@ -3,6 +3,30 @@
     "date": "2026-09-03",
     "action": "SELL",
     "ticker": "ENPH",
+    "qty": 11,
+    "price": 36.0099983215332,
+    "reason": "Protecting gains and managing risk by setting stop-loss and take-profit levels.",
+    "status": "submitted",
+    "order_id": "5fd2d776-80bf-4bb5-8c1c-cc14e54eb4ba",
+    "logged_at": "2026-09-03T14:03:25.118047-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "BUY",
+    "ticker": "XLE",
+    "qty": 15,
+    "price": 65.0199966430664,
+    "stop_loss_price": 61.76899681091308,
+    "take_profit_price": 74.77299613952636,
+    "reason": "Energy sector is leading with strong momentum. XLE is near its 52-week high with bullish technical indicators, making it a prime candidate for capturing sector strength.",
+    "status": "submitted",
+    "order_id": "2625e8da-667a-4136-9289-e950df0e4c95",
+    "logged_at": "2026-09-03T14:03:24.957313-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "SELL",
+    "ticker": "ENPH",
     "qty": 0,
     "price": 35.75429916381836,
     "reason": "Computed qty 0 < 1 share",
@@ -2106,25 +2130,5 @@
     "reason": "insufficient qty available for order (requested: 17, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-18T15:06:41.559867-04:00"
-  },
-  {
-    "date": "2026-08-18",
-    "action": "SELL",
-    "ticker": "MARA",
-    "qty": 51,
-    "price": 9.039999961853027,
-    "reason": "insufficient qty available for order (requested: 51, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-18T13:51:47.953940-04:00"
-  },
-  {
-    "date": "2026-08-18",
-    "action": "SELL",
-    "ticker": "SMCI",
-    "qty": 25,
-    "price": 37.46500015258789,
-    "reason": "insufficient qty available for order (requested: 25, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-18T12:56:54.891750-04:00"
   }
 ]
