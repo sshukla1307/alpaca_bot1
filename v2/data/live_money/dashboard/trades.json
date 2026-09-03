@@ -1,6 +1,19 @@
 [
   {
     "date": "2026-09-03",
+    "action": "BUY",
+    "ticker": "XLE",
+    "qty": 6,
+    "price": 65.09500122070312,
+    "stop_loss_price": 61.840251159667964,
+    "take_profit_price": 71.60450134277345,
+    "reason": "Strong momentum in the energy sector, supported by geopolitical risks and technical indicators, suggests a continued upward trend. However, the overbought RSI warrants caution, hence the protective stop-loss.",
+    "status": "submitted",
+    "order_id": "b7c941f3-9d18-4e6b-9492-0e58afcffdad",
+    "logged_at": "2026-09-03T13:00:07.808495-04:00"
+  },
+  {
+    "date": "2026-09-03",
     "action": "SELL",
     "ticker": "XLE",
     "qty": 0,
@@ -2105,15 +2118,5 @@
     "reason": "insufficient qty available for order (requested: 51, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-18T11:56:20.542900-04:00"
-  },
-  {
-    "date": "2026-08-18",
-    "action": "SELL",
-    "ticker": "FSLY",
-    "qty": 17,
-    "price": 26.959999084472656,
-    "reason": "insufficient qty available for order (requested: 17, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-18T11:56:20.474893-04:00"
   }
 ]
