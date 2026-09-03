@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-09-03T13:21:28.341057-04:00",
-  "cash": -3489.03,
+  "timestamp": "2026-09-03T13:31:29.262057-04:00",
+  "cash": -2315.56,
   "settled_cash": 0.0,
-  "equity": 4030.86,
+  "equity": 4046.04,
   "positions": [
     {
       "ticker": "FSLY",
       "direction": "LONG",
       "shares": 48.0,
       "entry_price": 20.735,
-      "current_price": 20.73,
-      "market_value": 995.04,
-      "unrealized_pnl": -0.24,
-      "unrealized_pnl_pct": -0.00024,
+      "current_price": 20.74,
+      "market_value": 995.52,
+      "unrealized_pnl": 0.24,
+      "unrealized_pnl_pct": 0.00024,
       "protected": false
     },
     {
@@ -20,22 +20,11 @@
       "direction": "LONG",
       "shares": 368.5493,
       "entry_price": 19.488077,
-      "current_price": 14.52,
-      "market_value": 5351.34,
-      "unrealized_pnl": -1830.98,
-      "unrealized_pnl_pct": -0.25493,
+      "current_price": 14.56,
+      "market_value": 5366.08,
+      "unrealized_pnl": -1816.24,
+      "unrealized_pnl_pct": -0.25288,
       "protected": true
-    },
-    {
-      "ticker": "XLE",
-      "direction": "LONG",
-      "shares": 18.0,
-      "entry_price": 65.228267,
-      "current_price": 65.195,
-      "market_value": 1173.51,
-      "unrealized_pnl": -0.6,
-      "unrealized_pnl_pct": -0.00051,
-      "protected": false
     }
   ]
 }
