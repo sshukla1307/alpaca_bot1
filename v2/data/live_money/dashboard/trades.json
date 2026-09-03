@@ -1,6 +1,19 @@
 [
   {
     "date": "2026-09-03",
+    "action": "BUY",
+    "ticker": "XLF",
+    "qty": 17,
+    "price": 58.224998474121094,
+    "stop_loss_price": 55.313748550415035,
+    "take_profit_price": 64.04749832153321,
+    "reason": "XLF is showing a bullish trend with a neutral RSI, indicating potential for further gains. The financial sector is leading, and XLF is close to its 52-week high, suggesting strong momentum.",
+    "status": "submitted",
+    "order_id": "ab2d2f3b-80ba-4df1-8653-80e6b5478e3e",
+    "logged_at": "2026-09-03T10:52:21.421257-04:00"
+  },
+  {
+    "date": "2026-09-03",
     "action": "SELL",
     "ticker": "XLE",
     "qty": 9,
@@ -2096,15 +2109,5 @@
     "reason": "insufficient qty available for order (requested: 25, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-18T10:05:15.946287-04:00"
-  },
-  {
-    "date": "2026-08-18",
-    "action": "SELL",
-    "ticker": "MARA",
-    "qty": 51,
-    "price": 9.194999694824219,
-    "reason": "insufficient qty available for order (requested: 51, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-18T10:05:15.867052-04:00"
   }
 ]
