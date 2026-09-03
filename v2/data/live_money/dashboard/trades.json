@@ -3,6 +3,39 @@
     "date": "2026-09-03",
     "action": "SELL",
     "ticker": "XLE",
+    "qty": 9,
+    "price": 65.19999694824219,
+    "reason": "Protecting gains with stop-loss and take-profit due to leading sector status.",
+    "status": "submitted",
+    "order_id": "966fc0ad-1132-471d-8d6b-2e63cf261533",
+    "logged_at": "2026-09-03T10:22:16.800625-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "SELL",
+    "ticker": "FSLY",
+    "qty": 40,
+    "price": 20.790000915527344,
+    "reason": "Protecting gains with stop-loss and take-profit due to high volatility and oversold RSI.",
+    "status": "submitted",
+    "order_id": "9943187a-1ab9-4666-8baf-e1fd19665441",
+    "logged_at": "2026-09-03T10:22:16.638953-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "SELL",
+    "ticker": "CHPT",
+    "qty": 106,
+    "price": 7.900000095367432,
+    "reason": "Protecting gains with stop-loss and take-profit due to strong momentum and RSI.",
+    "status": "submitted",
+    "order_id": "64ddffda-45ce-4670-b0e7-c144f18e01b1",
+    "logged_at": "2026-09-03T10:22:16.476618-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "SELL",
+    "ticker": "XLE",
     "qty": 0,
     "price": 65.05000305175781,
     "reason": "Computed qty 0 < 1 share",
@@ -2073,31 +2106,5 @@
     "reason": "insufficient qty available for order (requested: 51, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-18T10:05:15.867052-04:00"
-  },
-  {
-    "date": "2026-08-18",
-    "action": "SELL",
-    "ticker": "FSLY",
-    "qty": 17,
-    "price": 28.104999542236328,
-    "reason": "insufficient qty available for order (requested: 17, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-18T10:05:15.786440-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "BUY",
-    "ticker": "MARA",
-    "status": "REJECTED",
-    "reason": "Insufficient buying power: need ~$251, have $0 available",
-    "logged_at": "2026-08-17T15:49:45.560713-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "BUY",
-    "ticker": "IMVT",
-    "status": "REJECTED",
-    "reason": "Insufficient buying power: need ~$502, have $0 available",
-    "logged_at": "2026-08-17T15:49:45.560560-04:00"
   }
 ]
