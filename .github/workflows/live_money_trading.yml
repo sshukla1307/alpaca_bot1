@@ -18,9 +18,9 @@ on:
     # GitHub's own schedule trigger has proven unreliable in practice (it
     # silently dropped almost all fires in the week of 2026-08-25 -- see the
     # repository_dispatch trigger below, which is what an external Cloudflare
-    # Worker Cron Trigger now uses to fire ticks reliably every 10 minutes).
+    # Worker Cron Trigger now uses to fire ticks reliably every hour).
     # This schedule entry is left in only as a harmless secondary attempt.
-    - cron: '*/10 13-21 * * 1-5'
+    - cron: '0 13-21 * * 1-5'
   repository_dispatch:
     types: [tick]
   workflow_dispatch:
