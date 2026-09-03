@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-09-03T09:51:31.228841-04:00",
+  "timestamp": "2026-09-03T10:01:41.782522-04:00",
   "cash": -3581.69,
   "settled_cash": 0.0,
-  "equity": 4028.28,
+  "equity": 4023.71,
   "positions": [
     {
       "ticker": "CHPT",
       "direction": "LONG",
       "shares": 106.0,
       "entry_price": 7.56,
-      "current_price": 7.4799,
-      "market_value": 792.87,
-      "unrealized_pnl": -8.49,
-      "unrealized_pnl_pct": -0.0106,
+      "current_price": 7.3551,
+      "market_value": 779.64,
+      "unrealized_pnl": -21.72,
+      "unrealized_pnl_pct": -0.0271,
       "protected": false
     },
     {
@@ -20,10 +20,10 @@
       "direction": "LONG",
       "shares": 40.0,
       "entry_price": 20.1891,
-      "current_price": 20.61,
-      "market_value": 824.4,
-      "unrealized_pnl": 16.84,
-      "unrealized_pnl_pct": 0.02085,
+      "current_price": 20.43,
+      "market_value": 817.2,
+      "unrealized_pnl": 9.64,
+      "unrealized_pnl_pct": 0.01193,
       "protected": false
     },
     {
@@ -31,10 +31,10 @@
       "direction": "LONG",
       "shares": 368.5493,
       "entry_price": 19.488077,
-      "current_price": 14.67,
-      "market_value": 5406.62,
-      "unrealized_pnl": -1775.7,
-      "unrealized_pnl_pct": -0.24723,
+      "current_price": 14.715,
+      "market_value": 5423.2,
+      "unrealized_pnl": -1759.11,
+      "unrealized_pnl_pct": -0.24492,
       "protected": true
     },
     {
@@ -42,10 +42,10 @@
       "direction": "LONG",
       "shares": 9.0,
       "entry_price": 65.005,
-      "current_price": 65.12,
-      "market_value": 586.08,
-      "unrealized_pnl": 1.03,
-      "unrealized_pnl_pct": 0.00177,
+      "current_price": 65.04,
+      "market_value": 585.36,
+      "unrealized_pnl": 0.32,
+      "unrealized_pnl_pct": 0.00054,
       "protected": false
     }
   ]

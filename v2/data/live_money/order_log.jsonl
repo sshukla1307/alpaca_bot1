@@ -252,3 +252,6 @@
 {"date": "2026-09-03", "action": "SELL", "ticker": "CHPT", "qty": 0, "price": 7.5, "reason": "Computed qty 0 < 1 share", "status": "rejected", "logged_at": "2026-09-03T09:52:14.665874-04:00"}
 {"date": "2026-09-03", "action": "SELL", "ticker": "FSLY", "qty": 0, "price": 20.610000610351562, "reason": "Computed qty 0 < 1 share", "status": "rejected", "logged_at": "2026-09-03T09:52:14.686317-04:00"}
 {"date": "2026-09-03", "action": "SELL", "ticker": "XLE", "qty": 0, "price": 65.12000274658203, "reason": "Computed qty 0 < 1 share", "status": "rejected", "logged_at": "2026-09-03T09:52:14.708006-04:00"}
+{"date": "2026-09-03", "action": "SELL", "ticker": "CHPT", "qty": 0, "price": 7.380000114440918, "reason": "Computed qty 0 < 1 share", "status": "rejected", "logged_at": "2026-09-03T10:03:20.283220-04:00"}
+{"date": "2026-09-03", "action": "SELL", "ticker": "FSLY", "qty": 0, "price": 20.45709991455078, "reason": "Computed qty 0 < 1 share", "status": "rejected", "logged_at": "2026-09-03T10:03:20.352503-04:00"}
+{"date": "2026-09-03", "action": "SELL", "ticker": "XLE", "qty": 0, "price": 65.04000091552734, "reason": "Computed qty 0 < 1 share", "status": "rejected", "logged_at": "2026-09-03T10:03:20.422540-04:00"}
