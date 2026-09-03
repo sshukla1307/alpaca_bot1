@@ -1,6 +1,36 @@
 [
   {
     "date": "2026-09-03",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 0,
+    "price": 65.12000274658203,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-09-03T09:52:14.708006-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "SELL",
+    "ticker": "FSLY",
+    "qty": 0,
+    "price": 20.610000610351562,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-09-03T09:52:14.686317-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "SELL",
+    "ticker": "CHPT",
+    "qty": 0,
+    "price": 7.5,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-09-03T09:52:14.665874-04:00"
+  },
+  {
+    "date": "2026-09-03",
     "action": "BUY",
     "ticker": "RBLX",
     "qty": 19,
@@ -2067,37 +2097,5 @@
     "reason": "insufficient qty available for order (requested: 51, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-17T14:28:52.674659-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "SELL",
-    "ticker": "FSLY",
-    "qty": 17,
-    "price": 28.844999313354492,
-    "reason": "insufficient qty available for order (requested: 17, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-17T14:28:52.584224-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "SELL",
-    "ticker": "LUNR",
-    "qty": 180,
-    "price": 20.30500030517578,
-    "reason": "Setting stop-loss and take-profit to manage risk and lock in gains.",
-    "status": "submitted",
-    "order_id": "1dcc6120-039e-4a17-b664-a9d1b62658ca",
-    "logged_at": "2026-08-17T13:53:08.780022-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "SELL",
-    "ticker": "KLAR",
-    "qty": 250,
-    "price": 19.395000457763672,
-    "reason": "Setting stop-loss and take-profit to manage risk and lock in gains.",
-    "status": "submitted",
-    "order_id": "7fe6347b-ab1c-4b39-b8fb-260fd2850b4b",
-    "logged_at": "2026-08-17T13:53:08.769052-04:00"
   }
 ]
