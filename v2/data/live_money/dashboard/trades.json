@@ -1,5 +1,18 @@
 [
   {
+    "date": "2026-09-03",
+    "action": "BUY",
+    "ticker": "XLE",
+    "qty": 9,
+    "price": 65.0199966430664,
+    "stop_loss_price": 61.76899681091308,
+    "take_profit_price": 71.52199630737306,
+    "reason": "XLE is leading the market with strong momentum, and the Energy sector is currently outperforming. The trade aims to capitalize on this trend while managing risk with a tight stop-loss.",
+    "status": "submitted",
+    "order_id": "33c136fb-a1eb-4a03-ae40-49362a0ff834",
+    "logged_at": "2026-09-03T09:32:38.481220-04:00"
+  },
+  {
     "date": "2026-09-02",
     "action": "SELL",
     "ticker": "DELL",
@@ -2078,15 +2091,5 @@
     "reason": "insufficient qty available for order (requested: 3, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-17T12:53:59.980434-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "SELL",
-    "ticker": "WEN",
-    "qty": 138,
-    "price": 8.574999809265137,
-    "reason": "insufficient qty available for order (requested: 138, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-17T12:53:59.903876-04:00"
   }
 ]
