@@ -4,6 +4,36 @@
     "action": "SELL",
     "ticker": "XLE",
     "qty": 0,
+    "price": 65.05000305175781,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-09-03T10:12:18.614915-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "SELL",
+    "ticker": "FSLY",
+    "qty": 0,
+    "price": 20.559999465942383,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-09-03T10:12:18.606140-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "SELL",
+    "ticker": "CHPT",
+    "qty": 0,
+    "price": 7.739999771118164,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-09-03T10:12:18.597913-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "SELL",
+    "ticker": "XLE",
+    "qty": 0,
     "price": 65.04000091552734,
     "reason": "Computed qty 0 < 1 share",
     "status": "rejected",
@@ -2069,33 +2099,5 @@
     "status": "REJECTED",
     "reason": "Insufficient buying power: need ~$502, have $0 available",
     "logged_at": "2026-08-17T15:49:45.560560-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "BUY",
-    "ticker": "STNE",
-    "status": "REJECTED",
-    "reason": "Insufficient buying power: need ~$502, have $0 available",
-    "logged_at": "2026-08-17T15:49:45.560293-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "SELL",
-    "ticker": "SMCI",
-    "qty": 25,
-    "price": 38.2327995300293,
-    "reason": "insufficient qty available for order (requested: 25, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-17T15:07:28.177163-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "SELL",
-    "ticker": "MARA",
-    "qty": 51,
-    "price": 9.555000305175781,
-    "reason": "insufficient qty available for order (requested: 51, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-17T15:07:28.134009-04:00"
   }
 ]
