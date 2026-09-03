@@ -1,6 +1,30 @@
 [
   {
     "date": "2026-09-03",
+    "action": "BUY",
+    "ticker": "ENPH",
+    "qty": 11,
+    "price": 35.72999954223633,
+    "stop_loss_price": 32.156999588012695,
+    "take_profit_price": 44.66249942779541,
+    "reason": "ENPH is oversold with potential for a rebound. Tight stop-loss to protect against further downside.",
+    "status": "submitted",
+    "order_id": "7f8443a6-5b7c-43c7-b5b3-25ed38567301",
+    "logged_at": "2026-09-03T13:42:33.944463-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "SELL",
+    "ticker": "FSLY",
+    "qty": 48,
+    "price": 20.719999313354492,
+    "reason": "Setting stop-loss and take-profit to manage risk and lock in potential gains.",
+    "status": "submitted",
+    "order_id": "fa5512b1-ecf1-41c1-8af6-4ebdbac7c71f",
+    "logged_at": "2026-09-03T13:42:33.783182-04:00"
+  },
+  {
+    "date": "2026-09-03",
     "action": "SELL",
     "ticker": "XLE",
     "qty": 18,
@@ -2102,25 +2126,5 @@
     "reason": "insufficient qty available for order (requested: 51, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-18T12:56:54.866619-04:00"
-  },
-  {
-    "date": "2026-08-18",
-    "action": "SELL",
-    "ticker": "FSLY",
-    "qty": 17,
-    "price": 26.75,
-    "reason": "insufficient qty available for order (requested: 17, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-18T12:56:54.842355-04:00"
-  },
-  {
-    "date": "2026-08-18",
-    "action": "SELL",
-    "ticker": "XLE",
-    "qty": 3,
-    "price": 63.43000030517578,
-    "reason": "insufficient qty available for order (requested: 3, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-18T11:56:20.812585-04:00"
   }
 ]

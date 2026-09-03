@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-09-03T13:31:29.262057-04:00",
-  "cash": -2315.56,
-  "settled_cash": 0.0,
-  "equity": 4046.04,
+  "timestamp": "2026-09-03T13:41:28.342321-04:00",
+  "cash": -1714.06,
+  "settled_cash": 370.85,
+  "equity": 4074.42,
   "positions": [
     {
-      "ticker": "FSLY",
+      "ticker": "ENPH",
       "direction": "LONG",
-      "shares": 48.0,
-      "entry_price": 20.735,
-      "current_price": 20.74,
-      "market_value": 995.52,
-      "unrealized_pnl": 0.24,
-      "unrealized_pnl_pct": 0.00024,
+      "shares": 11.0,
+      "entry_price": 35.73,
+      "current_price": 35.7235,
+      "market_value": 392.96,
+      "unrealized_pnl": -0.07,
+      "unrealized_pnl_pct": -0.00018,
       "protected": false
     },
     {
@@ -20,10 +20,10 @@
       "direction": "LONG",
       "shares": 368.5493,
       "entry_price": 19.488077,
-      "current_price": 14.56,
-      "market_value": 5366.08,
-      "unrealized_pnl": -1816.24,
-      "unrealized_pnl_pct": -0.25288,
+      "current_price": 14.6399,
+      "market_value": 5395.52,
+      "unrealized_pnl": -1786.79,
+      "unrealized_pnl_pct": -0.24878,
       "protected": true
     }
   ]
