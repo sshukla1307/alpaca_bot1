@@ -4,6 +4,14 @@
     "action": "BUY",
     "ticker": "XLE",
     "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$599, have $339 available",
+    "logged_at": "2026-09-03T15:42:24.449963-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "BUY",
+    "ticker": "XLE",
+    "status": "REJECTED",
     "reason": "Insufficient buying power: need ~$602, have $358 available",
     "logged_at": "2026-09-03T15:32:21.866800-04:00"
   },
@@ -2125,15 +2133,5 @@
     "reason": "insufficient qty available for order (requested: 25, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-19T10:06:07.106966-04:00"
-  },
-  {
-    "date": "2026-08-19",
-    "action": "SELL",
-    "ticker": "FSLY",
-    "qty": 17,
-    "price": 24.940000534057617,
-    "reason": "insufficient qty available for order (requested: 17, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-19T10:06:07.094968-04:00"
   }
 ]
