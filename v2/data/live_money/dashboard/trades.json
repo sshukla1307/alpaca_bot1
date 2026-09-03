@@ -1,6 +1,19 @@
 [
   {
     "date": "2026-09-03",
+    "action": "BUY",
+    "ticker": "FSLY",
+    "qty": 48,
+    "price": 20.739999771118164,
+    "stop_loss_price": 18.66599979400635,
+    "take_profit_price": 26.961999702453614,
+    "reason": "Oversold RSI suggests a potential bounce. High volatility and significant discount from 52-week high present a high-risk, high-reward opportunity.",
+    "status": "submitted",
+    "order_id": "c0f98da7-a96e-4704-890d-64d550ff7834",
+    "logged_at": "2026-09-03T13:12:29.049993-04:00"
+  },
+  {
+    "date": "2026-09-03",
     "action": "SELL",
     "ticker": "XLE",
     "qty": 18,
@@ -2108,15 +2121,5 @@
     "reason": "insufficient qty available for order (requested: 138, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-18T11:56:20.677335-04:00"
-  },
-  {
-    "date": "2026-08-18",
-    "action": "SELL",
-    "ticker": "SMCI",
-    "qty": 25,
-    "price": 36.73649978637695,
-    "reason": "insufficient qty available for order (requested: 25, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-18T11:56:20.610869-04:00"
   }
 ]

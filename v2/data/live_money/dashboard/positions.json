@@ -1,18 +1,29 @@
 {
-  "timestamp": "2026-09-03T13:01:31.596548-04:00",
-  "cash": -2493.75,
-  "settled_cash": 194.17,
-  "equity": 4013.52,
+  "timestamp": "2026-09-03T13:11:33.380633-04:00",
+  "cash": -3489.03,
+  "settled_cash": 0.0,
+  "equity": 4015.66,
   "positions": [
+    {
+      "ticker": "FSLY",
+      "direction": "LONG",
+      "shares": 48.0,
+      "entry_price": 20.735,
+      "current_price": 20.73,
+      "market_value": 995.04,
+      "unrealized_pnl": -0.24,
+      "unrealized_pnl_pct": -0.00024,
+      "protected": false
+    },
     {
       "ticker": "KLAR",
       "direction": "LONG",
       "shares": 368.5493,
       "entry_price": 19.488077,
-      "current_price": 14.475,
-      "market_value": 5334.75,
-      "unrealized_pnl": -1847.57,
-      "unrealized_pnl_pct": -0.25724,
+      "current_price": 14.48,
+      "market_value": 5336.59,
+      "unrealized_pnl": -1845.72,
+      "unrealized_pnl_pct": -0.25698,
       "protected": true
     },
     {
@@ -20,10 +31,10 @@
       "direction": "LONG",
       "shares": 18.0,
       "entry_price": 65.228267,
-      "current_price": 65.14,
-      "market_value": 1172.52,
-      "unrealized_pnl": -1.59,
-      "unrealized_pnl_pct": -0.00135,
+      "current_price": 65.17,
+      "market_value": 1173.06,
+      "unrealized_pnl": -1.05,
+      "unrealized_pnl_pct": -0.00089,
       "protected": false
     }
   ]
