@@ -2,6 +2,44 @@
   {
     "date": "2026-09-03",
     "action": "BUY",
+    "ticker": "RBLX",
+    "qty": 19,
+    "price": 42.70500183105469,
+    "stop_loss_price": 38.43450164794922,
+    "take_profit_price": 51.246002197265625,
+    "reason": "insufficient buying power",
+    "status": "rejected",
+    "logged_at": "2026-09-03T09:42:11.694138-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "BUY",
+    "ticker": "CHPT",
+    "qty": 106,
+    "price": 7.624499797821045,
+    "stop_loss_price": 6.86204981803894,
+    "take_profit_price": 9.149399757385254,
+    "reason": "Strong earnings and revenue growth, potential for continued momentum.",
+    "status": "submitted",
+    "order_id": "31664d4f-34fd-4445-86a8-1f8b2d77c512",
+    "logged_at": "2026-09-03T09:42:11.346413-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "BUY",
+    "ticker": "FSLY",
+    "qty": 40,
+    "price": 20.145000457763672,
+    "stop_loss_price": 18.130500411987306,
+    "take_profit_price": 24.174000549316407,
+    "reason": "Oversold with high volatility, potential for a sharp rebound.",
+    "status": "submitted",
+    "order_id": "5ad5184c-1012-4efe-ac92-3ede6ef19433",
+    "logged_at": "2026-09-03T09:42:11.206445-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "BUY",
     "ticker": "XLE",
     "qty": 9,
     "price": 65.0199966430664,
@@ -2061,35 +2099,5 @@
     "status": "submitted",
     "order_id": "7fe6347b-ab1c-4b39-b8fb-260fd2850b4b",
     "logged_at": "2026-08-17T13:53:08.769052-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "SELL",
-    "ticker": "FSLY",
-    "qty": 17,
-    "price": 29.040000915527344,
-    "reason": "insufficient qty available for order (requested: 17, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-17T13:53:08.757181-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "SELL",
-    "ticker": "XLK",
-    "qty": 6,
-    "price": 191.11000061035156,
-    "reason": "insufficient qty available for order (requested: 6, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-17T12:54:00.065595-04:00"
-  },
-  {
-    "date": "2026-08-17",
-    "action": "SELL",
-    "ticker": "XLE",
-    "qty": 3,
-    "price": 62.32849884033203,
-    "reason": "insufficient qty available for order (requested: 3, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-17T12:53:59.980434-04:00"
   }
 ]
