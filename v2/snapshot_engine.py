@@ -423,13 +423,22 @@ def format_as_toon(watchlist: List[Dict[str, Any]], sectors: Dict[str, Any]) -> 
     
     table = "\n".join(rows)
     
-    # Also format Sector RRG for rapid parsing
-    sector_rows = ["| Sector | Ticker | RS_Ratio | Momentum | Quadrant |", "|---|---|---|---|---|"]
-    for name, data in sectors.items():
-        row = f"| {name} | {data.get('ticker')} | {data.get('rs_ratio')} | {data.get('rs_momentum')} | **{data.get('quadrant')}** |"
-        sector_rows.append(row)
-    
-    sector_table = "\n".join(sector_rows)
+    # Also format Sector RRG for rapid parsing. fetch_sector_rotation() returns
+    # {"error": "<msg>"} (a str value, not a per-sector dict) when the yfinance
+    # download fails -- guard against that shape instead of crashing the whole
+    # tick over an analytics-only feature (real incident: 2026-09-03, a
+    # yfinance "database is locked" error during the multi-ticker download
+    # propagated into an AttributeError here and aborted the entire run before
+    # any trade was even evaluated).
+    if "error" in sectors:
+        sector_table = f"Sector rotation unavailable this tick: {sectors['error']}"
+    else:
+        sector_rows = ["| Sector | Ticker | RS_Ratio | Momentum | Quadrant |", "|---|---|---|---|---|"]
+        for name, data in sectors.items():
+            if not isinstance(data, dict): continue
+            row = f"| {name} | {data.get('ticker')} | {data.get('rs_ratio')} | {data.get('rs_momentum')} | **{data.get('quadrant')}** |"
+            sector_rows.append(row)
+        sector_table = "\n".join(sector_rows)
     
     return f"### [MODULE 2: SECTOR ROTATION]\n{sector_table}\n\n### [MODULE 3: CATALYST WATCHLIST]\n{table}"
 
