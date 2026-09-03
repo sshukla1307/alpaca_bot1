@@ -3,6 +3,32 @@
     "date": "2026-09-03",
     "action": "BUY",
     "ticker": "XLF",
+    "qty": 6,
+    "price": 58.23500061035156,
+    "stop_loss_price": 55.32325057983398,
+    "take_profit_price": 66.97025070190429,
+    "reason": "Financials are stable with yields stabilizing, providing a solid opportunity to add to an existing position with potential for continued performance.",
+    "status": "submitted",
+    "order_id": "af53134c-cb7f-4a65-8192-3c764639fef9",
+    "logged_at": "2026-09-03T11:02:39.709724-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "BUY",
+    "ticker": "XLE",
+    "qty": 12,
+    "price": 65.29499816894531,
+    "stop_loss_price": 58.765498352050784,
+    "take_profit_price": 78.35399780273437,
+    "reason": "Energy sector is leading with strong momentum due to geopolitical tensions affecting oil prices. This is a high-conviction play to capture the trend.",
+    "status": "submitted",
+    "order_id": "308c4d0c-e806-488f-b5dc-7acbd8dfdf79",
+    "logged_at": "2026-09-03T11:02:39.525654-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "BUY",
+    "ticker": "XLF",
     "qty": 17,
     "price": 58.224998474121094,
     "stop_loss_price": 55.313748550415035,
@@ -2089,25 +2115,5 @@
     "reason": "insufficient qty available for order (requested: 6, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-18T10:05:16.138917-04:00"
-  },
-  {
-    "date": "2026-08-18",
-    "action": "SELL",
-    "ticker": "WEN",
-    "qty": 138,
-    "price": 8.444999694824219,
-    "reason": "insufficient qty available for order (requested: 138, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-18T10:05:16.026207-04:00"
-  },
-  {
-    "date": "2026-08-18",
-    "action": "SELL",
-    "ticker": "SMCI",
-    "qty": 25,
-    "price": 37.54990005493164,
-    "reason": "insufficient qty available for order (requested: 25, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-18T10:05:15.946287-04:00"
   }
 ]
