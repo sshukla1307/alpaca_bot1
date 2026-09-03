@@ -3,6 +3,14 @@
     "date": "2026-09-03",
     "action": "BUY",
     "ticker": "XLE",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$809, have $780 available",
+    "logged_at": "2026-09-03T14:52:49.772755-04:00"
+  },
+  {
+    "date": "2026-09-03",
+    "action": "BUY",
+    "ticker": "XLE",
     "qty": 9,
     "price": 64.86000061035156,
     "stop_loss_price": 61.617000579833984,
@@ -2126,15 +2134,5 @@
     "reason": "insufficient qty available for order (requested: 6, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-18T15:06:41.743899-04:00"
-  },
-  {
-    "date": "2026-08-18",
-    "action": "SELL",
-    "ticker": "SMCI",
-    "qty": 25,
-    "price": 37.37990188598633,
-    "reason": "insufficient qty available for order (requested: 25, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-18T15:06:41.679431-04:00"
   }
 ]
