@@ -1,6 +1,16 @@
 [
   {
     "date": "2026-09-03",
+    "action": "SELL",
+    "ticker": "ENPH",
+    "qty": 0,
+    "price": 35.75429916381836,
+    "reason": "Computed qty 0 < 1 share",
+    "status": "rejected",
+    "logged_at": "2026-09-03T13:52:14.078046-04:00"
+  },
+  {
+    "date": "2026-09-03",
     "action": "BUY",
     "ticker": "ENPH",
     "qty": 11,
@@ -2116,15 +2126,5 @@
     "reason": "insufficient qty available for order (requested: 25, available: 0)",
     "status": "rejected",
     "logged_at": "2026-08-18T12:56:54.891750-04:00"
-  },
-  {
-    "date": "2026-08-18",
-    "action": "SELL",
-    "ticker": "MARA",
-    "qty": 51,
-    "price": 9.286399841308594,
-    "reason": "insufficient qty available for order (requested: 51, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-18T12:56:54.866619-04:00"
   }
 ]
