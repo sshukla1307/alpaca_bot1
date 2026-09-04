@@ -2,6 +2,14 @@
   {
     "date": "2026-09-04",
     "action": "BUY",
+    "ticker": "XLK",
+    "status": "REJECTED",
+    "reason": "Insufficient buying power: need ~$791, have $0 available",
+    "logged_at": "2026-09-04T15:01:56.016383-04:00"
+  },
+  {
+    "date": "2026-09-04",
+    "action": "BUY",
     "ticker": "MSFT",
     "status": "REJECTED",
     "reason": "Insufficient buying power: need ~$792, have $0 available",
@@ -2121,15 +2129,5 @@
     "status": "submitted",
     "order_id": "e8f29f13-d2e6-4ed8-b74f-27713edd1967",
     "logged_at": "2026-08-19T10:06:07.146428-04:00"
-  },
-  {
-    "date": "2026-08-19",
-    "action": "SELL",
-    "ticker": "XLK",
-    "qty": 6,
-    "price": 183.80999755859375,
-    "reason": "insufficient qty available for order (requested: 6, available: 0)",
-    "status": "rejected",
-    "logged_at": "2026-08-19T10:06:07.119160-04:00"
   }
 ]
