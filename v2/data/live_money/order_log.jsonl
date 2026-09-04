@@ -284,3 +284,4 @@
 {"date": "2026-09-03", "action": "SELL", "ticker": "XLE", "qty": 0, "price": 64.84500122070312, "reason": "Computed qty 0 < 1 share", "status": "rejected", "logged_at": "2026-09-03T15:22:30.780032-04:00"}
 {"date": "2026-09-03", "action": "BUY", "ticker": "XLE", "status": "REJECTED", "reason": "Insufficient buying power: need ~$602, have $358 available", "logged_at": "2026-09-03T15:32:21.866800-04:00"}
 {"date": "2026-09-03", "action": "BUY", "ticker": "XLE", "status": "REJECTED", "reason": "Insufficient buying power: need ~$599, have $339 available", "logged_at": "2026-09-03T15:42:24.449963-04:00"}
+{"date": "2026-09-04", "action": "BUY", "ticker": "MSFT", "status": "REJECTED", "reason": "Insufficient buying power: need ~$792, have $0 available", "logged_at": "2026-09-04T12:50:05.756864-04:00"}
