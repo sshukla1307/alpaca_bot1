@@ -286,3 +286,4 @@
 {"date": "2026-09-03", "action": "BUY", "ticker": "XLE", "status": "REJECTED", "reason": "Insufficient buying power: need ~$599, have $339 available", "logged_at": "2026-09-03T15:42:24.449963-04:00"}
 {"date": "2026-09-04", "action": "BUY", "ticker": "MSFT", "status": "REJECTED", "reason": "Insufficient buying power: need ~$792, have $0 available", "logged_at": "2026-09-04T12:50:05.756864-04:00"}
 {"date": "2026-09-04", "action": "BUY", "ticker": "XLK", "status": "REJECTED", "reason": "Insufficient buying power: need ~$791, have $0 available", "logged_at": "2026-09-04T15:01:56.016383-04:00"}
+{"date": "2026-09-04", "action": "BUY", "ticker": "XLE", "status": "REJECTED", "reason": "Insufficient buying power: need ~$394, have $0 available", "logged_at": "2026-09-04T15:24:00.821675-04:00"}
